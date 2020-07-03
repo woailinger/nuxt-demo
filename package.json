@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-demo02",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env CODE_ENV=dev nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "export": "nuxt export",
+    "serve": "nuxt serve"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.11.0",
+    "ant-design-vue": "^1.6.2",
+    "nuxt": "^2.13.0",
+    "vue-quill-editor": "^3.0.6"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "less": "^3.11.3",
+    "less-loader": "^6.1.3"
+  }
+}
