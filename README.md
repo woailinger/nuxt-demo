@@ -1,4 +1,4 @@
-# nuxt-demo02
+# nuxt-demo
 
 ## Build Setup
 
