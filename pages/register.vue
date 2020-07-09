@@ -28,7 +28,7 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" class="register" :loading="loading">
+        <a-button type="primary" html-type="submit" class="register" :loading="loading" :disabled="hasErrors(form.getFieldsError())">
           Register
         </a-button>
         <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
@@ -98,7 +98,7 @@
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    padding-top: 200px;
     flex-direction: column;
     align-items: center;
     overflow: auto;

@@ -28,13 +28,13 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" block :loading="loading">
-          Login
+        <a-button type="primary" html-type="submit" block :loading="loading" :disabled="hasErrors(form.getFieldsError())">
+          Log in
         </a-button>
       </a-form-item>
       <div class="others">
         <span>
-          其他方式登录
+          Other login methods
           <a-icon class="icon" type="facebook" />
           <a-icon class="icon" style="font-size: 24px" type="wechat" />
         </span>
@@ -82,6 +82,8 @@
           if (!err) {
             console.log('Received values of form: ', values);
             this.postLogin(values);
+          } else {
+            return false;
           }
         });
       },
@@ -118,7 +120,7 @@
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  padding-top: 200px;
   flex-direction: column;
   align-items: center;
   overflow: auto;
