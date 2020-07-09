@@ -10,8 +10,7 @@
         link: [{ rel: "favicon", href: "favicon.ico" }]
       }
     },
-    asyncData({$server}) {
-    }
+    middleware: 'tokenenticated',
   }
 </script>
 <style>

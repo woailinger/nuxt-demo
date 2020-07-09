@@ -4,7 +4,6 @@ export default function ({ $axios, redirect}, inject) {
     baseUrl: Config.host,
     timeout: 60000,
     withCredentials: true, // default
-    // ignoreCode: false // 是否忽略服务端的错误提示
   })
   const isNull = (obj) => {
     if (obj !== undefined && obj !== null) {
@@ -20,10 +19,8 @@ export default function ({ $axios, redirect}, inject) {
   // 请求头操作
   instance.interceptors.request.use(
     config => {
-      console.log(config, 666)
       // 剔除异常字段
       let _data = Object.assign({}, config.data);
-      config.baseURL = Config['host'];
       isNull(_data);
       config.data = _data;
       // 处理formdata

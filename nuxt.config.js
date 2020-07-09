@@ -1,5 +1,5 @@
-
-export default {
+require('dotenv').config()
+module.exports = {
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -29,7 +29,8 @@ export default {
   ** Global CSS
   */
   css: [
-    'ant-design-vue/lib/button/style/css',
+    // 'ant-design-vue/lib/button/style/css',
+    'ant-design-vue/dist/antd.css',
     'quill/dist/quill.core.css',
     // for snow theme
     'quill/dist/quill.snow.css',
@@ -49,7 +50,15 @@ export default {
   ** 客户端和服务端共享的环境变量
   */
   env: {
-    code_env: process.env.CODE_ENV
+    host_env: process.env.CODE_ENV
+  },
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:9090'
+    }
   },
   /*
   ** Auto import components
@@ -65,7 +74,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Build configuration
@@ -76,6 +86,7 @@ export default {
       // 客户端打包配置
       if (isClient) {
       }
-    }
+    },
+    vendor: ['axios']
   }
 }
