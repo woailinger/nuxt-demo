@@ -54,13 +54,8 @@
 </script>
 
 <style lang="less">
-  .container {
-    width: 60%;
-    margin: 0 auto;
-    padding: 50px 0;
-    .quill-editor {
-      width: 800px;
-      height: 400px;
-    }
+  .quill-editor {
+    width: 800px;
+    height: 400px;
   }
 </style>

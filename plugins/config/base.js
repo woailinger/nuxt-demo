@@ -1,4 +1,4 @@
 let BaseConfig = {
-  host: 'https://www.baidu.com' // 接口访问配置
+  host: 'http://localhost:8080' // 接口访问配置
 }
 export default BaseConfig

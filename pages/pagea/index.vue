@@ -1,17 +1,16 @@
 <template>
-  <div>我是页面aaaaa<a-button>哈哈</a-button></div>
+  <div>page aaaaa<a-button>haha</a-button></div>
 </template>
 <script>
   export default {
     head() {
       return {
         title: '页面AAA',
-        meta: [{ name: "description", hid: "description", content: "这是页面aaaa"}],
+        meta: [{ name: "description", hid: "description", content: "page aaaa"}],
         link: [{ rel: "favicon", href: "favicon.ico" }]
       }
     },
-    asyncData({$server}) {
-    }
+    middleware: 'tokenenticated',
   }
 </script>
 <style>
