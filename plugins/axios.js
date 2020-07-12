@@ -48,7 +48,7 @@ export default function ({ $axios, redirect}, inject) {
         redirect('/login')
       } else if (status === 404) {
         redirect('/404')
-      }
+      } 
       return Promise.reject(error)
     }
   )

@@ -7,6 +7,19 @@
 <script>
 const Cookie = process.client ? require('js-cookie') : undefined
 export default {
+  mounted() {
+    // 初始化fbjssdk
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '2816565075139161',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v7.0'
+      });
+    };
+    console.log('fbAsync----')
+    window.fbAsyncInit();
+  },
   methods: {
     logout () {
       Cookie.remove('token')

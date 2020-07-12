@@ -35,7 +35,7 @@
       <div class="others">
         <span>
           Other login methods
-          <a-icon class="icon" type="facebook" />
+          <a-icon class="icon" type="facebook" @click="fbLogin"/>
           <a-icon class="icon" style="font-size: 24px" type="wechat" />
         </span>
         <a-button class="register" type="link" @click="handleToRegister">Register</a-button>
@@ -75,6 +75,37 @@
       passwordError() {
         const { getFieldError, isFieldTouched } = this.form;
         return isFieldTouched('password') && getFieldError('password');
+      },
+      fbLogin() {
+        console.log(FB, '----');
+        FB.login(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function(response) {
+                  console.log('Good to see you, ' + response.name + '.');
+                });
+                } else {
+                console.log('User cancelled login or did not fully authorize.');
+                }
+            });
+        // window.fbAsyncInit = function() {
+          // FB.init({
+          //   appId            : '2816565075139161',
+          //   autoLogAppEvents : true,
+          //   xfbml            : true,
+          //   version          : 'v7.0'
+          // });
+          // FB.login(function(response) {
+          //   if (response.authResponse) {
+          //       console.log('Welcome!  Fetching your information.... ');
+          //       FB.api('/me', function(response) {
+          //         console.log('Good to see you, ' + response.name + '.');
+          //       });
+          //       } else {
+          //       console.log('User cancelled login or did not fully authorize.');
+          //       }
+          //   });
+        // };
       },
       handleSubmit(e) {
         e.preventDefault();

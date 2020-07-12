@@ -13,6 +13,7 @@ $ yarn dev
     Are you interested in participation? 建议 选择 no
     如果出现: Error: getaddrinfo ENOTFOUND localhost 
     请配置hosts: 127.0.0.1 localhost
+$ 本地api 服务： node server/api.js  登陆账户: test/123456 
 # build for production and launch server
 $ yarn build
 $ yarn start
