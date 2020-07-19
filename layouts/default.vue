@@ -22,82 +22,55 @@
         <Nuxt />
       </a-layout-content>
       <a-layout-footer>
-          <footer class="footer red dp-footer-wrap" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
-              <div class="container dp-footer">
-                <div class="row">
-                  <div class="col-6">
-                    <ul class="nav justify-content-between">
-                      <li class="nav-item">
-                        <a class="nav-link" href="">
-                          <p>关于我们</p>
-                          <span>About Us</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="">
-                          <p>联系我们 </p>
-                          <span>Contact Us</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="">
-                          <p>加入我们</p>
-                          <span>Join Us</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="">
-                          <p>声 明</p>
-                          <span>Disclaimer</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="">
-                          <p>用户协议</p>
-                          <span>Privacy</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="dp-foot-social">
-                    <div class="dp-foot-icon dp-foot-icon-wechat">
-                      <div class="dp-foot-pop dp-foot-pop-wechat">
-                        <p>ASHA GO</p>
-                      </div>
-                      <i class="icon-wechat"></i>
-                    </div>
-                    <div class="dp-foot-icon dp-foot-icon-weibo">
-                      <div class="dp-foot-pop dp-foot-pop-weibo">
-                        <div class="dp-foot-pop-weibo-item dp-foot-pop-weibo-item-main">
-                          <p>@ASHA GO</p>
-                        </div>
-                      </div>
-                      <i class="icon-weibo"></i>
-                    </div>
-                    <div class="dp-foot-icon dp-foot-icon-app">
-                      <a href="">
-                        <i class="icon-phone"></i>
-                      </a>
-                    </div>
-                    <!-- Begin MailChimp Signup Form -->
-                    <div id="mc_embed_signup">
-                      <div id="mce-responses" class="clear">
-                        <div class="response" id="mce-error-response" style="display:none"></div>
-                        <div class="response" id="mce-success-response" style="display:none"></div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
-              </div>
-            </footer>
+        <div class="footer-container">
+          <ul class="footer-link">
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <p>About Us</p>
+                <span>关于我们</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <p>Contact Us </p>
+                <span>联系我们</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <p>Join Us</p>
+                <span>加入我们</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <p>Disclaimer</p>
+                <span>声 明</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <p>Privacy</p>
+                <span>用户协议</span>
+              </a>
+            </li>
+          </ul>
+          <div class="footer-social">
+            <a-icon type="facebook" class="social-icon"/>
+            <a-icon type="twitter" class="social-icon"/>
+            <a-icon type="instagram" class="social-icon"/>
+            <a-icon type="wechat" class="social-icon"/>
+            <a-icon type="mail" class="social-icon"/>
+            <span class="mail-desc"> &nbsp;&nbsp;email:info@ashago.com</span>
+          </div>
+          <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
+        </div>
       </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
-<style>
+<style lang="less">
 html {
   font-family:
     'Source Sans Pro',
@@ -124,7 +97,7 @@ html {
   margin: 0;
 }
 .header {
-  height: 400px;
+  height: 200px;
   background-color: #fff;
   margin: 0px;
   padding: 0px;
@@ -140,34 +113,65 @@ html {
   margin-top: 30px;
   margin-left: 30px;
   color: #ac4448;
-}
-.header-logo {
+
+  .header-logo {
     object-position: 50% 50%;
     width: 84px;
     height: 80px;
     object-fit: contain
   }
+}
 .menu-item {
   margin-left: 30px;
   color:#fff;
 }
 
-.footer {
+.ant-layout-footer {
+  padding: 0px;
+  .footer-container {
+    height: 180px;
+    background-color: #8d040c;
     color: #fff;
     padding: 3rem 0;
-    /* margin-top: 15px;*/
     position: relative;
     bottom: 0;
+    .footer-link {
+      list-style: none;
+      display: inline;
+      .nav-item {
+        display: inline-block;
+        width: 120px;
+        .nav-link {
+          font-size: 16px;
+          color: #fff;
+          margin-right: 50px;
+        } 
+      }
+    }
+    .footer-social {
+      display: inline-flex;
+      .mail-desc {
+        height: 40px;
+        line-height: 40px;
+      }
+      .social-icon {
+        margin-left: 30px;
+        svg {
+          height: 40px;
+          width: 40px;
+        }
+      }
+    }
+    .copyright {
+        width: 100%;
+        font-size: 18px;
+        line-height: 18px;
+        text-align: center;
+        margin-top: 50px;
+    }
+  }
 }
 
-.footer .nav-link {
-    color: #fff;
-    padding: 0;
-}
-.footer .footer-img {
-  width: 180px;
-  height: 150px;
-}
 .button--green {
   display: inline-block;
   border-radius: 4px;
