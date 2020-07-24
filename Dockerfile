@@ -1,16 +1,17 @@
-FROM node:8.2.1
-
-ENV NODE_ENV=production
-ENV HOST 0.0.0.0
+FROM node:10.15.3
 
 RUN mkdir -p /app
 COPY . /app
 WORKDIR /app
+
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm install
+RUN npm run build
+
+
+ENV NODE_ENV=production
+ENV HOST 0.0.0.0
 # Expose the app port
 EXPOSE 3000
 
-RUN npm config set registry https://registry.npm.taobao.org
-
-RUN npm install
-RUN npm run build
 CMD ["npm", "start"]
