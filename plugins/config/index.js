@@ -6,6 +6,6 @@
  */
 import BaseConfig from './base'
 console.log(process.env.host_env)
-const Config = require('./' + process.env.host_env)
+const Config = require('./' + (process.env.host_env || 'product'))
 Object.assign(BaseConfig, Config.default)
 export default BaseConfig
