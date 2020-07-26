@@ -8,7 +8,7 @@
         </div>
         <nav class="menu">
           <nuxt-link to="/" class="menu-item">Daily Life</nuxt-link>
-          <nuxt-link to="/pagea" class="menu-item">Food & Drinks</nuxt-link>
+          <nuxt-link to="/my" class="menu-item">Food & Drinks</nuxt-link>
           <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link>
           <nuxt-link to="/pageb" class="menu-item">Travel</nuxt-link>
           <nuxt-link to="/pageb" class="menu-item">Community</nuxt-link>
