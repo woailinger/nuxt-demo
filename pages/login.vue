@@ -47,6 +47,7 @@
   const Cookie = process.client ? require('js-cookie') : undefined
   export default {
     middleware: 'notTokenenticated',
+    layout: "blank",
     data () {
       return {
         loading: false,
