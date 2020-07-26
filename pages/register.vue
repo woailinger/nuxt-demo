@@ -2,7 +2,7 @@
   <div class="container">
     <div class="title">Register</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
-      <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
+      <a-form-item>
         <a-input
           v-decorator="[
           'userName',
@@ -52,6 +52,37 @@
         </a-input>
       </a-form-item>
       <a-form-item>
+        <a-col :span="14">
+          <a-input
+            v-decorator="[
+          'code',
+          {
+            rules: [
+              { required: true, message: 'Please enter the verification code!' }
+            ]
+          }
+        ]"
+            placeholder="verification code"
+            size="large"
+          >
+            <a-icon slot="prefix" type="number" style="color:rgba(0,0,0,.25)" />
+          </a-input>
+        </a-col>
+        <a-col :span="8" :offset="2">
+          <a-button style="text-align: center; width: 100%" size="large" @click="handleGetCode" :disabled="codeDisabled">
+            <span v-if="!codeDisabled">get Code</span>
+            <a-statistic-countdown
+              v-else
+              :value="deadline"
+              suffix="S"
+              format="s"
+              valueStyle="color: rgba(0, 0, 0, 0.25); font-size: 16px;"
+              @finish="onFinish"
+            />
+          </a-button>
+        </a-col>
+      </a-form-item>
+      <a-form-item>
         <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
           I have read the
           <a href="">
@@ -60,7 +91,7 @@
         </a-checkbox>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" class="register" :loading="loading" :disabled="hasErrors(form.getFieldsError())">
+        <a-button type="primary" html-type="submit" class="register" :loading="loading">
           Register
         </a-button>
         <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
@@ -80,7 +111,9 @@
         confirmDirty: false,
         hasErrors: fieldsError => {
           return Object.keys(fieldsError).some(field => fieldsError[field]);
-        }
+        },
+        codeDisabled: false,
+        deadline: '',
       }
     },
     mounted() {
@@ -121,6 +154,17 @@
           callback();
         }
       },
+      /***
+       * 校验code值
+       */
+      handleGetCode () {
+
+        this.codeDisabled = true;
+        this.deadline = Date.now() + 1000 * 60;
+      },
+      onFinish () {
+        this.codeDisabled = false;
+      },
       handleSubmit(e) {
         e.preventDefault();
         this.form.validateFields((err, values) => {
@@ -143,8 +187,10 @@
           data: values
         }).then(res => {
           this.loading = false;
-          this.$store.commit('setToken', res.token);
-          this.$router.push('/')
+          if (res.code === 0) {
+            this.$store.commit('setToken', res.data.token);
+            this.$router.push('/')
+          }
         })
       }
     }

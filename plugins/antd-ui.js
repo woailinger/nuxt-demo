@@ -7,7 +7,8 @@ import Icon from 'ant-design-vue/lib/icon';
 import Message from 'ant-design-vue/lib/message';
 import Checkbox from 'ant-design-vue/lib/checkbox';
 import Layout from 'ant-design-vue/lib/Layout';
-
+import Col from 'ant-design-vue/lib/col';
+import Statistic from 'ant-design-vue/lib/statistic';
 // import 'ant-design-vue/lib/button/style/css';
 Vue.use(Button);
 Vue.use(Form);
@@ -16,4 +17,6 @@ Vue.use(Icon);
 Vue.use(Message);
 Vue.use(Checkbox);
 Vue.use(Layout);
+Vue.use(Col);
+Vue.use(Statistic);
 Vue.prototype.$message = Message;

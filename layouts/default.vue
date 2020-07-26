@@ -18,7 +18,6 @@
         </nav>
       </a-layout-header>
       <a-layout-content>
-        Content
         <Nuxt />
       </a-layout-content>
       <a-layout-footer>
@@ -145,7 +144,7 @@ html {
           font-size: 16px;
           color: #fff;
           margin-right: 50px;
-        } 
+        }
       }
     }
     .footer-social {

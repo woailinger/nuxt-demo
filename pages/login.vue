@@ -135,11 +135,10 @@
           data: values
         }).then(res => {
           this.loading = false;
-          if (res.ok === 1) {
-            this.$store.commit('setToken', res.token);
+          if (res.code === 0) {
+            debugger;
+            this.$store.commit('setToken', res.data.token);
             this.$router.push('/')
-          } else {
-            this.$message.error('Wrong account or password. Please try again.');
           }
         })
       }
