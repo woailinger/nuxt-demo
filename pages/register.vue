@@ -52,40 +52,9 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-col :span="14">
-          <a-input
-            v-decorator="[
-          'code',
-          {
-            rules: [
-              { required: true, message: 'Please enter the verification code!' }
-            ]
-          }
-        ]"
-            placeholder="verification code"
-            size="large"
-          >
-            <a-icon slot="prefix" type="number" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-col>
-        <a-col :span="8" :offset="2">
-          <a-button style="text-align: center; width: 100%" size="large" @click="handleGetCode" :disabled="codeDisabled">
-            <span v-if="!codeDisabled">get Code</span>
-            <a-statistic-countdown
-              v-else
-              :value="deadline"
-              suffix="S"
-              format="s"
-              valueStyle="color: rgba(0, 0, 0, 0.25); font-size: 16px;"
-              @finish="onFinish"
-            />
-          </a-button>
-        </a-col>
-      </a-form-item>
-      <a-form-item>
         <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
           I have read the
-          <a href="">
+          <a href="/agreement" target="_blank">
             agreement
           </a>
         </a-checkbox>
@@ -111,9 +80,7 @@
         confirmDirty: false,
         hasErrors: fieldsError => {
           return Object.keys(fieldsError).some(field => fieldsError[field]);
-        },
-        codeDisabled: false,
-        deadline: '',
+        }
       }
     },
     mounted() {
@@ -153,17 +120,6 @@
         } else {
           callback();
         }
-      },
-      /***
-       * 校验code值
-       */
-      handleGetCode () {
-
-        this.codeDisabled = true;
-        this.deadline = Date.now() + 1000 * 60;
-      },
-      onFinish () {
-        this.codeDisabled = false;
       },
       handleSubmit(e) {
         e.preventDefault();
