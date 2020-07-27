@@ -43,7 +43,9 @@ export default function ({ $axios, redirect}, inject) {
       if (res.code === 0 ){
         return res.data
       } else {
-        Message.error(res.data.message);
+        if(process.client) {
+          Message.error(res.data.message)
+        }
         return res.data
       }
     },

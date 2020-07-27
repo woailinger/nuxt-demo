@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <a-button @click="logout">登出</a-button>
+    <a-button @click="logout" v-if="$store.state.token">登出</a-button>
+    <a-button v-else>
+      <nuxt-link to="/login">请登录</nuxt-link>
+    </a-button>
   </div>
 </template>
 
@@ -22,9 +25,9 @@ export default {
   },
   methods: {
     logout () {
-      Cookie.remove('token')
-      this.$store.commit('setToken', null)
-      this.$router.push('/login')
+      Cookie.remove('_t');
+      this.$store.commit('setToken', null);
+      this.$router.push('/login');
     }
   }
 }

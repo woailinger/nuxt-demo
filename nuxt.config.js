@@ -62,6 +62,9 @@ module.exports = {
   proxy: {
     '/api': {
       target: 'http://yapi.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/mock/25'
+    },
+    '/user': {
+      target: 'http://yapi.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/mock/25'
     }
   },
   /*

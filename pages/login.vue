@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <img class="logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
     <div class="title">Sign Up</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
       <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
@@ -17,7 +18,7 @@
       <a-form-item :validate-status="passwordError() ? 'error' : ''" :help="passwordError() || ''">
         <a-input
           v-decorator="[
-          'password',
+          'token',
           { rules: [{ required: true, message: 'Please input your Password!' }] },
         ]"
           type="password"
@@ -45,6 +46,8 @@
 </template>
 <script>
   const Cookie = process.client ? require('js-cookie') : undefined
+  import Utils from '@/tools/Utils.js';
+  const { encryption } = Utils;
   export default {
     middleware: 'notTokenenticated',
     layout: "blank",
@@ -74,7 +77,7 @@
       // Only show error after a field is touched.
       passwordError() {
         const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('password') && getFieldError('password');
+        return isFieldTouched('token') && getFieldError('token');
       },
       fbLogin() {
         console.log(FB, '----');
@@ -130,14 +133,17 @@
 //          this.$router.push('/')
 //        }, 3000)
         this.$Server({
-          url: 'api/login',
+          url: 'user/login',
           method: 'post',
-          data: values
+          data: {
+            token: encryption(values.token),
+            userId: values.userName
+          }
         }).then(res => {
           this.loading = false;
           if (res.code === 0) {
-            debugger;
-            this.$store.commit('setToken', res.data.token);
+            Cookie.set('_t', res.data.t);
+            this.$store.commit('setToken', res.data.t);
             this.$router.push('/')
           }
         })
@@ -150,7 +156,6 @@
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  padding-top: 200px;
   flex-direction: column;
   align-items: center;
   overflow: auto;
@@ -159,6 +164,10 @@
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;
+  .logo {
+    margin-top: 50px;
+    height: 100px;
+  }
   .title {
     line-height: 120px;
     font-size: 50px;
