@@ -60,12 +60,12 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/api': {
-      target: 'http://yapi.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/mock/25'
-    },
-    '/user': {
-      target: 'http://yapi.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/mock/25'
-    }
+    // '/api': {
+    //   target: 'http://ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com:80'
+    // },
+    // '/user': {
+    //   target: 'http://ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com:80'
+    // }
   },
   /*
   ** Auto import components

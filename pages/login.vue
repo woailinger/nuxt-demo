@@ -140,13 +140,14 @@
             userId: values.userName
           }
         }).then(res => {
-          this.loading = false;
           if (res.code === 0) {
             Cookie.set('_t', res.data.t);
             this.$store.commit('setToken', res.data.t);
             this.$router.push('/')
           }
-        })
+        }).finally(data => {
+          this.loading = false;
+        });
       }
     }
   }

@@ -54,8 +54,8 @@ export default function ({ $axios, redirect}, inject) {
       if (status === 401) {
         // 重定向到登录页面
         redirect('/login')
-      } else if (status === 404) {
-        redirect('/404')
+      } else {
+        Message.error("服务器错误, 请联系管理员:info@ashago.com")
       }
       return Promise.reject(error)
     }
