@@ -1,4 +1,5 @@
 import Config from './config';
+import Message from 'ant-design-vue/lib/message';
 export default function ({ $axios, redirect}, inject) {
   const instance = $axios.create({
     baseUrl: Config.host,
@@ -39,7 +40,14 @@ export default function ({ $axios, redirect}, inject) {
   // 处理返回结果
   instance.interceptors.response.use(
     res => {
-      return res.data
+      if (res.code === 0 ){
+        return res.data
+      } else {
+        if(process.client) {
+          Message.error(res.data.message)
+        }
+        return res.data
+      }
     },
     error => {
       const status = error.response && error.response.status
@@ -48,7 +56,7 @@ export default function ({ $axios, redirect}, inject) {
         redirect('/login')
       } else if (status === 404) {
         redirect('/404')
-      } 
+      }
       return Promise.reject(error)
     }
   )

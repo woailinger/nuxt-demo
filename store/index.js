@@ -16,7 +16,7 @@ export const actions = {
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
-        token = parsed.token
+        token = parsed._t
       } catch (err) {
         // No valid cookie found
       }

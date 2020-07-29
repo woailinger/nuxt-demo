@@ -8,7 +8,7 @@
         </div>
         <nav class="menu">
           <nuxt-link to="/" class="menu-item">Daily Life</nuxt-link>
-          <nuxt-link to="/pagea" class="menu-item">Food & Drinks</nuxt-link>
+          <nuxt-link to="/my" class="menu-item">Food & Drinks</nuxt-link>
           <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link>
           <nuxt-link to="/pageb" class="menu-item">Travel</nuxt-link>
           <nuxt-link to="/pageb" class="menu-item">Community</nuxt-link>
@@ -18,7 +18,6 @@
         </nav>
       </a-layout-header>
       <a-layout-content>
-        Content
         <Nuxt />
       </a-layout-content>
       <a-layout-footer>
@@ -145,7 +144,7 @@ html {
           font-size: 16px;
           color: #fff;
           margin-right: 50px;
-        } 
+        }
       }
     }
     .footer-social {

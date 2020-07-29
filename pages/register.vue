@@ -1,14 +1,36 @@
 <template>
   <div class="container">
+    <img class="logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
     <div class="title">Register</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
-      <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
+      <a-form-item>
+        <a-input
+          v-decorator="[
+          'email',
+          {
+            rules: [
+              { type: 'email', message: 'The input is not valid E-mail!' },
+              { required: true, message: 'Please input your email!' }
+            ]
+          },
+        ]"
+          placeholder="email"
+          size="large"
+        >
+          <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)" />
+        </a-input>
+      </a-form-item>
+      <a-form-item>
         <a-input
           v-decorator="[
           'userName',
-          { rules: [{ required: true, message: 'Please input your username!' }] },
+          {
+            rules: [
+              { required: true, message: 'Please input your userName!' }
+            ]
+          },
         ]"
-          placeholder="Username"
+          placeholder="userName"
           size="large"
         >
           <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
@@ -17,7 +39,7 @@
       <a-form-item has-feedback>
         <a-input
           v-decorator="[
-          'password',
+          'token',
           {
             rules: [
               { required: true, message: 'Please input your Password!' },
@@ -54,13 +76,18 @@
       <a-form-item>
         <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
           I have read the
-          <a href="">
+          <a href="/agreement" target="_blank">
             agreement
           </a>
         </a-checkbox>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" class="register" :loading="loading" :disabled="hasErrors(form.getFieldsError())">
+        <a-checkbox v-decorator="['subscribed', { valuePropName: 'checked' }]">
+          Subscribe to email？
+        </a-checkbox>
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" html-type="submit" class="register" :loading="loading">
           Register
         </a-button>
         <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
@@ -69,9 +96,11 @@
   </div>
 </template>
 <script>
-  const Cookie = process.client ? require('js-cookie') : undefined
+  import Utils from '@/tools/Utils.js';
+  const { encryption } = Utils;
   export default {
     middleware: 'notTokenenticated',
+    layout: "blank",
     data () {
       return {
         loading: false,
@@ -95,7 +124,7 @@
       // Only show error after a field is touched.
       passwordError() {
         const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('password') && getFieldError('password');
+        return isFieldTouched('token') && getFieldError('token');
       },
       handleConfirmBlur(e) {
         const value = e.target.value;
@@ -114,7 +143,7 @@
       },
       compareToFirstPassword(rule, value, callback) {
         const form = this.form;
-        if (value && value !== form.getFieldValue('password')) {
+        if (value && value !== form.getFieldValue('token')) {
           callback('Two passwords that you enter is inconsistent!');
         } else {
           callback();
@@ -137,13 +166,19 @@
       postLogin (values) {
         this.loading = true
         this.$Server({
-          url: 'api/register',
+          url: 'user/register',
           method: 'post',
-          data: values
+          data: {
+            email: values.email,
+            token: encryption(values['token']),
+            subscribed: !!values.subscribed
+          }
         }).then(res => {
           this.loading = false;
-          this.$store.commit('setToken', res.token);
-          this.$router.push('/')
+          if (res.code === 0) {
+//            this.$store.commit('setToken', res.data.token);
+            this.$router.push('/getStarted');
+          }
         })
       }
     }
@@ -154,7 +189,6 @@
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
-    padding-top: 200px;
     flex-direction: column;
     align-items: center;
     overflow: auto;
@@ -163,6 +197,10 @@
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
+    .logo {
+      margin-top: 50px;
+      height: 100px;
+    }
     .title {
       line-height: 120px;
       font-size: 50px;
