@@ -12,6 +12,19 @@
           placeholder="Username"
           size="large"
         >
+        <!-- <a-input
+          v-decorator="[
+          'email',
+          {
+            rules: [
+              { type: 'email', message: 'The input is not valid E-mail!' },
+              { required: true, message: 'Please input your email!' }
+            ]
+          },
+        ]"
+          placeholder="email"
+          size="large"
+        > -->
           <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
         </a-input>
       </a-form-item>
