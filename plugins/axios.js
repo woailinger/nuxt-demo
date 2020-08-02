@@ -2,9 +2,14 @@ import Config from './config';
 import Message from 'ant-design-vue/lib/message';
 export default function ({ $axios, redirect}, inject) {
   const instance = $axios.create({
-    baseUrl: Config.host,
+    browserBaseURL: Config.browserBaseURL,  // 客户端请求
+    baseURL: Config.baseURL,  // 服务端请求
     timeout: 60000,
-    withCredentials: true, // default
+    headers: {
+      'Content-Type': 'application/json; text/json; charset=utf-8',
+      'Access-Control-Allow-Origin': 'ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
+    },
+    withCredentials: false, // default
   })
   const isNull = (obj) => {
     if (obj !== undefined && obj !== null) {
@@ -20,10 +25,13 @@ export default function ({ $axios, redirect}, inject) {
   // 请求头操作
   instance.interceptors.request.use(
     config => {
+
       // 剔除异常字段
+      // config.headers['content-type'] = 'application/json; text/json; charset=utf-8';
       let _data = Object.assign({}, config.data);
       isNull(_data);
       config.data = _data;
+
       // 处理formdata
       // if (process.borwers) {
       //   if (config.data instanceof window.FormData) {
@@ -44,7 +52,7 @@ export default function ({ $axios, redirect}, inject) {
         return res.data
       } else {
         if(process.client) {
-          Message.error(res.data.message)
+          Message.error(res.data.msg)
         }
         return res.data
       }

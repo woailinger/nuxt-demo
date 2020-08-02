@@ -37,7 +37,7 @@
         <span>
           Other login methods
           <a-icon class="icon" type="facebook" @click="fbLogin"/>
-          <a-icon class="icon" style="font-size: 24px" type="wechat" />
+          <a-icon class="icon" style="font-size: 24px" @click="wxLogin" type="wechat" />
         </span>
         <a-button class="register" type="link" @click="handleToRegister">Register</a-button>
       </div>
@@ -79,8 +79,10 @@
         const { getFieldError, isFieldTouched } = this.form;
         return isFieldTouched('token') && getFieldError('token');
       },
+      wxLogin() {
+
+      },
       fbLogin() {
-        console.log(FB, '----');
         FB.login(function(response) {
             if (response.authResponse) {
                 console.log('Welcome!  Fetching your information.... ');
