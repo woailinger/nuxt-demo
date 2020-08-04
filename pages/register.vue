@@ -164,6 +164,7 @@
         });
       },
       postLogin (values) {
+        console.log(values, '---');
         this.loading = true
         this.$Server({
           url: 'user/register',
@@ -171,7 +172,8 @@
           data: {
             email: values.email,
             token: encryption(values['token']),
-            subscribed: !!values.subscribed
+            subscribed: !!values.subscribed,
+            userName: values.userName,
           }
         }).then(res => {
           this.loading = false;
