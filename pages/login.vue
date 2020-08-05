@@ -75,16 +75,16 @@
       }
     },
     mounted() {
-      // var obj = new WxLogin({
-      //   self_redirect:true,
-      //   id: "login_container",
-      //   appid: "wx2b4b189cd5930702",
-      //   scope: "snsapi_login",
-      //   redirect_uri: "http://ashago-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/",
-      //   state: "",
-      //   style: "",
-      //   href: ""
-      // });
+      var obj = new WxLogin({
+        self_redirect:true,
+        id: "login_container",
+        appid: "wx2b4b189cd5930702",
+        scope: "snsapi_login",
+        redirect_uri: "http://ashago-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/",
+        state: "",
+        style: "",
+        href: ""
+      });
       this.$nextTick(() => {
         // To disabled submit button at the beginning.
         this.form.validateFields();

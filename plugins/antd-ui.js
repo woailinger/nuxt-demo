@@ -11,6 +11,7 @@ import Col from 'ant-design-vue/lib/col';
 import Statistic from 'ant-design-vue/lib/statistic';
 import Result from 'ant-design-vue/lib/result';
 import Menu from 'ant-design-vue/lib/menu';
+import Carousel from 'ant-design-vue/lib/carousel';
 
 // import 'ant-design-vue/lib/button/style/css';
 Vue.use(Button);
@@ -24,4 +25,5 @@ Vue.use(Col);
 Vue.use(Statistic);
 Vue.use(Result);
 Vue.use(Menu);
+Vue.use(Carousel);
 Vue.prototype.$message = Message;
