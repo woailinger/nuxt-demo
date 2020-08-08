@@ -12,6 +12,8 @@ import Statistic from 'ant-design-vue/lib/statistic';
 import Result from 'ant-design-vue/lib/result';
 import Menu from 'ant-design-vue/lib/menu';
 import Carousel from 'ant-design-vue/lib/carousel';
+import Upload from 'ant-design-vue/lib/upload';
+import Dropdown from 'ant-design-vue/lib/dropdown';
 
 // import 'ant-design-vue/lib/button/style/css';
 Vue.use(Button);
@@ -26,4 +28,6 @@ Vue.use(Statistic);
 Vue.use(Result);
 Vue.use(Menu);
 Vue.use(Carousel);
+Vue.use(Upload);
+Vue.use(Dropdown);
 Vue.prototype.$message = Message;

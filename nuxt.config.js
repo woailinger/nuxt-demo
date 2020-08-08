@@ -49,7 +49,8 @@ module.exports = {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/axios',
-    { src: '@/plugins/vue-quill-editor', ssr: false }
+    { src: '@/plugins/vue-quill-editor', ssr: false },
+    { src: '@/plugins/avatar.js', ssr: false }
   ],
   /*
   ** 客户端和服务端共享的环境变量
