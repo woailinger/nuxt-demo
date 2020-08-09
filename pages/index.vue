@@ -61,9 +61,35 @@
         />
       </a-card>
      </div>
-    <a-divider>LASTEST ARICLE</a-divider>
+    <a-divider>Daily life</a-divider>
      <p class="card-container">
        <a-card hoverable class="card" v-for="(item, index) in latestData" :key="'lastest'+ index">
+        <img
+          class="card-img"
+          slot="cover"
+          alt="example"
+          :src="item.url"
+        />
+        <a-card-meta :title="item.title">
+        </a-card-meta>
+      </a-card>
+     </p>
+     <a-divider>Food & Drinks</a-divider>
+     <p class="card-container">
+       <a-card hoverable class="card" v-for="(item, index) in FoodData" :key="'lastest'+ index">
+        <img
+          class="card-img"
+          slot="cover"
+          alt="example"
+          :src="item.url"
+        />
+        <a-card-meta :title="item.title">
+        </a-card-meta>
+      </a-card>
+     </p>
+     <a-divider>Travel</a-divider>
+     <p class="card-container">
+       <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index">
         <img
           class="card-img"
           slot="cover"
@@ -135,6 +161,46 @@ export default {
             url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20order%20from%20JD/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87%E7%A4%BA%E4%BE%8B.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596707090&Signature=0BHAYzIUAPO7%2BJw615MtKVuAvBk%3D'
           },
         ],
+        FoodData: [
+          {
+            title: 'An introduction to Chinese alcohol',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/An%20introduction%20to%20Chinese%20alcohol/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596703048&Signature=gBFrTL4RkY2XhsAIQSUQ30%2B%2FShs%3D'
+          },
+          {
+            title: 'What is the spiciest food in China?',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/What%20to%20Order%20in%20a%20Traditional%20Beijing%20Mutton%20Hotpot%20Restaurant%3F/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596703145&Signature=BseZuqJffIeSVdBERZx6hwlVuMk%3D'
+          },
+          {
+            title: 'What to Order in a Traditional Beijing Mutton Hotpot Restaurant?',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/What%20to%20order%20in%20a%20Chaoshan%20(Guangdong)%20Beef%20Hotpot%20restaurant%3F/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596703532&Signature=lPq0nIJzCWnlQj5o3Jjx9JowlfQ%3D'
+          },
+          {
+            title: 'What to order in a Cantonese Beef Hotpot restaurant?',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20exotic%20fruit%20in%20China/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=100001596705279&Signature=UHVnzpuPAsVTpXT%2Fc8K4o5iNGE0%3D'
+          },
+          {
+            title: 'The most exotic fruit in China',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20exotic%20fruit%20in%20China/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=100001596705279&Signature=UHVnzpuPAsVTpXT%2Fc8K4o5iNGE0%3D'
+          },
+          {
+            title: 'The most famous Chinese tea',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20famous%20Chinese%20tea/%E9%A6%96%E9%A1%B5%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596708617&Signature=v0f%2BqrXbk%2BuRURvYNs8muA%2BeRuA%3D'
+          },
+        ],
+        travelData: [
+          {
+            title: 'Weekend getaways from Shanghai',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Travel/Weekend%20getaways%20from%20Shanghai/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596702894&Signature=aaIpQ6VfkCp%2FmdwFf7h8u0Kv1Js%3D'
+          },
+          {
+            title: 'Beijing best weekend getaways',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Travel/Beijing%20best%20weekend%20getaways/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596705048&Signature=ZVwl5tij8UaZj4PUVBSgtOjLoy4%3D'
+          },
+          {
+            title: 'Best HK staycations',
+            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Travel/Best%20HK%20staycations/Best%20HK%20staycations.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596702782&Signature=cdYJ3igLmiBjt1m1Wb0M5y%2BLkTQ%3D'
+          },
+        ],
         cityData: [
           {name: 'china', url: '../assets/img/china.jpg'},
           {name: 'beijing', url: '../assets/img/bj.jpg'},
@@ -193,7 +259,7 @@ export default {
   text-align: center;
   .city-container {
     display: flex;
-    margin-top: 100px ;
+    margin-top: 10px ;
     .card-city {
       margin-left: 80px;
     }
