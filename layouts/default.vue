@@ -1,26 +1,33 @@
 <template>
   <div>
-    <a-layout>
-      <a-layout-header class="header">
-        <div class="header-contanier">
-          <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-          &nbsp;&nbsp;ASHA GO
+      <div class="header">
+        <div class="header-container">
+          <span class="header-left">
+            <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
+            &nbsp;&nbsp;ASHA GO
+          </span>
+          <span class="header-right">
+            <a-button @click="sign">Sign in/Login in</a-button>
+          </span>
         </div>
-        <nav class="menu">
-          <nuxt-link to="/" class="menu-item">Daily Life</nuxt-link>
-          <nuxt-link to="/my" class="menu-item">Food & Drinks</nuxt-link>
-          <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link>
-          <nuxt-link to="/pageb" class="menu-item">Travel</nuxt-link>
-          <nuxt-link to="/pageb" class="menu-item">Community</nuxt-link>
-          <nuxt-link to="/pageb" class="menu-item">Services</nuxt-link>
-          <nuxt-link to="/pageb" class="menu-item">Services</nuxt-link>
-          <nuxt-link to="/edit" class="menu-item">About Us</nuxt-link>
-        </nav>
-      </a-layout-header>
-      <a-layout-content>
+        <div class="menu-container">
+          <nav class="menu">
+            <nuxt-link to="/" class="menu-item">Daily Life</nuxt-link>
+            <nuxt-link to="/my" class="menu-item">Food & Drinks</nuxt-link>
+            <!-- <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link> -->
+            <nuxt-link to="/pageb" class="menu-item">Travel</nuxt-link>
+            <!-- <nuxt-link to="/pageb" class="menu-item">Language</nuxt-link> -->
+            <nuxt-link to="/pageb" class="menu-item">Community</nuxt-link>
+            <nuxt-link to="/pageb" class="menu-item">Service</nuxt-link>
+            <nuxt-link to="/edit" class="menu-item">About Us</nuxt-link>
+          </nav>
+          <a-input-search class ='search' placeholder="input search text" v-model="searchValue" enter-button @search="onSearch" @pressEnter="onSearch"/>
+        </div>
+      </div>
+      <div class="content">
         <Nuxt />
-      </a-layout-content>
-      <a-layout-footer>
+      </div>
+      <div class="footer">
         <div class="footer-container">
           <ul class="footer-link">
             <li class="nav-item">
@@ -64,10 +71,29 @@
           </div>
           <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
         </div>
-      </a-layout-footer>
-    </a-layout>
+      </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      searchValue: ''
+    }
+  },
+  methods:{
+    sign() {
+      this.$router.push('/login');
+    },
+    onSearch() {
+      console.log('test');
+      this.$router.push({ path: '/article/search',  query: {
+        keyWord: this.searchValue
+      }});
+    }
+  }
+}
+</script>
 
 <style lang="less">
 html {
@@ -96,23 +122,59 @@ html {
   margin: 0;
 }
 .header {
-  height: 200px;
   background-color: #fff;
   margin: 0px;
   padding: 0px;
+  position: fixed;
+  top:0px;
+  width: 100%;
+  z-index: 999;
 }
-.menu {
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #8d040c;
   color: #fff;
+  .menu {
+    line-height: 40px;
+  }
+  .search {
+    margin-right: 40px ;
+    width: 200px;
+    color: #fff;
+    .ant-input {
+      border: none;
+      color: #fff;
+      border-bottom: 1px solid #fff;
+      background-color: #8d040c;
+      border-radius: 0px;
+    }
+    .ant-btn-primary {
+      background-color: #8d040c;
+      border: none;
+    }
+   
+  }
 }
-.header-contanier {
+
+.header-container {
   height: 100px;
   width: 100%;
   font-size: 22px;
   margin-top: 30px;
   margin-left: 30px;
   color: #ac4448;
-
+  display: flex;
+  justify-content:space-between;
+  .header-right {
+     align-self: center;
+     margin-right: 80px;
+     .ant-btn {
+       color: #ac4448;
+       border-color: #ac4448;
+     }
+  }
   .header-logo {
     object-position: 50% 50%;
     width: 84px;
@@ -125,7 +187,14 @@ html {
   color:#fff;
 }
 
-.ant-layout-footer {
+.content {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  margin-top: 170px ;
+}
+
+.footer {
   padding: 0px;
   .footer-container {
     height: 180px;

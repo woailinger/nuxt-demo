@@ -40,7 +40,8 @@ module.exports = {
     'quill/dist/quill.snow.css',
     // for bubble theme
     'quill/dist/quill.bubble.css',
-    '~/assets/main.css'
+    '~/assets/main.css',
+    'swiper/css/swiper.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -50,7 +51,8 @@ module.exports = {
     '@/plugins/antd-ui',
     '@/plugins/axios',
     { src: '@/plugins/vue-quill-editor', ssr: false },
-    { src: '@/plugins/avatar.js', ssr: false }
+    { src: '@/plugins/avatar.js', ssr: false },
+    { src: '@/plugins/vue-swiper', ssr: false },
   ],
   /*
   ** 客户端和服务端共享的环境变量

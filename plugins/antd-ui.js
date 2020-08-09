@@ -14,6 +14,10 @@ import Menu from 'ant-design-vue/lib/menu';
 import Carousel from 'ant-design-vue/lib/carousel';
 import Upload from 'ant-design-vue/lib/upload';
 import Dropdown from 'ant-design-vue/lib/dropdown';
+import Avatar from 'ant-design-vue/lib/avatar';
+import Card from 'ant-design-vue/lib/card';
+import Divider from 'ant-design-vue/lib/divider';
+
 
 // import 'ant-design-vue/lib/button/style/css';
 Vue.use(Button);
@@ -30,4 +34,7 @@ Vue.use(Menu);
 Vue.use(Carousel);
 Vue.use(Upload);
 Vue.use(Dropdown);
+Vue.use(Avatar);
+Vue.use(Card);
+Vue.use(Divider);
 Vue.prototype.$message = Message;
