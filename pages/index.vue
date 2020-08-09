@@ -259,10 +259,8 @@ export default {
   text-align: center;
   .city-container {
     display: flex;
-    margin-top: 10px ;
-    .card-city {
-      margin-left: 80px;
-    }
+    margin-top: 10px;
+    justify-content: space-around;
     .card-img  {
       width: 150px;
       height: 150px;

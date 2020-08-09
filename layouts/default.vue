@@ -2,12 +2,12 @@
   <div>
       <div class="header">
         <div class="header-container">
-          <span class="header-left">
+          <span class="header-left" @click="goHome">
             <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
             &nbsp;&nbsp;ASHA GO
           </span>
           <span class="header-right">
-            <a-button @click="sign">Sign in/Login in</a-button>
+            <a-button @click="sign">Sign in / Login</a-button>
           </span>
         </div>
         <div class="menu-container">
@@ -82,6 +82,9 @@ export default {
     }
   },
   methods:{
+    goHome() {
+      this.$router.push('/');
+    },
     sign() {
       this.$router.push('/login');
     },
@@ -169,7 +172,7 @@ html {
   justify-content:space-between;
   .header-right {
      align-self: center;
-     margin-right: 80px;
+     margin-right: 140px;
      .ant-btn {
        color: #ac4448;
        border-color: #ac4448;
