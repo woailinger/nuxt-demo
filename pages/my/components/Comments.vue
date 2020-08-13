@@ -95,6 +95,20 @@
               <span class="star"><a-icon type="star" /></span>
             </div>
             <div class="time"></div>
+            <div class="desc-content">
+              <div class="desc-content-item">
+                <span class="desc-content-item-title">Where:</span>
+                <span class="desc-content-item-where">Galaxy Soho</span>
+              </div>
+              <div class="desc-content-item">
+                <span class="desc-content-item-title">POSTPONED:</span>
+                <span>--> My love is like the grasses,Hidden in the deep mountains.Though its abundance increase,There is none that knows.</span>
+              </div>
+              <div class="desc-content-item">
+                <span class="desc-content-item-title">Is it free?:</span>
+                <span>Not free</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="delete">Delete</div>
@@ -108,6 +122,20 @@
               <span class="star"><a-icon type="star" /></span>
             </div>
             <div class="time"></div>
+            <div class="desc-content">
+              <div class="desc-content-item">
+                <span class="desc-content-item-title">Where:</span>
+                <span class="desc-content-item-where">Galaxy Soho</span>
+              </div>
+              <div class="desc-content-item">
+                <span class="desc-content-item-title">POSTPONED:</span>
+                <span>--> My love is like the grasses,Hidden in the deep mountains.Though its abundance increase,There is none that knows.</span>
+              </div>
+              <div class="desc-content-item">
+                <span class="desc-content-item-title">Is it free?:</span>
+                <span>Not free</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="delete">Delete</div>
