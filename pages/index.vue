@@ -12,10 +12,13 @@
       >
         <swiper-slide v-for="(item, index) in bannerData" :key="'banner'+ index">
           <img :src="item.url" :alt="'banner'+index">
+          <div class="text" data-swiper-parallax="-360">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+          </div>
         </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
+        <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
      </client-only>
      <div class="city-container">
@@ -225,9 +228,9 @@ export default {
     console.log('Current Swiper instance object', this.swiper)
     // this.swiper.slideTo(3, 1000, false)
   },
- 
- 
-  
+
+
+
   methods: {
     getImgUrl(i) {
       return `${baseUrl}abstract0${i + 1}.jpg`;
@@ -269,16 +272,20 @@ export default {
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    .card {
-      margin-left: 50px;
-      margin-bottom: 20px;
-      width: 350px;
+    justify-content: space-around;
+    padding: 0px 80px;
+    .ant-card {
+        border-radius: 30px;
     }
-    .card-img  {
-      width: 350px;
-      height: 200px;
+    .card {
+      margin-bottom: 50px;
+      width: 422px;
+      .ant-card-cover img {
+        border-radius: 30px 30px 0 0;
+      }
     }
   }
+
   .ant-carousel  .slick-dots {
     height: auto;
   }
