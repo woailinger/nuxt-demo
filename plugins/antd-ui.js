@@ -20,8 +20,12 @@ import Divider from 'ant-design-vue/lib/divider';
 import DatePicker from 'ant-design-vue/lib/date-picker';
 import Radio from 'ant-design-vue/lib/radio';
 
+import { Comment } from 'ant-design-vue';
+import { Row } from 'ant-design-vue';
+import { List} from 'ant-design-vue';
+import { Tag } from 'ant-design-vue';
 
-
+// All the component found in https://github.com/vueComponent/ant-design-vue/blob/master/components/index.js
 // import 'ant-design-vue/lib/button/style/css';
 Vue.use(Button);
 Vue.use(Form);
@@ -42,4 +46,8 @@ Vue.use(Card);
 Vue.use(Divider);
 Vue.use(DatePicker);
 Vue.use(Radio);
+Vue.use(Comment );
+Vue.use(List);
+Vue.use(Row);
+Vue.use(Tag);
 Vue.prototype.$message = Message;
