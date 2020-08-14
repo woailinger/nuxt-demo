@@ -17,6 +17,9 @@ import Dropdown from 'ant-design-vue/lib/dropdown';
 import Avatar from 'ant-design-vue/lib/avatar';
 import Card from 'ant-design-vue/lib/card';
 import Divider from 'ant-design-vue/lib/divider';
+import DatePicker from 'ant-design-vue/lib/date-picker';
+import Radio from 'ant-design-vue/lib/radio';
+
 
 
 // import 'ant-design-vue/lib/button/style/css';
@@ -37,4 +40,6 @@ Vue.use(Dropdown);
 Vue.use(Avatar);
 Vue.use(Card);
 Vue.use(Divider);
+Vue.use(DatePicker);
+Vue.use(Radio);
 Vue.prototype.$message = Message;

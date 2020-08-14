@@ -4,7 +4,10 @@
         <div class="header-container">
           <span class="header-left" @click="goHome">
             <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-            &nbsp;&nbsp;ASHA GO
+            <span class="logo-desc">
+              <span>ASHA GO</span>
+              <span class="desc">Your China Platform</span>
+            </span>
           </span>
           <span class="header-right">
             <a-button @click="sign">Sign in / Login</a-button>
@@ -33,7 +36,7 @@
               </a-menu>
             </a-dropdown>
           </nav>
-          <a-input-search class ='search' placeholder="input search text" v-model="searchValue" enter-button @search="onSearch" @pressEnter="onSearch"/>
+          <a-input-search class ='search' placeholder="search" v-model="searchValue" enter-button @search="onSearch" @pressEnter="onSearch"/>
         </div>
       </div>
       <div class="content">
@@ -193,12 +196,29 @@ html {
   color: #ac4448;
   display: flex;
   justify-content:space-between;
+  .header-left {
+    vertical-align: middle;
+    display: flex;
+    .logo-desc {
+      margin-top: -18px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin-left: 20px;
+      .desc {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    }
+
+  }
   .header-right {
      align-self: center;
      margin-right: 140px;
      .ant-btn {
        color: #ac4448;
        border-color: #ac4448;
+       margin-top: -15px;
      }
   }
   .header-logo {
