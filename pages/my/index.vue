@@ -32,6 +32,7 @@
         <li @click="handleClickItem(3)" :class="active === 3 ? 'active' : ''">Notifications</li>
         <li @click="handleClickItem(4)" :class="active === 4 ? 'active' : ''">Change/Reset Password</li>
         <li @click="handleClickItem(5)" :class="active === 5 ? 'active' : ''">Newsletter</li>
+        <li @click="handleClickItem(6)" :class="active === 6 ? 'active' : ''">Find Password</li>
       </ul>
     </div>
     <client-only>
@@ -52,6 +53,7 @@
     <Notifications v-if="active === 3" />
     <ResetPwd v-if="active === 4" />
     <Newsletter v-if="active === 5" />
+    <FindPwd v-if="active === 6" />
     <div class="modifyUserInfo">
       <a-form :form="modifyForm" @submit="handleSubmitModify" class="form">
 
@@ -66,6 +68,7 @@
   import Notifications from './components/Notifications.vue';
   import ResetPwd from './components/ResetPwd.vue';
   import Newsletter from './components/Newsletter.vue';
+  import FindPwd from './components/FindPwd.vue';
   export default {
     head() {
       return {
@@ -80,7 +83,8 @@
       Comments,
       Notifications,
       ResetPwd,
-      Newsletter
+      Newsletter,
+      FindPwd
     },
     data() {
       return {
