@@ -19,6 +19,9 @@ import Card from 'ant-design-vue/lib/card';
 import Divider from 'ant-design-vue/lib/divider';
 import DatePicker from 'ant-design-vue/lib/date-picker';
 import Radio from 'ant-design-vue/lib/radio';
+import List from 'ant-design-vue/lib/list';
+import Comment from 'ant-design-vue/lib/comment';
+import ToolTip from 'ant-design-vue/lib/tooltip';
 
 
 
@@ -42,4 +45,7 @@ Vue.use(Card);
 Vue.use(Divider);
 Vue.use(DatePicker);
 Vue.use(Radio);
+Vue.use(List);
+Vue.use(Comment);
+Vue.use(ToolTip);
 Vue.prototype.$message = Message;
