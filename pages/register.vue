@@ -124,7 +124,7 @@
       // Only show error after a field is touched.
       passwordError() {
         const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('token') && getFieldError('token');
+        return isFieldTouched('password') && getFieldError('password');
       },
       handleConfirmBlur(e) {
         const value = e.target.value;
@@ -143,7 +143,7 @@
       },
       compareToFirstPassword(rule, value, callback) {
         const form = this.form;
-        if (value && value !== form.getFieldValue('token')) {
+        if (value && value !== form.getFieldValue('password')) {
           callback('Two passwords that you enter is inconsistent!');
         } else {
           callback();
@@ -171,7 +171,7 @@
           method: 'post',
           data: {
             email: values.email,
-            token: encryption(values['token']),
+            password: encryption(values['password']),
             subscribed: !!values.subscribed,
             userName: values.userName,
           }
