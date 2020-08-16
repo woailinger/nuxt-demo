@@ -39,7 +39,7 @@
       <a-form-item has-feedback>
         <a-input
           v-decorator="[
-          'token',
+          'password',
           {
             rules: [
               { required: true, message: 'Please input your Password!' },
