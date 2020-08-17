@@ -28,11 +28,11 @@
     <div class="bottom">
       <ul class="list">
         <li @click="handleClickItem(1)" :class="active === 1 ? 'active' : ''">Profile</li>
-        <li @click="handleClickItem(2)" :class="active === 2 ? 'active' : ''">Likes</li>
-        <li @click="handleClickItem(3)" :class="active === 3 ? 'active' : ''">comments</li>
-        <!-- <li @click="handleClickItem(3)" :class="active === 4 ? 'active' : ''">Notifications</li> -->
-        <li @click="handleClickItem(5)" :class="active === 5 ? 'active' : ''">Change/Reset Password</li>
-        <!-- <li @click="handleClickItem(5)" :class="active === 6 ? 'active' : ''">Newsletter</li> -->
+        <li @click="handleClickItem(2)" :class="active === 2 ? 'active' : ''">Comments</li>
+        <li @click="handleClickItem(3)" :class="active === 3 ? 'active' : ''">Likes</li>
+        <li @click="handleClickItem(4)" :class="active === 4 ? 'active' : ''">Change/Reset Password</li>
+        <li @click="handleClickItem(5)" :class="active === 5 ? 'active' : ''">Newsletter</li>
+        <li @click="handleClickItem(6)" :class="active === 6 ? 'active' : ''">Find Password</li>
       </ul>
     </div>
     <client-only>
@@ -49,11 +49,11 @@
   </div>
   <div class="right">
     <Profile v-if="active === 1" />
-    <Likes v-if="active === 2" />
-    <Comments v-if="active === 3" />
-    <Notifications v-if="active === 4" />
-    <ResetPwd v-if="active === 5" />
-    <!-- <Newsletter v-if="active === 6" /> -->
+    <Comments v-if="active === 2" />
+    <Likes v-if="active === 3" />
+    <ResetPwd v-if="active === 4" />
+    <Newsletter v-if="active === 5" />
+    <FindPwd v-if="active === 6" />
     <div class="modifyUserInfo">
       <a-form :form="modifyForm" @submit="handleSubmitModify" class="form">
 
@@ -68,8 +68,8 @@
   import Notifications from './components/Notifications.vue';
   import ResetPwd from './components/ResetPwd.vue';
   import Newsletter from './components/Newsletter.vue';
+  import FindPwd from './components/FindPwd.vue';
   import Likes from './components/Likes.vue';
-
   export default {
     head() {
       return {
@@ -85,6 +85,7 @@
       Notifications,
       ResetPwd,
       Newsletter,
+      FindPwd,
       Likes
     },
     data() {

@@ -177,7 +177,7 @@
           }
         }).then(res => {
           this.loading = false;
-          if (res.code === 0) {
+          if (res.code == 0) {
 //            this.$store.commit('setToken', res.data.token);
             this.$router.push('/getStarted');
           }

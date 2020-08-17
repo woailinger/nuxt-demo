@@ -19,6 +19,7 @@ import Card from 'ant-design-vue/lib/card';
 import Divider from 'ant-design-vue/lib/divider';
 import DatePicker from 'ant-design-vue/lib/date-picker';
 import Radio from 'ant-design-vue/lib/radio';
+import ToolTip from 'ant-design-vue/lib/tooltip';
 
 import { Comment } from 'ant-design-vue';
 import { Row } from 'ant-design-vue';
@@ -50,4 +51,6 @@ Vue.use(Comment );
 Vue.use(List);
 Vue.use(Row);
 Vue.use(Tag);
+Vue.use(List);
+Vue.use(ToolTip);
 Vue.prototype.$message = Message;

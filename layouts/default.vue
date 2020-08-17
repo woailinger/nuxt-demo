@@ -10,7 +10,12 @@
             </span>
           </span>
           <span class="header-right">
-            <a-button @click="sign">Sign in / Login</a-button>
+            <a-button @click="signHandler" v-show="!loginFlag">Sign in / Login</a-button>
+            <span v-show="!!loginFlag">
+              <a-avatar :src="avatarImg" @click="goInfo"></a-avatar> 
+              <span>{{userName}}</span>
+              <a-button type="link" @click="logoutHandler" ghost>Logout</a-button>
+            </span>
           </span>
         </div>
         <div class="menu-container">
@@ -90,18 +95,57 @@
   </div>
 </template>
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
+      avatarImg: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+      userName: '',
+      loginFlag: false
+    }
+  },
+  mounted() {
+    console.log(this.$store.state.token, '-----------');
+    if(this.$store.state.token){
+        this.getUserInfo();
+        this.loginFlag = true;
+    } else {
+      this.loginFlag = false;
     }
   },
   methods:{
     goHome() {
       this.$router.push('/');
     },
-    sign() {
+    signHandler() {
       this.$router.push('/login');
+    },
+    logoutHandler() {
+      // 清空登陆态
+      this.$router.push('/login');
+      Cookie.set('_t', '');
+      this.$store.commit('setToken', '');
+      this.$store.commit('setUserId', '');
+      console.log('logout', 'success');
+    },
+    goInfo() {
+      this.$router.push('/my');
+    },
+    getUserInfo() {
+      this.$Server({
+          url: 'user/user-profile',
+          method: 'get',
+          data: {
+            userId: this.$store.userId,
+          }
+        }).then(res => {
+          if (res.code == 0) {
+            // 设置全局个人信息
+          }
+        }).finally(data => {
+          this.loading = false;
+        });
     },
     onSearch() {
       console.log('test');

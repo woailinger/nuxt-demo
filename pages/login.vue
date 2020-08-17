@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <img class="logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-    <div class="title">Sign Up</div>
+    <div class="title">Login</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
       <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
         <!-- <a-input
@@ -166,9 +166,10 @@
             email: values.email
           }
         }).then(res => {
-          if (res.code === 0) {
+          if (res.code == 0) {
             Cookie.set('_t', res.data.t);
             this.$store.commit('setToken', res.data.t);
+            this.$store.commit('setUserId', res.data.userId || '');
             this.$router.push('/')
           }
         }).finally(data => {
