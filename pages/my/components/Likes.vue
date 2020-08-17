@@ -29,60 +29,6 @@
         </div>
         <div class="delete">Delete</div>
       </li>
-      <li class="item">
-        <div class="item-content">
-          <img src="" alt="" class="pic">
-          <div class="desc">
-            <div class="title">
-              <span class="name">[POSTPONED] HOT & Spicy Festival 2020</span>
-              <span class="star"><a-icon type="star" /></span>
-            </div>
-            <div class="time"></div>
-            <div class="desc-content">
-              <div class="desc-content-item">
-                <span class="desc-content-item-title">Where:</span>
-                <span class="desc-content-item-where">Galaxy Soho</span>
-              </div>
-              <div class="desc-content-item">
-                <span class="desc-content-item-title">POSTPONED:</span>
-                <span>--> My love is like the grasses,Hidden in the deep mountains.Though its abundance increase,There is none that knows.</span>
-              </div>
-              <div class="desc-content-item">
-                <span class="desc-content-item-title">Is it free?:</span>
-                <span>Not free</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="delete">Delete</div>
-      </li>
-      <li class="item">
-        <div class="item-content">
-          <img src="" alt="" class="pic">
-          <div class="desc">
-            <div class="title">
-              <span class="name">[POSTPONED] HOT & Spicy Festival 2020</span>
-              <span class="star"><a-icon type="star" /></span>
-            </div>
-            <div class="time"></div>
-            <div class="desc-content">
-              <div class="desc-content-item">
-                <span class="desc-content-item-title">Where:</span>
-                <span class="desc-content-item-where">Galaxy Soho</span>
-              </div>
-              <div class="desc-content-item">
-                <span class="desc-content-item-title">POSTPONED:</span>
-                <span>--> My love is like the grasses,Hidden in the deep mountains.Though its abundance increase,There is none that knows.</span>
-              </div>
-              <div class="desc-content-item">
-                <span class="desc-content-item-title">Is it free?:</span>
-                <span>Not free</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="delete">Delete</div>
-      </li>
     </ul>
   </div>
 </template>
@@ -91,7 +37,26 @@ export default {
   data () {
     return {
     }
-  }
+  },
+  asyncData ({ req, $Server, redirect }) {
+    $Server({
+      url: '/search',
+      method: 'get',
+      params: {
+        searchKey: '',
+        type: 'all'
+      }
+    }).then(res => {
+      if (res.code == 0) {
+        // 重定向到登录页面
+//        redirect('/login');
+      } else {
+        return {
+          data: res.data.data
+        }
+      }
+    })
+  },
 }
 </script>
 <style scoped lang="less">

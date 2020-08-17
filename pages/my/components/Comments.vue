@@ -188,7 +188,25 @@ export default {
       ],
       moment
     }
-  }
+  },
+  asyncData ({ req, $Server, redirect, store }) {
+    $Server({
+      url: '/comments',
+      method: 'post',
+      data: {
+        userId: store.state.userId
+      }
+    }).then(res => {
+      if (res.code == 0) {
+        // 重定向到登录页面
+//        redirect('/login');
+      } else {
+        return {
+          data: res.data.data
+        }
+      }
+    })
+  },
 }
 </script>
 <style scoped lang="less">

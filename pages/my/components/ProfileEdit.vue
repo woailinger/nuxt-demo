@@ -1,12 +1,12 @@
 <template>
   <div class="form">
-    <a-form :form="form" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
+    <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
       <a-form-item
         label="Name"
       >
         <a-input
           v-decorator="[
-          'username',
+          'name',
           { rules: [{ required: true, message: 'Please input your name' }] },
         ]"
           placeholder="Please input your name"
@@ -15,14 +15,14 @@
       <a-form-item label="Gender">
         <a-radio-group
           v-decorator="[
-            'radio-group',
+            'gender',
             { rules: [{ required: true, message: 'Please Choose your Gender' }] },
           ]"
         >
-          <a-radio value="a">
+          <a-radio value="female">
             Female
           </a-radio>
-          <a-radio value="b">
+          <a-radio value="male">
             Male
           </a-radio>
         </a-radio-group>
@@ -32,10 +32,10 @@
       >
         <a-input
           v-decorator="[
-          'username',
-          { rules: [{ required: true, message: 'Please input your name' }] },
+          'nationality',
+          { rules: [{ required: true, message: 'Please input your nationality' }] },
         ]"
-          placeholder="Please input your name"
+          placeholder="Please input your nationality"
         />
       </a-form-item>
       <a-form-item
@@ -65,7 +65,7 @@
       >
         <a-input
           v-decorator="[
-          'email',
+          'city',
           { rules: [{ required: true, message: 'Please input your live now' }] },
         ]"
           placeholder="Please input your live now"
@@ -76,7 +76,7 @@
       >
         <a-checkbox-group
           v-decorator="[
-          'email',
+          'interesting',
           { rules: [{ required: true, message: 'Please choose your interests' }] },
         ]"
           placeholder="Please choose your live now"
@@ -122,7 +122,7 @@
       </a-form-item>
       <a-form-item>
         <a-col :span="24" class="button">
-          <a-button type="primary" @click="$emit('ok')">
+          <a-button type="primary" html-type="submit">
             Save
           </a-button>
         </a-col>
@@ -136,6 +136,30 @@
       return {
         checkNick: false,
         form: this.$form.createForm(this, {name: 'dynamic_rule'}),
+      }
+    },
+    methods: {
+      handleSubmit(e) {
+        e.preventDefault();
+        this.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+            this.handleEdit(values);
+          } else {
+            return false;
+          }
+        });
+      },
+      handleEdit (values) {
+        this.$Server({
+          url: '/user-profile',
+          method: 'post',
+          data: {
+            ...values
+          }
+        }).then(res => {
+          this.$emit('ok')
+        })
       }
     }
   }

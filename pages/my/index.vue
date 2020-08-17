@@ -51,7 +51,7 @@
     <Profile v-if="active === 1" />
     <Comments v-if="active === 2" />
     <Likes v-if="active === 3" />
-    <ResetPwd v-if="active === 4" />
+    <ResetPwd v-if="active === 4" @changeTab="handleChangeTab" />
     <Newsletter v-if="active === 5" />
     <FindPwd v-if="active === 6" />
     <div class="modifyUserInfo">
@@ -143,6 +143,9 @@
             console.log('Received values of form: ', values);
           }
         });
+      },
+      handleChangeTab (num) {
+        this.active = num;
       }
     }
   }
@@ -151,6 +154,7 @@
   .page {
     padding: 20px;
     display: flex;
+    overflow-x: auto;
     .left {
       width: 350px;
       .top {
@@ -232,6 +236,8 @@
     .right {
       /*flex: 1;*/
       margin: 0 auto;
+      padding: 0 100px;
+      /*overflow: auto;*/
     }
   }
 </style>

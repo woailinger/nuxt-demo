@@ -20,7 +20,7 @@
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25);" />
           </a-input>
         </a-col>
-        <a-col :span="7" :offset="2" class="forgetPwd" @click="forget()">Forget password ?</a-col>
+        <a-col :span="7" :offset="2" class="forgetPwd" @click="forget">Forget password ?</a-col>
       </a-form-item>
       <a-form-item has-feedback label="New password">
         <a-col :span="15">
@@ -103,7 +103,7 @@ export default {
       })
     },
     forget() {
-      this.$route.push('--');
+      this.$emit('changeTab', 6);
     },
     passwordError() {
       const { getFieldError, isFieldTouched } = this.reSetPwdForm;
@@ -147,6 +147,7 @@ export default {
     display: inline-block;
     border: 1px solid #ccc;
     text-align: center;
+    cursor: pointer;
   }
   .button {
     text-align: center;

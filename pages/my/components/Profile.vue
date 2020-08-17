@@ -12,7 +12,7 @@
                 v-model="show"
                 :width="300"
                 :height="300"
-                url="/upload"
+                url="/user/avatar"
                 img-format="png" />
       </client-only>
     </div>
@@ -20,7 +20,7 @@
     <ul class="info" v-else>
       <li class="item">
         <span class="name">Name</span>
-        <span class="value">Zi Wang</span>
+        <span class="value">{{ data.userName }}</span>
       </li>
       <li class="item">
         <span class="name">Gender</span>
@@ -28,23 +28,23 @@
       </li>
       <li class="item">
         <span class="name">Nationality</span>
-        <span class="value">Chinese</span>
+        <span class="value">{{ data.nationality }}</span>
       </li>
       <li class="item">
         <span class="name">Age</span>
-        <span class="value">29</span>
+        <span class="value">{{ data.age }}</span>
       </li>
       <li class="item">
         <span class="name">Email </span>
-        <span class="value">123456@qq.com</span>
+        <span class="value">{{ data.email }}</span>
       </li>
       <li class="item">
         <span class="name">Where do you live now</span>
-        <span class="value">Shanghai</span>
+        <span class="value">{{ data.city }}</span>
       </li>
       <li class="item">
         <span class="name">What interests you</span>
-        <span class="value">daily life, food& drinks</span>
+        <span class="value">{{ data.interesting }}</span>
       </li>
       <li class="button">
         <a-button type="primary" @click="toggleEdit">Edit</a-button>
@@ -55,17 +55,17 @@
 <script>
 import ProfileEdit from './ProfileEdit.vue';
 export default {
-  async asyncData ({ req, $Server, redirect }) {
-    await $Server({
-      url: 'user/user-profile',
+  asyncData ({ req, $Server, redirect, store }) {
+    $Server({
+      url: '/user-profile',
       method: 'get',
       data: {
-        userId: ''
+        userId: store.state.userId
       }
     }).then(res => {
       if (res.code == 0) {
         // 重定向到登录页面
-        redirect('/login');
+//        redirect('/login');
       } else {
         return {
           data: res.data.data
@@ -80,7 +80,18 @@ export default {
     return {
       imgDataUrl: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
       show: false,
-      isEdit: false
+      isEdit: false,
+      data: {
+        nationality: 'Chinese',
+        email: '798406168@qq.com',
+        subscribed: '',
+        city: 'Shange Hai',
+        userName: 'return',
+        requiredCompleted: '',
+        interesting: 'daily life, food& drinks',
+        avatarImg: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        age: 30
+      }
     }
   },
   methods: {

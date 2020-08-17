@@ -12,7 +12,7 @@
           <span class="header-right">
             <a-button @click="signHandler" v-show="!loginFlag">Sign in / Login</a-button>
             <span v-show="!!loginFlag">
-              <a-avatar :src="avatarImg" @click="goInfo"></a-avatar> 
+              <a-avatar :src="avatarImg" @click="goInfo"></a-avatar>
               <span>{{userName}}</span>
               <a-button type="link" @click="logoutHandler" ghost>Logout</a-button>
             </span>
@@ -134,7 +134,7 @@ export default {
     },
     getUserInfo() {
       this.$Server({
-          url: 'user/user-profile',
+          url: '/user-profile',
           method: 'get',
           data: {
             userId: this.$store.userId,

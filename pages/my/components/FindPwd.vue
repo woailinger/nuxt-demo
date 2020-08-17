@@ -3,7 +3,7 @@
     <div class="title">
       Find Password
     </div>
-    <a-form :form="form" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
+    <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
       <a-form-item label="邮箱">
       <span class="ant-form-text">
         12345678@qq.com
@@ -13,7 +13,7 @@
         <a-col :span="14">
           <a-input
             v-decorator="[
-          'code',
+          'vcode',
           {
             rules: [
               { required: true, message: 'Please enter the verification code!' }
@@ -43,7 +43,7 @@
       <a-form-item label="New Password">
         <a-input
           v-decorator="[
-          'token',
+          'newPassword',
           { rules: [{ required: true, message: 'Please input your Password!' }] },
         ]"
           type="password"
@@ -55,7 +55,7 @@
       </a-form-item>
       <a-form-item>
         <a-col :span="24" class="button">
-          <a-button type="primary" @click="$emit('ok')">
+          <a-button type="primary" html-type="submit">
             Save
           </a-button>
         </a-col>
@@ -79,10 +79,39 @@ export default {
     handleGetCode () {
       this.codeDisabled = true;
       this.deadline = Date.now() + 1000 * 60;
+      this.$Server({
+        url: '/user/send-vcode',
+        method: 'post',
+        data: {
+          userId: this.$store.state.userId,
+          useage: 'FIND_PASSWORD'
+        }
+      })
     },
     onFinish () {
       this.codeDisabled = false;
     },
+    handleSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values);
+          this.handleConfirm(values);
+        } else {
+          return false;
+        }
+      });
+    },
+    handleConfirm (values) {
+      this.$Server({
+        url: '/user/change-pwd',
+        method: 'post',
+        data: {
+          userId: this.$store.state.userId,
+          ...values
+        }
+      })
+    }
   }
 }
 </script>

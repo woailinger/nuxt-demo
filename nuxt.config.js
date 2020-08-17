@@ -64,6 +64,9 @@ module.exports = {
     proxy: false,
   },
   proxy: {
+    '/': {
+      target: '//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
+    },
     '/api': {
       target: '//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
     },
