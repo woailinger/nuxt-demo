@@ -54,6 +54,7 @@
           <div id="login_container"> test</div>
         </span> -->
         <a-button class="register" type="link" @click="handleToRegister">Register</a-button>
+        <a-button class="register" type="link" @click="handleToForgot">Forgot password?</a-button>
       </div>
     </a-form>
   </div>
@@ -93,6 +94,9 @@
     methods: {
       handleToRegister () {
         this.$router.push('/register');
+      },
+      handleToForgot() {
+        this.$router.push('/FindPwd');
       },
       userNameError() {
         const { getFieldError, isFieldTouched } = this.form;
@@ -188,7 +192,7 @@
   align-items: center;
   overflow: auto;
   background: #f0f2f5;
-  background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+//   background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;
