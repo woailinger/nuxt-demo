@@ -137,7 +137,7 @@ export default {
           url: '/user/profile',
           method: 'get',
           params: {
-            userId: this.$store.userId || '',
+            userId: this.$store.state.userId || '',
           }
         }).then(res => {
           if (res.code == 0) {

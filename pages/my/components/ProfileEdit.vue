@@ -2,11 +2,11 @@
   <div class="form">
     <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
       <a-form-item
-        label="Name"
+        label="userName"
       >
         <a-input
           v-decorator="[
-          'name',
+          'userName',
           { rules: [{ required: true, message: 'Please input your name' }] },
         ]"
           placeholder="Please input your name"
@@ -47,6 +47,7 @@
           { rules: [{ required: checkNick, message: 'Please choose your Birthday' }] },
         ]"
           placeholder="Please choose your Birthday"
+          format="YYYY-MM-DD"
         />
       </a-form-item>
       <a-form-item
@@ -84,17 +85,12 @@
           <a-row>
             <a-col :span="12">
               <a-checkbox value="daily">
-                daily
+                daily & Life
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="life">
-                life
-              </a-checkbox>
-            </a-col>
-            <a-col :span="12">
-              <a-checkbox value="food& drinks">
-                food& drinks
+              <a-checkbox value="food & drinks">
+                food & drinks
               </a-checkbox>
             </a-col>
             <a-col :span="12">
@@ -117,6 +113,11 @@
                 events
               </a-checkbox>
             </a-col>
+            <a-col :span="12">
+              <a-checkbox value="others">
+                others
+              </a-checkbox>
+            </a-col>
           </a-row>
         </a-checkbox-group>
       </a-form-item>
@@ -131,6 +132,8 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
+
   export default {
     data () {
       return {
@@ -151,6 +154,8 @@
         });
       },
       handleEdit (values) {
+        debugger;
+        values.birthday =  moment(values.birthday).format('YYYY-MM-DD');
         this.$Server({
           url: '/user/update-profile',
           method: 'POST',

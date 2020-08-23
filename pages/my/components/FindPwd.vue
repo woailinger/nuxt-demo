@@ -4,12 +4,16 @@
       Find Password
     </div>
     <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
-      <a-form-item label="邮箱">
-      <span class="ant-form-text">
-        12345678@qq.com
-      </span>
+      <a-form-item label="email">
+       <a-input
+          v-decorator="[
+          'email',
+          { rules: [{ required: true, message: 'Please input your Email' }] },
+        ]"
+          placeholder="Please input your Email"
+        />
       </a-form-item>
-      <a-form-item label="验证码">
+      <a-form-item label="code">
         <a-col :span="14">
           <a-input
             v-decorator="[
@@ -69,23 +73,36 @@ export default {
     return  {
       form: this.$form.createForm(this, {name: 'dynamic_rule'}),
       codeDisabled: false,
-      deadline: ''
+      deadline: '',
+      email: '',
+      seqNo: '',
+      userId: '',
+      newPassword: ''
     }
+  },
+  mounted() {
+    let userInfo = this.$store.state.userInfo;
+    this.email = (userInfo && userInfo.email) || '';
   },
   methods: {
     /***
      * 校验code值
      */
     handleGetCode () {
-      this.codeDisabled = true;
-      this.deadline = Date.now() + 1000 * 60;
       this.$Server({
         url: '/vcode/send-email',
         method: 'post',
         data: {
-          email: this.$store.state.userId,
+          email: this.email,
           scene: 'RESET_PASSWORD'
         }
+      }).then((res) => {
+        this.codeDisabled = true;
+        this.deadline = Date.now() + 1000 * 60;
+        this.seqNo = res.data.seqNo;
+        this.userId = res.data.userId;
+      }).catch((res) => {
+        this.$message.waring('sorry')
       })
     },
     onFinish () {
@@ -104,11 +121,13 @@ export default {
     },
     handleConfirm (values) {
       this.$Server({
-        url: '/user/change-pwd',
+        url: '/user/reset-password',
         method: 'post',
         data: {
-          userId: this.$store.state.userId,
-          ...values
+          userId: this.userId,
+          newPassword: this.newPassword,
+          seqNo: this.seqNo,
+          vcode: this.vcode
         }
       })
     }

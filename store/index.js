@@ -3,7 +3,8 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 export const state = () => {
   return {
     token: null,
-    userId: null
+    userId: null,
+    userInfo: null
   }
 }
 export const mutations = {
@@ -12,12 +13,16 @@ export const mutations = {
   },
   setUserId(state, userId) {
     state.userId = userId
+  },
+  setEmail(state, email) {
+    state.email = email
   }
 }
 export const actions = {
   nuxtServerInit ({ commit }, { req }) {
     let token = null
     let userId = null
+    let userInfo = null
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
@@ -28,5 +33,6 @@ export const actions = {
     }
     commit('setToken', token)
     commit('setUserId', userId)
+    commit('setUserInfo', userInfo)
   }
 }

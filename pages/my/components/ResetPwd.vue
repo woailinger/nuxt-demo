@@ -62,6 +62,7 @@
             <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-col>
+        
       </a-form-item>
       <a-form-item>
         <div class="button">
@@ -78,7 +79,8 @@ export default {
   data () {
     return {
       reSetPwdForm: this.$form.createForm(this, { name: 'horizontal_reset' }),
-      loading: false
+      loading: false,
+      codeDisabled: false
     }
   },
   methods: {
@@ -93,10 +95,12 @@ export default {
     },
     reSetPwd (values) {
       this.$Server({
-        url: 'user/reset-password',
+        url: '/user/change-password',
         method: 'post',
         data: {
-          token: encryption(values['token'])
+          userId: this.$store.state.userId,
+          oldPassword: this.oldPassword,
+          newPassword: this.confirmPassword,
         }
       }).then(res => {
         this.loading = false;
@@ -104,6 +108,24 @@ export default {
     },
     forget() {
       this.$emit('changeTab', 6);
+    },
+     /***
+     * 校验code值
+     */
+    handleGetCode () {
+      this.codeDisabled = true;
+      this.deadline = Date.now() + 1000 * 60;
+      this.$Server({
+        url: '/vcode/send-email',
+        method: 'post',
+        data: {
+          email: this.$store.state.email,
+          scene: 'RESET_PASSWORD'
+        }
+      })
+    },
+    onFinish () {
+      this.codeDisabled = false;
     },
     passwordError() {
       const { getFieldError, isFieldTouched } = this.reSetPwdForm;
