@@ -2,7 +2,7 @@
   <div>
     <div class="container">
      <div class="search">
-       <a-input-search placeholder="search word" v-model="keyWord" @search="onSearch" />
+       <a-input-search placeholder="search" v-model="keyWord" @search="onSearch" />
      </div>
       <client-only>
         <div class="articlelist" :bordered="false" :body-style="{padding: '24px',margin: '15%'}">

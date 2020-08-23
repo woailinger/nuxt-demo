@@ -31,7 +31,7 @@
         />
       </a-card>
      </div>
-    <a-divider>Daily life</a-divider>
+    <a-divider class="">Daily Life</a-divider>
      <p class="card-container">
        <a-card hoverable class="card" v-for="(item, index) in latestData" :key="'lastest'+ index">
         <img
@@ -243,6 +243,9 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  .ant-divider-inner-text {
+    margin: 26px 0px;
+  }
   .city-container {
     display: flex;
     margin-top: 30px;

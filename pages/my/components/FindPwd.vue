@@ -80,11 +80,11 @@ export default {
       this.codeDisabled = true;
       this.deadline = Date.now() + 1000 * 60;
       this.$Server({
-        url: '/user/send-vcode',
+        url: '/vcode/send-email',
         method: 'post',
         data: {
-          userId: this.$store.state.userId,
-          useage: 'FIND_PASSWORD'
+          email: this.$store.state.userId,
+          scene: 'RESET_PASSWORD'
         }
       })
     },

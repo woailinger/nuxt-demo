@@ -10,7 +10,7 @@
             </span>
           </span>
           <span class="header-right">
-            <a-button @click="signHandler" v-show="!loginFlag">Sign in / Login</a-button>
+            <a-button @click="signHandler" v-show="!loginFlag">Sign up / Login</a-button>
             <span v-show="!!loginFlag">
               <a-avatar :src="avatarImg" @click="goInfo"></a-avatar>
               <span>{{userName}}</span>
@@ -52,26 +52,26 @@
           <ul class="footer-link">
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>About Us</p>
-                <span>关于我们</span>
+                <p>Who are we</p>
+                <span>我们是谁</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>Contact Us </p>
-                <span>联系我们</span>
+                <p>Business inquiries </p>
+                <span>商业合作</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>Join Us</p>
-                <span>加入我们</span>
+                <p>Write for us</p>
+                <span>投稿</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>Disclaimer</p>
-                <span>声 明</span>
+                <p>User agreement</p>
+                <span>用户协议</span>
               </a>
             </li>
             <li class="nav-item">
@@ -87,7 +87,7 @@
             <a-icon type="instagram" class="social-icon"/>
             <a-icon type="wechat" class="social-icon"/>
             <a-icon type="mail" class="social-icon"/>
-            <span class="mail-desc"> &nbsp;&nbsp;email:info@ashago.com</span>
+            <span class="mail-desc"> &nbsp;&nbsp;&nbsp;Email: info@ashago.com</span>
           </div>
           <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
         </div>
@@ -221,12 +221,12 @@ html {
   }
 }
 .ant-dropdown-menu {
-  background-color: #ac4448;
+  background-color: #8d040c;
   .ant-dropdown-menu-item > a {
     color: #fff;
   }
   .ant-dropdown-menu-item:hover {
-    background-color: #ac4448;
+    background-color: #8d040c;
     color: #cccccc;
   }
 }
