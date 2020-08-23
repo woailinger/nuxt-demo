@@ -20,13 +20,13 @@
         </div>
         <div class="menu-container">
           <nav class="menu">
-            <nuxt-link to="/" class="menu-item">Daily Life</nuxt-link>
-            <nuxt-link to="/my" class="menu-item">Food & Drinks</nuxt-link>
+            <nuxt-link to="/category/daily" class="menu-item">Daily Life</nuxt-link>
+            <nuxt-link to="/category/food" class="menu-item">Food & Drinks</nuxt-link>
             <!-- <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link> -->
-            <nuxt-link to="/pageb" class="menu-item">Travel</nuxt-link>
-            <nuxt-link to="/pageb" class="menu-item">Language</nuxt-link>
-            <nuxt-link to="/pageb" class="menu-item">Community</nuxt-link>
-            <nuxt-link to="/pageb" class="menu-item">Service</nuxt-link>
+            <nuxt-link to="/category/travel" class="menu-item">Travel</nuxt-link>
+            <nuxt-link to="/category" class="menu-item">Language</nuxt-link>
+            <nuxt-link to="/category" class="menu-item">Community</nuxt-link>
+            <nuxt-link to="/category" class="menu-item">Service</nuxt-link>
             <a-dropdown>
               <a class="ant-dropdown-link menu-item" @click="e => e.preventDefault()">
                 About Us <a-icon type="down" />
@@ -134,10 +134,10 @@ export default {
     },
     getUserInfo() {
       this.$Server({
-          url: '/user-profile',
+          url: '/user/profile',
           method: 'get',
-          data: {
-            userId: this.$store.userId,
+          params: {
+            userId: this.$store.userId || '',
           }
         }).then(res => {
           if (res.code == 0) {
@@ -148,7 +148,6 @@ export default {
         });
     },
     onSearch() {
-      console.log('test');
       this.$router.push({ path: '/article/search',  query: {
         keyWord: this.searchValue
       }});
@@ -235,7 +234,7 @@ html {
   height: 100px;
   width: 100%;
   font-size: 22px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 30px;
   color: #ac4448;
   display: flex;
@@ -281,21 +280,20 @@ html {
   display: block;
   height: 100%;
   overflow: hidden;
-  margin-top: 170px ;
+  margin-top: 150px ;
 }
 
 .footer {
   padding: 0px;
   .footer-container {
-    height: 180px;
     background-color: #8d040c;
     color: #fff;
-    padding: 3rem 0;
+    padding: 2rem 0;
     position: relative;
     bottom: 0;
     .footer-link {
       list-style: none;
-      display: inline;
+      display: inline-block;
       .nav-item {
         display: inline-block;
         width: 120px;
@@ -303,6 +301,9 @@ html {
           font-size: 16px;
           color: #fff;
           margin-right: 50px;
+          p {
+            padding-bottom: 10px;
+          }
         }
       }
     }
@@ -325,7 +326,7 @@ html {
         font-size: 18px;
         line-height: 18px;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 40px;
     }
   }
 }

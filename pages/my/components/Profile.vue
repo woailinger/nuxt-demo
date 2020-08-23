@@ -57,9 +57,9 @@ import ProfileEdit from './ProfileEdit.vue';
 export default {
   asyncData ({ req, $Server, redirect, store }) {
     $Server({
-      url: '/user-profile',
+      url: '/user/profile',
       method: 'get',
-      data: {
+      params: {
         userId: store.state.userId
       }
     }).then(res => {

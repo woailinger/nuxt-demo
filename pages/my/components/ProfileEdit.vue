@@ -152,10 +152,10 @@
       },
       handleEdit (values) {
         this.$Server({
-          url: '/user-profile',
-          method: 'post',
+          url: '/user/update-profile',
+          method: 'POST',
           data: {
-            ...values
+              ...values
           }
         }).then(res => {
           this.$emit('ok')

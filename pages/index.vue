@@ -12,9 +12,9 @@
       >
         <swiper-slide v-for="(item, index) in bannerData" :key="'banner'+ index">
           <img :src="item.url" :alt="'banner'+index" >
-          <!-- <div class="text" data-swiper-parallax="-360">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
-          </div> -->
+          <div class="text">
+            <p>{{item.text}}</p>
+          </div>
         </swiper-slide>
         <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
@@ -30,47 +30,6 @@
           :src="item.url"
         />
       </a-card>
-
-       <!-- <a-card hoverable class="card-city" :bordered="false">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          src="../assets/img/china.jpg"
-        /> -->
-      <!-- </a-card> -->
-       <!-- <a-card hoverable class="card-city" :bordered="false">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          src="../assets/img/bj.jpg"
-        />
-      </a-card>
-       <a-card hoverable class="card-city" :bordered="false">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          src="../assets/img/sh.jpg"
-        />
-      </a-card>
-       <a-card hoverable class="card-city" :bordered="false">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          src="../assets/img/sz.jpg"
-        />
-      </a-card>
-       <a-card hoverable class="card-city" :bordered="false">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          src="../assets/img/hk.jpg"
-        />
-      </a-card> -->
      </div>
     <a-divider>Daily life</a-divider>
      <p class="card-container">
@@ -141,11 +100,26 @@ export default {
           }
         },
         bannerData: [
-          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Is%20China%20a%20safe%20country%20for%20travellers.jpg'},
-          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Growing%20up%20as%20a%20woman%20in%20China.jpg'},
-          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-The%20most%20famous%20Chinese%20curse%20words.JPG'},
-          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Movies%20to%20improve%20your%20Chinese.jpg'},
-          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Why%20you%20should%20travel%20solo%20in%20China.jpg'},
+          {
+            url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Is%20China%20a%20safe%20country%20for%20travellers.jpg',
+            text: 'Is China a safe country for travellers?'
+          },
+          {
+            url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Growing%20up%20as%20a%20woman%20in%20China.jpg',
+            text: 'Growing up as a woman in China'
+          },
+          {
+            url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-The%20most%20famous%20Chinese%20curse%20words.JPG',
+            text: 'The most famous Chinese curse words'
+          },
+          {
+            url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Movies%20to%20improve%20your%20Chinese.jpg',
+            text: 'Movies to improve your Chinese'
+          },
+          {
+            url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Why%20you%20should%20travel%20solo%20in%20China.jpg',
+            text: 'Why you should travel solo in China'
+          },
         ],
         latestData: [
           {
@@ -284,13 +258,13 @@ export default {
     justify-content: space-around;
     padding: 0px 60px;
     .ant-card {
-        border-radius: 30px;
+        border-radius: 15px;
     }
     .card {
       margin-bottom: 50px;
       width: 360px;
       .ant-card-cover img {
-        border-radius: 30px 30px 0 0;
+        border-radius: 15px 15px 0 0;
       }
     }
   }
@@ -340,6 +314,16 @@ export default {
       img {
         width: 100%;
         height: 100%;
+      }
+      .text {
+        position: absolute;
+        top: 80%;
+        color: white;
+        font-size: 27px;
+        width: 40%;
+        left: 5%;
+        line-height: 20px;
+        text-align: left;
       }
     }
     .swiper-pagination {
