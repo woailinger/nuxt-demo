@@ -4,14 +4,14 @@
     <div class="top">
       <div class="avatar">
         <img class="img" :src="imgDataUrl" alt="">
-        <a-dropdown>
-          <span class="dropdown" @click="e => e.preventDefault()">...</span>
-          <a-menu slot="overlay">
-            <a-menu-item>
-              <span @click="toggleShow">修改头像</span>
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <!--<a-dropdown>-->
+          <!--<span class="dropdown" @click="e => e.preventDefault()">...</span>-->
+          <!--<a-menu slot="overlay">-->
+            <!--<a-menu-item>-->
+              <!--<span @click="toggleShow">修改头像</span>-->
+            <!--</a-menu-item>-->
+          <!--</a-menu>-->
+        <!--</a-dropdown>-->
       </div>
       <div class="userName">hello Tom</div>
       <div class="follow">
@@ -26,13 +26,13 @@
       </div>
     </div>
     <div class="bottom">
-      <div class="title">Profile</div>
       <ul class="list">
-        <li @click="handleClickItem(1)" :class="active === 1 ? 'active' : ''">重置密码</li>
-        <li @click="handleClickItem(2)" :class="active === 2 ? 'active' : ''">修改个人资料</li>
-        <li @click="handleClickItem(3)" :class="active === 3 ? 'active' : ''">功能2222</li>
-        <li @click="handleClickItem(4)" :class="active === 4 ? 'active' : ''">功能3333</li>
-        <li @click="handleClickItem(5)" :class="active === 5 ? 'active' : ''">功能4444</li>
+        <li @click="handleClickItem(1)" :class="active === 1 ? 'active' : ''">Profile</li>
+        <li @click="handleClickItem(2)" :class="active === 2 ? 'active' : ''">Comments</li>
+        <li @click="handleClickItem(3)" :class="active === 3 ? 'active' : ''">Likes</li>
+        <li @click="handleClickItem(4)" :class="active === 4 ? 'active' : ''">Change/Reset Password</li>
+        <li @click="handleClickItem(5)" :class="active === 5 ? 'active' : ''">Newsletter</li>
+        <li @click="handleClickItem(6)" :class="active === 6 ? 'active' : ''">Find Password</li>
       </ul>
     </div>
     <client-only>
@@ -48,69 +48,12 @@
     </client-only>
   </div>
   <div class="right">
-    <div class="resetPwd" v-if="active === 1">
-      <a-form :form="reSetPwdForm" @submit="handleSubmit" class="form">
-        <a-form-item>
-          <a-input
-            v-decorator="[
-          'oldPwd',
-          {
-            rules: [
-              { required: true, message: 'Please input your oldPwd!' }
-            ]
-          },
-        ]"
-            type="password"
-            placeholder="oldPwd"
-            size="large"
-          >
-            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-item>
-        <a-form-item has-feedback>
-          <a-input
-            v-decorator="[
-          'token',
-          {
-            rules: [
-              { required: true, message: 'Please input your Password!' },
-              { validator: validateToNextPassword }
-            ]
-          },
-        ]"
-            type="password"
-            placeholder="Password"
-            size="large"
-          >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-item>
-        <a-form-item has-feedback>
-          <a-input
-            v-decorator="[
-          'confirmPassword',
-          {
-            rules: [
-              { required: true, message: 'The passwords entered twice do not match!' },
-              { validator: compareToFirstPassword }
-            ]
-          }
-        ]"
-            type="password"
-            placeholder="Confirm password"
-            size="large"
-            @blur="handleConfirmBlur"
-          >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-item>
-        <a-form-item>
-          <a-button type="primary" html-type="submit" class="register" :loading="loading">
-            Reset Pwd
-          </a-button>
-        </a-form-item>
-      </a-form>
-    </div>
+    <Profile v-if="active === 1" />
+    <Comments v-if="active === 2" />
+    <Likes v-if="active === 3" />
+    <ResetPwd v-if="active === 4" @changeTab="handleChangeTab" />
+    <Newsletter v-if="active === 5" />
+    <FindPwd v-if="active === 6" />
     <div class="modifyUserInfo">
       <a-form :form="modifyForm" @submit="handleSubmitModify" class="form">
 
@@ -120,6 +63,13 @@
 </div>
 </template>
 <script>
+  import Profile from './components/Profile.vue';
+  import Comments from './components/Comments.vue';
+  import Notifications from './components/Notifications.vue';
+  import ResetPwd from './components/ResetPwd.vue';
+  import Newsletter from './components/Newsletter.vue';
+  import FindPwd from './components/FindPwd.vue';
+  import Likes from './components/Likes.vue';
   export default {
     head() {
       return {
@@ -128,8 +78,16 @@
         link: [{ rel: "favicon", href: "favicon.ico" }]
       }
     },
-    layout: "blank",
     middleware: 'notTokenenticated',
+    components: {
+      Profile,
+      Comments,
+      Notifications,
+      ResetPwd,
+      Newsletter,
+      FindPwd,
+      Likes
+    },
     data() {
       return {
         mode: 'inline',
@@ -138,7 +96,6 @@
         imgDataUrl: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
         active: 1,
         loading: false,
-        reSetPwdForm: this.$form.createForm(this, { name: 'horizontal_reset' }),
         modifyForm: this.$form.createForm(this, { name: 'horizontal_modify' }),
         confirmDirty: false,
         hasErrors: fieldsError => {
@@ -179,49 +136,6 @@
         console.log(status);
         console.log('field: ' + field);
       },
-      passwordError() {
-        const { getFieldError, isFieldTouched } = this.reSetPwdForm;
-        return isFieldTouched('token') && getFieldError('token');
-      },
-      handleConfirmBlur(e) {
-        const value = e.target.value;
-        this.confirmDirty = this.confirmDirty || !!value;
-      },
-      validateToNextPassword(rule, value, callback) {
-        const form = this.reSetPwdForm;
-        if (value && this.confirmDirty) {
-          form.validateFields(['confirm'], { force: true });
-        }
-        callback();
-      },
-      compareToFirstPassword(rule, value, callback) {
-        const form = this.reSetPwdForm;
-        if (value && value !== form.getFieldValue('token')) {
-          callback('Two passwords that you enter is inconsistent!');
-        } else {
-          callback();
-        }
-      },
-      handleSubmit(e) {
-        e.preventDefault();
-        this.reSetPwdForm.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-            this.reSetPwd(values);
-          }
-        });
-      },
-      reSetPwd (values) {
-        this.$Server({
-          url: 'user/resetPwd',
-          method: 'post',
-          data: {
-            token: encryption(values['token'])
-          }
-        }).then(res => {
-          this.loading = false;
-        })
-      },
       handleSubmitModify (e) {
         e.preventDefault();
         this.reSetPwdForm.validateFields((err, values) => {
@@ -229,6 +143,9 @@
             console.log('Received values of form: ', values);
           }
         });
+      },
+      handleChangeTab (num) {
+        this.active = num;
       }
     }
   }
@@ -237,10 +154,11 @@
   .page {
     padding: 20px;
     display: flex;
+    overflow-x: auto;
     .left {
       width: 350px;
       .top {
-        padding: 30px 50px;
+        padding: 30px 30px;
         border: 1px solid #8D050B;
         .avatar {
           text-align: center;
@@ -287,7 +205,7 @@
       }
       .bottom {
         margin-top: 20px;
-        padding: 10px 50px;
+        padding: 10px 30px;
         border: 1px solid #8D050B;
         color: #8D050B;
         .title {
@@ -301,7 +219,7 @@
         .list {
           li {
             font-size: 18px;
-            line-height: 40px;
+            line-height: 80px;
             cursor: pointer;
           }
           .active {
@@ -316,7 +234,10 @@
       }
     }
     .right {
-      padding: 120px 50px 0 30px;
+      /*flex: 1;*/
+      margin: 0 auto;
+      padding: 0 100px;
+      /*overflow: auto;*/
     }
   }
 </style>

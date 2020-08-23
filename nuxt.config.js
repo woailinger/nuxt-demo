@@ -34,7 +34,7 @@ module.exports = {
   */
   css: [
     // 'ant-design-vue/lib/button/style/css',
-    'ant-design-vue/dist/antd.css',
+    'ant-design-vue/dist/antd.less',
     'quill/dist/quill.core.css',
     // for snow theme
     'quill/dist/quill.snow.css',
@@ -64,6 +64,9 @@ module.exports = {
     proxy: false,
   },
   proxy: {
+    '/': {
+      target: '//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
+    },
     '/api': {
       target: '//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
     },
@@ -102,6 +105,17 @@ module.exports = {
     extend (config, { isClient }) {
       // 客户端打包配置
       if (isClient) {
+      }
+    },
+    loaders: {
+      // 定制ant-design-vue全局主题
+      less: {
+        lessOptions: {
+          javascriptEnabled: true,
+          modifyVars: {
+            'primary-color': '#8D050B',
+          }
+        }
       }
     },
     vendor: ['axios']

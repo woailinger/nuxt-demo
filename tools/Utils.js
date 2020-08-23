@@ -5,7 +5,8 @@ export default {
       const crypt = new JSEncrypt();
       const rsaPublicKey = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTgTQ9BltH6I5bVGYMvlKtQgJHv+p6/H5ANZwQP1hKhFbMTWU94GfhWPCfyJpURiF5L//6NOKikQiih0h0cMfJwx3BQZp/pvv2fVqK7ilQtFaGVFlrsQ0b9hTGKxUPtdXrHvdN2ume0Wa+YMG/N5VHijI0phgW6zkwOQtzP5iLLwIDAQAB-----END PUBLIC KEY-----'
       crypt.setPublicKey(rsaPublicKey);
-      return crypt.encrypt(value);
+      //return crypt.encrypt(value);
+      return value;
     }
    return undefined;
   },

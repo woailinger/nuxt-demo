@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <img class="logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-    <div class="title">Sign Up</div>
+    <div class="title">Login</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
       <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
-        <a-input
+        <!-- <a-input
           v-decorator="[
           'userName',
           { rules: [{ required: true, message: 'Please input your username!' }] },
         ]"
           placeholder="Username"
           size="large"
-        >
-        <!-- <a-input
+        > -->
+        <a-input
           v-decorator="[
           'email',
           {
@@ -24,14 +24,14 @@
         ]"
           placeholder="email"
           size="large"
-        > -->
+        >
           <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
         </a-input>
       </a-form-item>
       <a-form-item :validate-status="passwordError() ? 'error' : ''" :help="passwordError() || ''">
         <a-input
           v-decorator="[
-          'token',
+          'password',
           { rules: [{ required: true, message: 'Please input your Password!' }] },
         ]"
           type="password"
@@ -47,13 +47,14 @@
         </a-button>
       </a-form-item>
       <div class="others">
-        <span>
+        <!-- <span>
           Other login methods
           <a-icon class="icon" type="facebook" @click="fbLogin"/>
           <a-icon class="icon" style="font-size: 24px" @click="wxLogin" type="wechat" />
           <div id="login_container"> test</div>
-        </span>
+        </span> -->
         <a-button class="register" type="link" @click="handleToRegister">Register</a-button>
+        <a-button class="register" type="link" @click="handleToForgot">Forgot password?</a-button>
       </div>
     </a-form>
   </div>
@@ -75,16 +76,16 @@
       }
     },
     mounted() {
-      var obj = new WxLogin({
-        self_redirect:true,
-        id: "login_container",
-        appid: "wx2b4b189cd5930702",
-        scope: "snsapi_login",
-        redirect_uri: "http://ashago-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/",
-        state: "",
-        style: "",
-        href: ""
-      });
+      // var obj = new WxLogin({
+      //   self_redirect:true,
+      //   id: "login_container",
+      //   appid: "wx2b4b189cd5930702",
+      //   scope: "snsapi_login",
+      //   redirect_uri: "http://ashago-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/",
+      //   state: "",
+      //   style: "",
+      //   href: ""
+      // });
       this.$nextTick(() => {
         // To disabled submit button at the beginning.
         this.form.validateFields();
@@ -94,14 +95,17 @@
       handleToRegister () {
         this.$router.push('/register');
       },
+      handleToForgot() {
+        this.$router.push('/FindPwd');
+      },
       userNameError() {
         const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('userName') && getFieldError('userName');
+        return isFieldTouched('email') && getFieldError('email');
       },
       // Only show error after a field is touched.
       passwordError() {
         const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('token') && getFieldError('token');
+        return isFieldTouched('password') && getFieldError('password');
       },
       wxLogin() {
 
@@ -162,13 +166,14 @@
           url: 'user/login',
           method: 'post',
           data: {
-            token: encryption(values.token),
-            userId: values.userName
+            password: encryption(values.password),
+            email: values.email
           }
         }).then(res => {
-          if (res.code === 0) {
+          if (res.code == 0) {
             Cookie.set('_t', res.data.t);
             this.$store.commit('setToken', res.data.t);
+            this.$store.commit('setUserId', res.data.userId || '');
             this.$router.push('/')
           }
         }).finally(data => {
@@ -187,7 +192,7 @@
   align-items: center;
   overflow: auto;
   background: #f0f2f5;
-  background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+//   background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;

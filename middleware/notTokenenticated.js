@@ -1,6 +1,6 @@
-export default function ({ store, redirect }) {
-  console.log(store.state.token, 111)
-  if (store.state.token) {
+export default function ({ store, redirect,route}) {
+  let noToken = ['/login', '/register']
+  if (!store.state.token && noToken.indexOf(route.path) == -1) {
     return redirect('/')
   }
 }

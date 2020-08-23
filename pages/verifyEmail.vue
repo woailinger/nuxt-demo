@@ -36,7 +36,7 @@
         userName: Utils.Server_URL_Request(req, 'userName') || ''
       }
     }).then(res => {
-      if (res.code === 0) {
+      if (res.code == 0) {
         // 重定向到登录页面
        redirect('/login');
       }

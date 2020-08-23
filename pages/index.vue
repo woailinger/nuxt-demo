@@ -11,24 +11,35 @@
         @slideChangeTransitionStart="onSwiperSlideChangeTransitionStart"
       >
         <swiper-slide v-for="(item, index) in bannerData" :key="'banner'+ index">
-          <img :src="item.url" :alt="'banner'+index">
+          <img :src="item.url" :alt="'banner'+index" >
+          <!-- <div class="text" data-swiper-parallax="-360">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+          </div> -->
         </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
+        <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
      </client-only>
      <div class="city-container">
-       <!-- <a-card hoverable class="card-city" v-for="(item, index) in cityData" :key="'city'+ index"> -->
-       <a-card hoverable class="card-city" :bordered="false">
+       <a-card hoverable :bordered="false" class="card-city" v-for="(item, index) in cityData" :key="'city'+ index">
+         <img
+          class="card-img"
+          slot="cover"
+          alt="example"
+          :src="item.url"
+        />
+      </a-card>
+
+       <!-- <a-card hoverable class="card-city" :bordered="false">
         <img
           class="card-img"
           slot="cover"
           alt="example"
           src="../assets/img/china.jpg"
-        />
-      </a-card>
-       <a-card hoverable class="card-city" :bordered="false">
+        /> -->
+      <!-- </a-card> -->
+       <!-- <a-card hoverable class="card-city" :bordered="false">
         <img
           class="card-img"
           slot="cover"
@@ -59,7 +70,7 @@
           alt="example"
           src="../assets/img/hk.jpg"
         />
-      </a-card>
+      </a-card> -->
      </div>
     <a-divider>Daily life</a-divider>
      <p class="card-container">
@@ -116,7 +127,8 @@ export default {
           loop: true,
           slidesPerView: 'auto',
           centeredSlides: true,
-          spaceBetween: 30,
+          spaceBetween: 10,
+          // height: '400',
           effect: 'fade',
           pagination: {
             el: '.swiper-pagination',
@@ -129,11 +141,11 @@ export default {
           }
         },
         bannerData: [
-          {url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/pic/Asha%20Go%20China%20%E7%BD%91%E7%AB%99/%E9%A6%96%E9%A1%B5%C2%B7%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0%E5%9B%BE%E7%89%87/Why%20you%20should%20travel%20solo%20in%20China%3F.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596680668&Signature=hPF7JwcXJKQMKCNIrA7dQlc4EjA%3D'},
-          {url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/pic/Asha%20Go%20China%20%E7%BD%91%E7%AB%99/%E9%A6%96%E9%A1%B5%C2%B7%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0%E5%9B%BE%E7%89%87/Growing%20up%20as%20a%20woman%20in%20China.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596680748&Signature=DlzO1xezIyFbfGSr%2ByXZZA5r2T8%3D'},
-          {url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/pic/Asha%20Go%20China%20%E7%BD%91%E7%AB%99/%E9%A6%96%E9%A1%B5%C2%B7%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0%E5%9B%BE%E7%89%87/Is%20China%20a%20safe%20country%20for%20travellers%3F.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596680589&Signature=WgIwceOyTF72KoylS3cc51Lofmc%3D'},
-          {url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/pic/Asha%20Go%20China%20%E7%BD%91%E7%AB%99/%E9%A6%96%E9%A1%B5%C2%B7%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0%E5%9B%BE%E7%89%87/Movies%20to%20improve%20your%20Chinese.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596680861&Signature=8n3YpM9IZV3PxWU9mP5aFQ7YnuM%3D'},
-          {url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/pic/Asha%20Go%20China%20%E7%BD%91%E7%AB%99/%E9%A6%96%E9%A1%B5%C2%B7%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0%E5%9B%BE%E7%89%87/The%20most%20famous%20Chinese%20curse%20words.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596680801&Signature=0BeqluMlivFZDO5qLhnzej%2F63No%3D'}
+          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Is%20China%20a%20safe%20country%20for%20travellers.jpg'},
+          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Growing%20up%20as%20a%20woman%20in%20China.jpg'},
+          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-The%20most%20famous%20Chinese%20curse%20words.JPG'},
+          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Movies%20to%20improve%20your%20Chinese.jpg'},
+          {url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Why%20you%20should%20travel%20solo%20in%20China.jpg'},
         ],
         latestData: [
           {
@@ -202,11 +214,11 @@ export default {
           },
         ],
         cityData: [
-          {name: 'china', url: '../assets/img/china.jpg'},
-          {name: 'beijing', url: '../assets/img/bj.jpg'},
-          {name: 'shanghai', url: '../assets/img/sh.jpg'},
-          {name: 'shenzhen', url: '../assets/img/sz.jpg'},
-          {name: 'hongkong', url: '../assets/img/hk.jpg'},
+          {name: 'china', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0207.PNG'},
+          {name: 'beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0208.PNG'},
+          {name: 'shanghai', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG'},
+          {name: 'shenzhen', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0210.PNG'},
+          {name: 'hongkong', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0211.PNG'},
         ]
     }
   },
@@ -225,9 +237,9 @@ export default {
     console.log('Current Swiper instance object', this.swiper)
     // this.swiper.slideTo(3, 1000, false)
   },
- 
- 
-  
+
+
+
   methods: {
     getImgUrl(i) {
       return `${baseUrl}abstract0${i + 1}.jpg`;
@@ -259,7 +271,7 @@ export default {
   text-align: center;
   .city-container {
     display: flex;
-    margin-top: 10px;
+    margin-top: 30px;
     justify-content: space-around;
     .card-img  {
       width: 150px;
@@ -269,16 +281,20 @@ export default {
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    .card {
-      margin-left: 50px;
-      margin-bottom: 20px;
-      width: 350px;
+    justify-content: space-around;
+    padding: 0px 60px;
+    .ant-card {
+        border-radius: 30px;
     }
-    .card-img  {
-      width: 350px;
-      height: 200px;
+    .card {
+      margin-bottom: 50px;
+      width: 360px;
+      .ant-card-cover img {
+        border-radius: 30px 30px 0 0;
+      }
     }
   }
+
   .ant-carousel  .slick-dots {
     height: auto;
   }
@@ -311,8 +327,8 @@ export default {
     filter: grayscale(0%);
   }
   .swiper {
-    height: 300px;
     width: 100%;
+    height: 400px;
     .swiper-slide {
       text-align: center;
       font-size: 38px;
@@ -321,6 +337,10 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
     .swiper-pagination {
       > .swiper-pagination-bullet {

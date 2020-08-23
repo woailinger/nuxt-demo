@@ -48,7 +48,7 @@ export default function ({ $axios, redirect}, inject) {
   // 处理返回结果
   instance.interceptors.response.use(
     res => {
-      if (res.code === 0 ){
+      if (res.data.code == 0 ){
         return res.data
       } else {
         if(process.client) {
