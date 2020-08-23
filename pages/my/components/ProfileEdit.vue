@@ -160,7 +160,8 @@ import moment from 'moment';
           url: '/user/update-profile',
           method: 'POST',
           data: {
-              ...values
+            userId: this.$store.state.userId || '',
+            ...values,
           }
         }).then(res => {
           this.$emit('ok')

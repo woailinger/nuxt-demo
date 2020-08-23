@@ -99,8 +99,8 @@ export default {
         method: 'post',
         data: {
           userId: this.$store.state.userId,
-          oldPassword: this.oldPassword,
-          newPassword: this.confirmPassword,
+          oldPassword: values.oldPwd,
+          newPassword: values.confirmPassword,
         }
       }).then(res => {
         this.loading = false;

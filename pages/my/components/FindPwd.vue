@@ -6,6 +6,7 @@
     <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
       <a-form-item label="email">
        <a-input
+          v-model="email"
           v-decorator="[
           'email',
           { rules: [{ required: true, message: 'Please input your Email' }] },
@@ -77,7 +78,6 @@ export default {
       email: '',
       seqNo: '',
       userId: '',
-      newPassword: ''
     }
   },
   mounted() {
@@ -125,9 +125,9 @@ export default {
         method: 'post',
         data: {
           userId: this.userId,
-          newPassword: this.newPassword,
+          newPassword: values.newPassword,
           seqNo: this.seqNo,
-          vcode: this.vcode
+          vcode: values.vcode
         }
       })
     }
