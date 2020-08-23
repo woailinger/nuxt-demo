@@ -124,7 +124,7 @@ export default {
   methods: {
     getData(key, callback) {
       this.$Server({
-        url: "http://localhost:8080/blog/get-blog-list",
+        url: "/blog/get-blog-list",
         method: "post",
         data: {
           blogId: key
