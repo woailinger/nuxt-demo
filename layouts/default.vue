@@ -20,13 +20,13 @@
         </div>
         <div class="menu-container">
           <nav class="menu">
-            <nuxt-link to="/category/daily" class="menu-item">Daily Life</nuxt-link>
-            <nuxt-link to="/category/food" class="menu-item">Food & Drinks</nuxt-link>
+            <nuxt-link to="/category/daily?category=daily" class="menu-item">Daily Life</nuxt-link>
+            <nuxt-link to="/category/food?category=food" class="menu-item">Food & Drinks</nuxt-link>
             <!-- <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link> -->
-            <nuxt-link to="/category/travel" class="menu-item">Travel</nuxt-link>
-            <nuxt-link to="/category" class="menu-item">Language</nuxt-link>
-            <nuxt-link to="/category" class="menu-item">Community</nuxt-link>
-            <nuxt-link to="/category" class="menu-item">Service</nuxt-link>
+            <nuxt-link to="/category/travel?category=travel" class="menu-item">Travel</nuxt-link>
+            <nuxt-link to="/category/language?category=language" class="menu-item">Language</nuxt-link>
+            <nuxt-link to="/category/community?category=community" class="menu-item">Community</nuxt-link>
+            <nuxt-link to="/category/service?category=service" class="menu-item">Service</nuxt-link>
             <a-dropdown>
               <a class="ant-dropdown-link menu-item" @click="e => e.preventDefault()">
                 About Us <a-icon type="down" />
