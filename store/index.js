@@ -14,8 +14,8 @@ export const mutations = {
   setUserId(state, userId) {
     state.userId = userId
   },
-  setEmail(state, email) {
-    state.email = email
+  setUserInfo(state, userInfo) {
+    state.userInfo = userInfo
   }
 }
 export const actions = {
@@ -27,6 +27,7 @@ export const actions = {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
         token = parsed._t
+        userId =  parsed.userId
       } catch (err) {
         // No valid cookie found
       }

@@ -3,14 +3,16 @@
     <div class="title">Your comments</div>
     <a-list
       class="comment-list"
-      :header="`${data.length} replies`"
+      :header="`${commentsData.length} replies`"
       item-layout="horizontal"
-      :data-source="data"
+      :data-source="commentsData"
     >
       <a-list-item slot="renderItem" slot-scope="item, index">
         <a-comment :author="item.author" :avatar="item.avatar">
           <template slot="actions">
-            <span v-for="(action, i) in item.actions" :key="i">{{ action }}</span>
+            <span>
+              comment on  {{item.blogName}}
+            </span>
           </template>
           <p slot="content">
             {{ item.content }}
@@ -28,32 +30,37 @@ import moment from 'moment';
 export default {
   data () {
     return {
-      data: [
+      commentsData: [
         {
-          actions: ['Reply to'],
           author: 'Han Solo',
           avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
           datetime: moment().subtract(1, 'days'),
+          blogId: '',
+          blogName: 'beijing City',
         },
         {
-          actions: ['Reply to'],
           author: 'Han Solo',
           avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
           datetime: moment().subtract(2, 'days'),
+          blogId: '',
+          blogTitle: 'shanghai City',
         },
       ],
       moment
     }
   },
+  created() {
+    this.getComments();
+  },
   asyncData ({ req, $Server, redirect, store }) {
     $Server({
-      url: '/comments',
-      method: 'post',
-      data: {
+      url: '/comment/list',
+      method: 'GET',
+      parmas: {
         userId: store.state.userId
       }
     }).then(res => {
@@ -62,11 +69,28 @@ export default {
 //        redirect('/login');
       } else {
         return {
-          data: res.data.data
+          data: res.data.comments
         }
       }
     })
   },
+  methods: {
+    getComments() {
+      this.$Server({
+      url: '/comment/list',
+      method: 'GET',
+      parmas: {
+        userId: this.$store.state.userId
+      }
+    }).then(res => {
+      if (res.code == 0) {
+        this.commentsData = res.data.comments
+      } else {
+        this.$message.error(res.msg);
+      }
+    })
+    }
+  }
 }
 </script>
 <style scoped lang="less">

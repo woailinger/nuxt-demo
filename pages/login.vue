@@ -164,6 +164,7 @@
         }).then(res => {
           if (res.code == 0) {
             Cookie.set('_t', res.data.t);
+            Cookie.set('userId', res.data.userId);
             this.$store.commit('setToken', res.data.t);
             this.$store.commit('setUserId', res.data.userId || '');
             this.$router.push('/')
