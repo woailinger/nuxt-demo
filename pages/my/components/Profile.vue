@@ -24,11 +24,11 @@
       </li>
       <li class="item">
         <span class="name">Gender</span>
-        <span class="value">Female</span>
+        <span class="value">{{info.Female}}</span>
       </li>
       <li class="item">
         <span class="name">Nationality</span>
-        <span class="value">{{ infonationality }}</span>
+        <span class="value">{{ info.nationality }}</span>
       </li>
       <li class="item">
         <span class="name">Age</span>
@@ -107,7 +107,7 @@ export default {
         }
       }).then(res => {
         if (res.code == 0) {
-           this.info = res.data.data
+           this.info = res.data
         } else {
           return {
             data: res.info.data

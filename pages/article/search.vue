@@ -120,12 +120,13 @@ export default {
   overflow: auto;
   .search {
     width: 100%;
-    height: 200px;
+    height: 300px;
     text-align: centrn;
     display: flex;
     align-items: center;
     justify-content: center;
     background: url("https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Search%20results/search%20result%20picture.jpg");
+    background-size: cover;
     .ant-input-affix-wrapper {
       width: 40%;
       height: 40px;

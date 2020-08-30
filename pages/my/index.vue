@@ -14,16 +14,6 @@
         <!--</a-dropdown>-->
       </div>
       <div class="userName">hello Tom</div>
-      <div class="follow">
-        <div class="item">
-          <div class="num">1</div>
-          <div class="name">Follows</div>
-        </div>
-        <div class="item">
-          <div class="num">0</div>
-          <div class="name">Following</div>
-        </div>
-      </div>
     </div>
     <div class="bottom">
       <ul class="list">
@@ -181,7 +171,7 @@
         .userName {
           text-align: center;
           margin: 0 auto;
-          border-bottom: 2px solid #8D050B;
+          // border-bottom: 2px solid #8D050B;
           line-height: 40px;
           font-size: 30px;
           color: #8D050B;

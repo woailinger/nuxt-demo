@@ -33,7 +33,7 @@
      </div>
     <a-divider class="">Daily Life</a-divider>
      <p class="card-container">
-       <a href="" class="more">MORE</a>
+       <nuxt-link to="/category/daily?category=daily" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in latestData" :key="'lastest'+ index">
         <img
           class="card-img"
@@ -47,6 +47,7 @@
      </p>
      <a-divider>Food & Drinks</a-divider>
      <p class="card-container">
+       <nuxt-link to="/category/daily?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in FoodData" :key="'lastest'+ index">
         <img
           class="card-img"
@@ -60,6 +61,7 @@
      </p>
      <a-divider>Travel</a-divider>
      <p class="card-container">
+       <nuxt-link to="/category/daily?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index">
         <img
           class="card-img"
@@ -88,8 +90,8 @@ export default {
           slidesPerView: 'auto',
           centeredSlides: true,
           spaceBetween: 10,
-          // height: '400',
           effect: 'fade',
+          autoplay: 3000,
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true,
@@ -268,10 +270,16 @@ export default {
     }
   }
   .card-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 0px 60px;
+    .more {
+      position:absolute;
+      bottom: 10px;
+      right: 40px;
+    }
     .ant-card {
         border-radius: 15px;
     }
