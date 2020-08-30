@@ -1,19 +1,17 @@
 <template>
   <div>
     <div class="container category-list">
-      <div style="margin-bottom:30px">
-        <a-row :gutter="16">
-          <a-row type="flex" justify="space-around" align="middle">
-            <a-col :span="10" justify="center" class="cover">
-              <h1 class="title wow fadeInLeft" data-wow-delay=".5s">{{config[type].title}}</h1>
-              <h3>{{config[type].desc}}</h3>
-              <p>{{config[type].content}}</p>
-            </a-col>
-            <a-col :span="10" justify="center">
-              <img :src="config[type].img" alt="images" style="height:200px">
-            </a-col>
-          </a-row>
-        </a-row>
+      <div class="exception">
+        <div class="img">
+          <img :src="config[type].img" style="height:260px">
+        </div>
+        <div class="content">
+          <h1>{{config[type].title}}</h1>
+          <div class="desc">{{config[type].desc}}</div>
+          <div class="action">
+            <p>{{config[type].content}}</p>
+          </div>
+        </div>
       </div>
       <client-only>
         <div class="articlelist" :bordered="false" :body-style="{padding: '24px',margin: '15%'}">
@@ -27,15 +25,16 @@
                   </h2>
                   <a-divider/>
                   <div>
-                    <a-button class="tag-btn">Travel Tips</a-button>
-                    <a-button class="tag-btn">Food</a-button>
+                     <a-button
+                      class="tag-btn"
+                      v-for="(tagName, tagIndex) in config.allTagList"
+                      :key="'lastest'+ tagIndex"
+                      v-bind:href="'/category/bloglist?tag='+tagName"
+                    >{{tagName}}</a-button>
                   </div>
                 </a-card>
               </div>
-              <a-list
-                size="large"
-                :bordered="false"
-              >
+              <a-list size="large" :bordered="false">
                 <a-list-item v-for="(item, index) in latestData" :key="'lastest'+ index">
                   <div class="listcover">
                     <img
@@ -106,7 +105,6 @@ const Cookie = process.client ? require("js-cookie") : undefined;
 const latestData = [];
 const tagList = [[]];
 const config = Config;
-const legacySystemHTML = "";
 export default {
   name: "CategoryList",
   props: ["type"],
@@ -121,7 +119,6 @@ export default {
     return {
       loadingFlag: true,
       latestData,
-      legacySystemHTML,
       tagList,
       comments: [],
       config: Config,
@@ -135,6 +132,7 @@ export default {
   methods: {
     getData(key, callback) {
       this.$Server({
+        //url: "http://localhost:8080/blog/get-blog-list",
         url: "/blog/get-blog-list",
         method: "post",
         data: {
@@ -163,12 +161,12 @@ export default {
         .then(res => {
           this.loadingFlag = false;
           this.latestData = res.dataList;
-          if (res.dataList){
-          for (var k = 0; k < res.dataList.length; k++) {
-            //this.latestData.tagList[k] = res.dataList[k].tag.split(",");
-            tagList[k] = res.dataList[k].tag.split(",");
+          if (res.dataList) {
+            for (var k = 0; k < res.dataList.length; k++) {
+              //this.latestData.tagList[k] = res.dataList[k].tag.split(",");
+              tagList[k] = res.dataList[k].tag.split(",");
+            }
           }
-}
           console.log(res.dataList, "LIST");
           console.log(tagList, "Tag");
         })
@@ -211,5 +209,45 @@ export default {
 }
 .cover {
   margin-left: 10%;
+}
+.exception {
+  min-height: 500px;
+  height: 80%;
+  align-items: center;
+  text-align: center;
+  margin-bottom: -10%;
+  .img {
+    display: inline-block;
+    padding-right: 52px;
+    zoom: 1;
+    img {
+      height: 360px;
+      max-width: 430px;
+    }
+  }
+  .content {
+    display: inline-block;
+    width: 35%;
+    h1 {
+      color: #434e59;
+      font-size: 60px;
+      font-weight: 600;
+      line-height: 60px;
+      margin-bottom: 24px;
+    }
+    p {
+      font-size: 18px;
+      line-height: 20px;
+      margin-bottom: 24px;
+      text-align: left;
+      word-break: break-all;
+    }
+    .desc {
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 20px;
+      line-height: 28px;
+      margin-bottom: 16px;
+    }
+  }
 }
 </style>
