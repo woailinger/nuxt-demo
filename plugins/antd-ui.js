@@ -25,6 +25,7 @@ import { Comment } from 'ant-design-vue';
 import { Row } from 'ant-design-vue';
 import { List} from 'ant-design-vue';
 import { Tag } from 'ant-design-vue';
+import { Spin } from 'ant-design-vue';
 
 // All the component found in https://github.com/vueComponent/ant-design-vue/blob/master/components/index.js
 // import 'ant-design-vue/lib/button/style/css';
@@ -51,6 +52,7 @@ Vue.use(Comment );
 Vue.use(List);
 Vue.use(Row);
 Vue.use(Tag);
+Vue.use(Spin);
 Vue.use(List);
 Vue.use(ToolTip);
 Vue.prototype.$message = Message;

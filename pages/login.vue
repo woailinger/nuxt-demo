@@ -4,14 +4,6 @@
     <div class="title">Login</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
       <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
-        <!-- <a-input
-          v-decorator="[
-          'userName',
-          { rules: [{ required: true, message: 'Please input your username!' }] },
-        ]"
-          placeholder="Username"
-          size="large"
-        > -->
         <a-input
           v-decorator="[
           'email',
@@ -22,7 +14,7 @@
             ]
           },
         ]"
-          placeholder="email"
+          placeholder="Email"
           size="large"
         >
           <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
@@ -32,7 +24,7 @@
         <a-input
           v-decorator="[
           'password',
-          { rules: [{ required: true, message: 'Please input your Password!' }] },
+          { rules: [{ required: true, message: 'Please input your password' }] },
         ]"
           type="password"
           placeholder="Password"
@@ -43,7 +35,7 @@
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit" block :loading="loading" :disabled="hasErrors(form.getFieldsError())">
-          Log in
+          Login
         </a-button>
       </a-form-item>
       <div class="others">
@@ -53,7 +45,8 @@
           <a-icon class="icon" style="font-size: 24px" @click="wxLogin" type="wechat" />
           <div id="login_container"> test</div>
         </span> -->
-        <a-button class="register" type="link" @click="handleToRegister">Register</a-button>
+        <a-button class="register" type="link" @click="handleToRegister">Sign Up</a-button>
+        <a-button class="register" type="link" @click="handleToForgot">Forgot password?</a-button>
       </div>
     </a-form>
   </div>
@@ -93,6 +86,9 @@
     methods: {
       handleToRegister () {
         this.$router.push('/register');
+      },
+      handleToForgot() {
+        this.$router.push('/FindPwd');
       },
       userNameError() {
         const { getFieldError, isFieldTouched } = this.form;
@@ -168,6 +164,7 @@
         }).then(res => {
           if (res.code == 0) {
             Cookie.set('_t', res.data.t);
+            Cookie.set('userId', res.data.userId);
             this.$store.commit('setToken', res.data.t);
             this.$store.commit('setUserId', res.data.userId || '');
             this.$router.push('/')
@@ -188,7 +185,7 @@
   align-items: center;
   overflow: auto;
   background: #f0f2f5;
-  background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+//   background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;

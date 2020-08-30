@@ -9,7 +9,7 @@ export default function ({ $axios, redirect}, inject) {
       'Content-Type': 'application/json; text/json; charset=utf-8',
       'Access-Control-Allow-Origin': 'ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
     },
-    withCredentials: false, // default
+    withCredentials: true, // default
   })
   const isNull = (obj) => {
     if (obj !== undefined && obj !== null) {

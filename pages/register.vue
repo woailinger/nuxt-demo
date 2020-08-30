@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <img class="logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-    <div class="title">Register</div>
+    <div class="title">Sign Up</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
       <a-form-item>
         <a-input
@@ -14,7 +14,7 @@
             ]
           },
         ]"
-          placeholder="email"
+          placeholder="Email"
           size="large"
         >
           <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)" />
@@ -30,7 +30,7 @@
             ]
           },
         ]"
-          placeholder="userName"
+          placeholder="Username"
           size="large"
         >
           <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
@@ -42,7 +42,7 @@
           'password',
           {
             rules: [
-              { required: true, message: 'Please input your Password!' },
+              { required: true, message: 'Please input your Password' },
               { validator: validateToNextPassword }
             ]
           },
@@ -77,18 +77,18 @@
         <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
           I have read the
           <a href="/agreement" target="_blank">
-            agreement
+            user agreement
           </a>
         </a-checkbox>
       </a-form-item>
       <a-form-item>
         <a-checkbox v-decorator="['subscribed', { valuePropName: 'checked' }]">
-          Subscribe to email？
+          Subscribe
         </a-checkbox>
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit" class="register" :loading="loading">
-          Register
+          Sign Up
         </a-button>
         <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
       </a-form-item>
@@ -195,7 +195,6 @@
     align-items: center;
     overflow: auto;
     background: #f0f2f5;
-    background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
@@ -214,6 +213,7 @@
       width: 125px
     }
     .toLogin {
+      display: block;
       width: 195px;
     }
   }

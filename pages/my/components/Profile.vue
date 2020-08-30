@@ -20,7 +20,7 @@
     <ul class="info" v-else>
       <li class="item">
         <span class="name">Name</span>
-        <span class="value">{{ data.userName }}</span>
+        <span class="value">{{ info.userName }}</span>
       </li>
       <li class="item">
         <span class="name">Gender</span>
@@ -28,23 +28,23 @@
       </li>
       <li class="item">
         <span class="name">Nationality</span>
-        <span class="value">{{ data.nationality }}</span>
+        <span class="value">{{ infonationality }}</span>
       </li>
       <li class="item">
         <span class="name">Age</span>
-        <span class="value">{{ data.age }}</span>
+        <span class="value">{{ info.age }}</span>
       </li>
       <li class="item">
         <span class="name">Email </span>
-        <span class="value">{{ data.email }}</span>
+        <span class="value">{{ info.email }}</span>
       </li>
       <li class="item">
         <span class="name">Where do you live now</span>
-        <span class="value">{{ data.city }}</span>
+        <span class="value">{{ info.city }}</span>
       </li>
       <li class="item">
         <span class="name">What interests you</span>
-        <span class="value">{{ data.interesting }}</span>
+        <span class="value">{{ info.interesting }}</span>
       </li>
       <li class="button">
         <a-button type="primary" @click="toggleEdit">Edit</a-button>
@@ -57,9 +57,9 @@ import ProfileEdit from './ProfileEdit.vue';
 export default {
   asyncData ({ req, $Server, redirect, store }) {
     $Server({
-      url: '/user-profile',
+      url: '/user/profile',
       method: 'get',
-      data: {
+      params: {
         userId: store.state.userId
       }
     }).then(res => {
@@ -68,7 +68,7 @@ export default {
 //        redirect('/login');
       } else {
         return {
-          data: res.data.data
+          data: res.info.data
         }
       }
     })
@@ -81,7 +81,7 @@ export default {
       imgDataUrl: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
       show: false,
       isEdit: false,
-      data: {
+      info: {
         nationality: 'Chinese',
         email: '798406168@qq.com',
         subscribed: '',
@@ -94,7 +94,27 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getInfo();
+  },
   methods: {
+    getInfo() {
+      this.$Server({
+        url: '/user/profile',
+        method: 'get',
+        params: {
+          userId: this.$store.state.userId
+        }
+      }).then(res => {
+        if (res.code == 0) {
+           this.info = res.data.data
+        } else {
+          return {
+            data: res.info.data
+          }
+        }
+      })
+    },
     toggleShow() {
       this.show = !this.show;
     },
@@ -132,10 +152,12 @@ export default {
 </script>
 <style scoped lang="less">
   .container {
+    margin-top:50px;
+    margin-left: 30px;
     color: #8D050B;
     width: 500px;
     .title {
-      font-size: 30px;
+      font-size: 22px;
       font-weight: 600;
     }
     .avatar {

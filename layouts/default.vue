@@ -10,7 +10,7 @@
             </span>
           </span>
           <span class="header-right">
-            <a-button @click="signHandler" v-show="!loginFlag">Sign in / Login</a-button>
+            <a-button @click="signHandler" v-show="!loginFlag">Sign up / Login</a-button>
             <span v-show="!!loginFlag">
               <a-avatar :src="avatarImg" @click="goInfo"></a-avatar>
               <span>{{userName}}</span>
@@ -20,13 +20,13 @@
         </div>
         <div class="menu-container">
           <nav class="menu">
-            <nuxt-link to="/" class="menu-item">Daily Life</nuxt-link>
-            <nuxt-link to="/my" class="menu-item">Food & Drinks</nuxt-link>
+            <nuxt-link to="/category/daily?category=daily" class="menu-item">Daily Life</nuxt-link>
+            <nuxt-link to="/category/food?category=food" class="menu-item">Food & Drinks</nuxt-link>
             <!-- <nuxt-link to="/pageb" class="menu-item">Shopping</nuxt-link> -->
-            <nuxt-link to="/pageb" class="menu-item">Travel</nuxt-link>
-            <nuxt-link to="/pageb" class="menu-item">Language</nuxt-link>
-            <nuxt-link to="/pageb" class="menu-item">Community</nuxt-link>
-            <nuxt-link to="/pageb" class="menu-item">Service</nuxt-link>
+            <nuxt-link to="/category/travel?category=travel" class="menu-item">Travel</nuxt-link>
+            <nuxt-link to="/category/language?category=language" class="menu-item">Language</nuxt-link>
+            <nuxt-link to="/category/community?category=community" class="menu-item">Community</nuxt-link>
+            <nuxt-link to="/category/service?category=service" class="menu-item">Service</nuxt-link>
             <a-dropdown>
               <a class="ant-dropdown-link menu-item" @click="e => e.preventDefault()">
                 About Us <a-icon type="down" />
@@ -52,26 +52,26 @@
           <ul class="footer-link">
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>About Us</p>
-                <span>关于我们</span>
+                <p>Who are we</p>
+                <span>我们是谁</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>Contact Us </p>
-                <span>联系我们</span>
+                <p>Business inquiries </p>
+                <span>商业合作</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>Join Us</p>
-                <span>加入我们</span>
+                <p>Write for us</p>
+                <span>投稿</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
-                <p>Disclaimer</p>
-                <span>声 明</span>
+                <p>User agreement</p>
+                <span>用户协议</span>
               </a>
             </li>
             <li class="nav-item">
@@ -87,7 +87,7 @@
             <a-icon type="instagram" class="social-icon"/>
             <a-icon type="wechat" class="social-icon"/>
             <a-icon type="mail" class="social-icon"/>
-            <span class="mail-desc"> &nbsp;&nbsp;email:info@ashago.com</span>
+            <span class="mail-desc"> &nbsp;&nbsp;&nbsp;Email: info@ashago.com</span>
           </div>
           <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
         </div>
@@ -134,10 +134,10 @@ export default {
     },
     getUserInfo() {
       this.$Server({
-          url: '/user-profile',
+          url: '/user/profile',
           method: 'get',
-          data: {
-            userId: this.$store.userId,
+          params: {
+            userId: this.$store.state.userId || '',
           }
         }).then(res => {
           if (res.code == 0) {
@@ -148,7 +148,6 @@ export default {
         });
     },
     onSearch() {
-      console.log('test');
       this.$router.push({ path: '/article/search',  query: {
         keyWord: this.searchValue
       }});
@@ -222,12 +221,12 @@ html {
   }
 }
 .ant-dropdown-menu {
-  background-color: #ac4448;
+  background-color: #8d040c;
   .ant-dropdown-menu-item > a {
     color: #fff;
   }
   .ant-dropdown-menu-item:hover {
-    background-color: #ac4448;
+    background-color: #8d040c;
     color: #cccccc;
   }
 }
@@ -235,7 +234,7 @@ html {
   height: 100px;
   width: 100%;
   font-size: 22px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 30px;
   color: #ac4448;
   display: flex;
@@ -281,21 +280,20 @@ html {
   display: block;
   height: 100%;
   overflow: hidden;
-  margin-top: 170px ;
+  margin-top: 150px ;
 }
 
 .footer {
   padding: 0px;
   .footer-container {
-    height: 180px;
     background-color: #8d040c;
     color: #fff;
-    padding: 3rem 0;
+    padding: 2rem 0;
     position: relative;
     bottom: 0;
     .footer-link {
       list-style: none;
-      display: inline;
+      display: inline-block;
       .nav-item {
         display: inline-block;
         width: 120px;
@@ -303,6 +301,9 @@ html {
           font-size: 16px;
           color: #fff;
           margin-right: 50px;
+          p {
+            padding-bottom: 10px;
+          }
         }
       }
     }
@@ -325,7 +326,7 @@ html {
         font-size: 18px;
         line-height: 18px;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 40px;
     }
   }
 }
