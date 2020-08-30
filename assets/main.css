@@ -25,6 +25,10 @@ body {
   line-height: 1;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 :focus {
   outline: 1;
 }
