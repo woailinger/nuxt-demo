@@ -88,7 +88,7 @@
         this.$router.push('/register');
       },
       handleToForgot() {
-        this.$router.push('/FindPwd');
+        this.$router.push('/findPassword');
       },
       userNameError() {
         const { getFieldError, isFieldTouched } = this.form;
