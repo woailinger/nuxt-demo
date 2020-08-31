@@ -10,7 +10,7 @@
             <a-list
               size="large"
               :bordered="false"
-              :pagination="{showQuickJumper: true, pageSize: 5, total: 20}"
+              :pagination="pagination"
             >
               <a-list-item :key="i" v-for="(item, i) in searchData">
                 <div class="listcover">
@@ -78,8 +78,14 @@ export default {
                 author: 'Jemma Admin',
                 commentNum: '46',
                 likeNum: '31'
-            }]
-        }
+            }],
+            pagination: {
+              showQuickJumper: true,
+              pageSize: 5,
+              total: 20,
+              onChange: page => this.getData(page)
+          }
+      }
     },
     created() {
         console.log(this.$route.query.keyWord, 'test--');
@@ -95,12 +101,13 @@ export default {
         onSearch() {
             this.getData();
         },
-        getData() {
+        getData(page) {
             this.$Server({
                 url: '/es/search-content',
                 method: 'GET',
                 params: {
-                  content: this.keyWord
+                  content: this.keyWord,
+                  page: page || 0
                 }
             }).then((res) => {
                 this.searchData = res.data;
