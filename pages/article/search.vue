@@ -96,7 +96,6 @@ export default {
             this.getData();
         },
         getData() {
-          console.log(this.keyWord, 'val---');
             this.$Server({
                 url: '/es/search-content',
                 method: 'GET',
@@ -105,7 +104,7 @@ export default {
                 }
             }).then((res) => {
                 this.searchData = res.data;
-            }) 
+            })
         }
     }
 }
@@ -125,7 +124,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Search%20results/search%20result%20picture.jpg");
+    background: url("../../assets/img/search.jpg");
     background-size: cover;
     .ant-input-affix-wrapper {
       width: 40%;
