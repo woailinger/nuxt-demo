@@ -86,16 +86,22 @@ export default {
         this.keyWord = this.$route.query.keyWord || '';
         this.getData();
     },
+    watch: {
+      '$route.query' (val, oldval) {
+        this.keyWord = val.keyWord;
+      }
+    },
     methods:{
         onSearch() {
             this.getData();
         },
         getData() {
+          console.log(this.keyWord, 'val---');
             this.$Server({
-                url: '',
-                methods: 'GET',
-                parmas: {
-                    keyWord: this.keyWord
+                url: '/es/search-content',
+                method: 'GET',
+                params: {
+                  content: this.keyWord
                 }
             }).then((res) => {
                 this.searchData = res.data;
@@ -114,12 +120,13 @@ export default {
   overflow: auto;
   .search {
     width: 100%;
-    height: 200px;
+    height: 300px;
     text-align: centrn;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598185639523&di=cb00f236c80e6ceb49f40d19081350ed&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Fback_pic%2F03%2F69%2F47%2F1057b4f83767ce8.jpg%2521%2Fwatermark%2Ftext%2FOTDorr7orqE%3D%2Ffont%2Fsimkai%2Falign%2Fsoutheast%2Fopacity%2F20%2Fsize%2F50");
+    background: url("https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Search%20results/search%20result%20picture.jpg");
+    background-size: cover;
     .ant-input-affix-wrapper {
       width: 40%;
       height: 40px;

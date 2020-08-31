@@ -7,6 +7,7 @@
         <a-input
           v-decorator="[
           'userName',
+          initialValue=data.userName,
           { rules: [{ required: true, message: 'Please input your name' }] },
         ]"
           placeholder="Please input your name"
@@ -16,6 +17,7 @@
         <a-radio-group
           v-decorator="[
             'gender',
+             initialValue=data.gender,
             { rules: [{ required: true, message: 'Please Choose your Gender' }] },
           ]"
         >
@@ -33,6 +35,7 @@
         <a-input
           v-decorator="[
           'nationality',
+           initialValue=data.nationality,
           { rules: [{ required: true, message: 'Please input your nationality' }] },
         ]"
           placeholder="Please input your nationality"
@@ -44,6 +47,7 @@
         <a-date-picker
           v-decorator="[
           'birthday',
+          initialValue=data.birthday,
           { rules: [{ required: checkNick, message: 'Please choose your Birthday' }] },
         ]"
           placeholder="Please choose your Birthday"
@@ -56,6 +60,7 @@
         <a-input
           v-decorator="[
           'email',
+          initialValue=data.email,
           { rules: [{ required: true, message: 'Please input your Email' }] },
         ]"
           placeholder="Please input your Email"
@@ -67,6 +72,7 @@
         <a-input
           v-decorator="[
           'city',
+          initialValue=data.city,
           { rules: [{ required: true, message: 'Please input your live now' }] },
         ]"
           placeholder="Please input your live now"
@@ -135,13 +141,47 @@
 import moment from 'moment';
 
   export default {
+    asyncData ({ req, $Server, redirect, store }) {
+      $Server({
+        url: '/user/profile',
+        method: 'get',
+        params: {
+          userId: store.state.userId
+        }
+      }).then(res => {
+        if (res.code == 0) {
+          // 重定向到登录页面
+//        redirect('/login');
+        } else {
+          return {
+            data: res.info.data
+          }
+        }
+      })
+    },
     data () {
       return {
         checkNick: false,
         form: this.$form.createForm(this, {name: 'dynamic_rule'}),
+        data: {}
       }
     },
     methods: {
+      getInfo() {
+        this.$Server({
+          url: '/user/profile',
+          method: 'get',
+          params: {
+            userId: this.$store.state.userId
+          }
+        }).then(res => {
+          if (res.code == 0) {
+            this.info = res.data
+          } else {
+            this.data = res.info.data
+          }
+        })
+      },
       handleSubmit(e) {
         e.preventDefault();
         this.form.validateFields((err, values) => {

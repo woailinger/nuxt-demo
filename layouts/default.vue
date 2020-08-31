@@ -2,14 +2,14 @@
   <div>
       <div class="header">
         <div class="header-container">
-          <span class="header-left" @click="goHome">
+          <span class="header-left pointer" @click="goHome">
             <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-            <span class="logo-desc">
+            <span class="logo-desc ">
               <span>ASHA GO</span>
               <span class="desc">Your China Platform</span>
             </span>
           </span>
-          <span class="header-right">
+          <span class="header-right pointer">
             <a-button @click="signHandler" v-show="!loginFlag">Sign up / Login</a-button>
             <span v-show="!!loginFlag">
               <a-avatar :src="avatarImg" @click="goInfo"></a-avatar>
@@ -123,8 +123,10 @@ export default {
     },
     logoutHandler() {
       // 清空登陆态
-      this.$router.push('/login');
+      // this.$router.push('/login');
+      this.loginFlag = false;
       Cookie.set('_t', '');
+      Cookie.set('userId', '');
       this.$store.commit('setToken', '');
       this.$store.commit('setUserId', '');
       console.log('logout', 'success');
@@ -182,6 +184,7 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+
 .header {
   background-color: #fff;
   margin: 0px;

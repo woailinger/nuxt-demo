@@ -107,7 +107,7 @@ export default {
         }
       }).then(res => {
         if (res.code == 0) {
-           this.info = res.data.data
+           this.info = res.data
         } else {
           return {
             data: res.info.data

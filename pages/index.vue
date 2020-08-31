@@ -4,7 +4,7 @@
     <client-only>
       <swiper
         ref="carousel"
-        class="swiper"
+        class="swiper pointer"
         :options="swiperOptions"
         @ready="onSwiperRedied"
         @clickSlide="onSwiperClickSlide"
@@ -22,7 +22,7 @@
       </swiper>
      </client-only>
      <div class="city-container">
-       <a-card hoverable :bordered="false" class="card-city" v-for="(item, index) in cityData" :key="'city'+ index">
+       <a-card hoverable :bordered="false" class="card-city" v-for="(item, index) in cityData" :key="'city'+ index" @click="search(item.name)">
          <img
           class="card-img"
           slot="cover"
@@ -33,6 +33,7 @@
      </div>
     <a-divider class="">Daily Life</a-divider>
      <p class="card-container">
+       <nuxt-link to="/category/daily?category=daily" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in latestData" :key="'lastest'+ index">
         <img
           class="card-img"
@@ -46,6 +47,7 @@
      </p>
      <a-divider>Food & Drinks</a-divider>
      <p class="card-container">
+       <nuxt-link to="/category/daily?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in FoodData" :key="'lastest'+ index">
         <img
           class="card-img"
@@ -59,6 +61,7 @@
      </p>
      <a-divider>Travel</a-divider>
      <p class="card-container">
+       <nuxt-link to="/category/daily?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index">
         <img
           class="card-img"
@@ -87,8 +90,8 @@ export default {
           slidesPerView: 'auto',
           centeredSlides: true,
           spaceBetween: 10,
-          // height: '400',
           effect: 'fade',
+          autoplay: 3000,
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true,
@@ -218,6 +221,14 @@ export default {
     getImgUrl(i) {
       return `${baseUrl}abstract0${i + 1}.jpg`;
     },
+    search(value) {
+      this.$router.push({
+        path: '/article/search',
+        query: {
+          keyWord: value
+        }
+      })
+    },
     logout () {
       Cookie.remove('_t');
       this.$store.commit('setToken', null);
@@ -243,6 +254,9 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  .more {
+    font-size: 16px;
+  }
   .ant-divider-inner-text {
     margin: 26px 0px;
   }
@@ -256,10 +270,16 @@ export default {
     }
   }
   .card-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 0px 60px;
+    .more {
+      position:absolute;
+      bottom: 10px;
+      right: 40px;
+    }
     .ant-card {
         border-radius: 15px;
     }
