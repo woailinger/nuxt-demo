@@ -47,7 +47,7 @@
      </p>
      <a-divider>Food & Drinks</a-divider>
      <p class="card-container">
-       <nuxt-link to="/category/daily?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
+       <nuxt-link to="/category/food?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in foodData" :key="'lastest'+ index"  @click="goDetail(item.blogId)">
         <img
           class="card-img"
@@ -61,7 +61,7 @@
      </p>
      <a-divider>Travel</a-divider>
      <p class="card-container">
-       <nuxt-link to="/category/daily?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
+       <nuxt-link to="/category/travel?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index"  @click="goDetail(item.blogId)">
         <img
           class="card-img"
@@ -392,6 +392,8 @@ export default {
         height: 100%;
       }
       .text {
+        -webkit-text-stroke: 1px #502626;
+        text-stroke: 1px #502626;
         position: absolute;
         top: 80%;
         color: white;

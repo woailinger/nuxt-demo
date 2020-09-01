@@ -11,7 +11,7 @@
         <a-comment :author="item.author" :avatar="item.avatar">
           <template slot="actions">
             <span>
-              comment on  {{item.blogName}}
+              comment on  {{item.blogTitle}}
             </span>
           </template>
           <p slot="content">
@@ -68,9 +68,9 @@ export default {
         // 重定向到登录页面
 //        redirect('/login');
       } else {
-        return {
-          data: res.data.comments
-        }
+        // return {
+        //   data: res.data.comments
+        // }
       }
     })
   },

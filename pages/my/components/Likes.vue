@@ -98,7 +98,7 @@ export default {
       this.$Server({
         url: '/like/list',
         methods: 'GET',
-        parmas: {
+        params: {
           userId: this.$store.state.userId,
           likeTargetType: 'BLOG'
         }

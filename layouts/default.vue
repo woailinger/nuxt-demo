@@ -106,7 +106,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state.token, '-----------');
     if(this.$store.state.token){
         this.getUserInfo();
         this.loginFlag = true;

@@ -194,7 +194,6 @@ import moment from 'moment';
         });
       },
       handleEdit (values) {
-        debugger;
         values.birthday =  moment(values.birthday).format('YYYY-MM-DD');
         this.$Server({
           url: '/user/update-profile',
@@ -204,7 +203,12 @@ import moment from 'moment';
             ...values,
           }
         }).then(res => {
-          this.$emit('ok')
+          if(res.code === '0') {
+            this.$message.info(res.msg);
+            this.$emit('ok')
+          } else {
+            this.$message.error(res.msg);
+          }
         })
       }
     }
