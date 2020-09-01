@@ -228,6 +228,7 @@ export default {
   .content {
     display: inline-block;
     width: 35%;
+    text-align: left;
     h1 {
       color: #434e59;
       font-size: 60px;
@@ -240,7 +241,6 @@ export default {
       line-height: 20px;
       margin-bottom: 24px;
       text-align: left;
-      word-break: break-all;
     }
     .desc {
       color: rgba(0, 0, 0, 0.45);
