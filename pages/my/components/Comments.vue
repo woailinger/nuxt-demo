@@ -11,15 +11,15 @@
         <a-comment :author="item.author" :avatar="item.avatar">
           <template slot="actions">
             <span>
-              comment on  {{item.blogTitle}}
+              comment on <span class="default">{{item.blogTitle}}</span>
             </span>
           </template>
           <p slot="content">
             {{ item.content }}
           </p>
-          <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
+          <!-- <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
             <span>{{ item.datetime.fromNow() }}</span>
-          </a-tooltip>
+          </a-tooltip> -->
         </a-comment>
       </a-list-item>
     </a-list>

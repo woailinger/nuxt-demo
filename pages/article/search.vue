@@ -108,7 +108,23 @@ export default {
                 params: {
                   content: this.keyWord,
                   page: page || 0
-                }
+                },
+                transformRequest: [
+                  function(data) {
+                    let ret = "";
+                    for (let it in data) {
+                      ret +=
+                        encodeURIComponent(it) +
+                        "=" +
+                        encodeURIComponent(data[it]) +
+                        "&";
+                    }
+                    ret = ret.substring(0, ret.lastIndexOf("&"));
+
+                    console.log(ret, "---");
+                    return ret;
+                  }
+                ],
             }).then((res) => {
                 this.searchData = res.data;
             })
