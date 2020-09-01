@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img class="logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
+    <img class="logo pointer" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
     <div class="title">Login</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
       <a-form-item :validate-status="userNameError() ? 'error' : ''" :help="userNameError() || ''">
@@ -88,7 +88,7 @@
         this.$router.push('/register');
       },
       handleToForgot() {
-        this.$router.push('/FindPwd');
+        this.$router.push('/findPassword');
       },
       userNameError() {
         const { getFieldError, isFieldTouched } = this.form;

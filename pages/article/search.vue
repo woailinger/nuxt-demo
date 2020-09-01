@@ -10,7 +10,7 @@
             <a-list
               size="large"
               :bordered="false"
-              :pagination="{showQuickJumper: true, pageSize: 5, total: 20}"
+              :pagination="pagination"
             >
               <a-list-item :key="i" v-for="(item, i) in searchData">
                 <div class="listcover">
@@ -78,8 +78,14 @@ export default {
                 author: 'Jemma Admin',
                 commentNum: '46',
                 likeNum: '31'
-            }]
-        }
+            }],
+            pagination: {
+              showQuickJumper: true,
+              pageSize: 5,
+              total: 20,
+              onChange: page => this.getData(page)
+          }
+      }
     },
     created() {
         console.log(this.$route.query.keyWord, 'test--');
@@ -95,17 +101,33 @@ export default {
         onSearch() {
             this.getData();
         },
-        getData() {
-          console.log(this.keyWord, 'val---');
+        getData(page) {
             this.$Server({
                 url: '/es/search-content',
                 method: 'GET',
                 params: {
-                  content: this.keyWord
-                }
+                  content: this.keyWord,
+                  page: page || 0
+                },
+                transformRequest: [
+                  function(data) {
+                    let ret = "";
+                    for (let it in data) {
+                      ret +=
+                        encodeURIComponent(it) +
+                        "=" +
+                        encodeURIComponent(data[it]) +
+                        "&";
+                    }
+                    ret = ret.substring(0, ret.lastIndexOf("&"));
+
+                    console.log(ret, "---");
+                    return ret;
+                  }
+                ],
             }).then((res) => {
                 this.searchData = res.data;
-            }) 
+            })
         }
     }
 }
@@ -125,7 +147,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Search%20results/search%20result%20picture.jpg");
+    background: url("../../assets/img/search.jpg");
     background-size: cover;
     .ant-input-affix-wrapper {
       width: 40%;

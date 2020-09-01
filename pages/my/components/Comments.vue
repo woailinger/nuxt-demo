@@ -11,15 +11,15 @@
         <a-comment :author="item.author" :avatar="item.avatar">
           <template slot="actions">
             <span>
-              comment on  {{item.blogName}}
+              comment on <span class="default">{{item.blogTitle}}</span>
             </span>
           </template>
           <p slot="content">
             {{ item.content }}
           </p>
-          <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
+          <!-- <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
             <span>{{ item.datetime.fromNow() }}</span>
-          </a-tooltip>
+          </a-tooltip> -->
         </a-comment>
       </a-list-item>
     </a-list>
@@ -68,9 +68,9 @@ export default {
         // 重定向到登录页面
 //        redirect('/login');
       } else {
-        return {
-          data: res.data.comments
-        }
+        // return {
+        //   data: res.data.comments
+        // }
       }
     })
   },

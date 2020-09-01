@@ -34,12 +34,12 @@
     <a-divider class="">Daily Life</a-divider>
      <p class="card-container">
        <nuxt-link to="/category/daily?category=daily" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-       <a-card hoverable class="card" v-for="(item, index) in latestData" :key="'lastest'+ index">
+       <a-card hoverable class="card" v-for="(item, index) in dailyData" :key="'lastest'+ index" @click="goDetail(item.blogId)">
         <img
           class="card-img"
           slot="cover"
           alt="example"
-          :src="item.url"
+          :src="item.img"
         />
         <a-card-meta :title="item.title">
         </a-card-meta>
@@ -47,13 +47,13 @@
      </p>
      <a-divider>Food & Drinks</a-divider>
      <p class="card-container">
-       <nuxt-link to="/category/daily?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-       <a-card hoverable class="card" v-for="(item, index) in FoodData" :key="'lastest'+ index">
+       <nuxt-link to="/category/food?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
+       <a-card hoverable class="card" v-for="(item, index) in foodData" :key="'lastest'+ index"  @click="goDetail(item.blogId)">
         <img
           class="card-img"
           slot="cover"
           alt="example"
-          :src="item.url"
+          :src="item.img"
         />
         <a-card-meta :title="item.title">
         </a-card-meta>
@@ -61,13 +61,13 @@
      </p>
      <a-divider>Travel</a-divider>
      <p class="card-container">
-       <nuxt-link to="/category/daily?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-       <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index">
+       <nuxt-link to="/category/travel?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
+       <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index"  @click="goDetail(item.blogId)">
         <img
           class="card-img"
           slot="cover"
           alt="example"
-          :src="item.url"
+          :src="item.img"
         />
         <a-card-meta :title="item.title">
         </a-card-meta>
@@ -124,7 +124,7 @@ export default {
             text: 'Why you should travel solo in China'
           },
         ],
-        latestData: [
+        dailyData: [
           {
             title: 'How to get a taxi in China',
             url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20get%20a%20taxi%20in%20China/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596705905&Signature=EcIU64C6E%2BgsGPYSkA%2F25BYtc2w%3D'
@@ -150,7 +150,7 @@ export default {
             url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20order%20from%20JD/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87%E7%A4%BA%E4%BE%8B.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596707090&Signature=0BHAYzIUAPO7%2BJw615MtKVuAvBk%3D'
           },
         ],
-        FoodData: [
+        foodData: [
           {
             title: 'An introduction to Chinese alcohol',
             url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/An%20introduction%20to%20Chinese%20alcohol/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596703048&Signature=gBFrTL4RkY2XhsAIQSUQ30%2B%2FShs%3D'
@@ -214,6 +214,12 @@ export default {
     console.log('Current Swiper instance object', this.swiper)
     // this.swiper.slideTo(3, 1000, false)
   },
+  created() {
+    let categoryList = ['daily', 'food', 'travel']
+    categoryList.forEach(item => {
+      this.getData(item);
+    })
+  },
 
 
 
@@ -229,6 +235,13 @@ export default {
         }
       })
     },
+    goDetail(blogId) {
+      this.$router.push({
+        path: '/blog/detail',
+        query: {
+          blogId: blogId
+      }});
+    },
     logout () {
       Cookie.remove('_t');
       this.$store.commit('setToken', null);
@@ -242,7 +255,43 @@ export default {
     },
     onSwiperClickSlide(index, reallyIndex) {
       console.log('Swiper click slide!', reallyIndex)
-    }
+    },
+    getData(category) {
+      this.$Server({
+        url: "/blog/get-blog-list",
+        method: "post",
+        data: {
+          category: category,
+          recommend: true
+        },
+        transformRequest: [
+          function(data) {
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            ret = ret.substring(0, ret.lastIndexOf("&"));
+
+            console.log(ret, "---");
+            return ret;
+          }
+        ],
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+        .then(res => {
+          this.loadingFlag = false;
+          this[category+ 'Data'] = res.dataList;
+        })
+        .finally(() => {
+          this.loadingFlag = false;
+        });
+    },
   }
 }
 </script>
@@ -286,6 +335,10 @@ export default {
     .card {
       margin-bottom: 50px;
       width: 360px;
+      .card-img {
+        width: 358px;
+        height: 238px;
+      }
       .ant-card-cover img {
         border-radius: 15px 15px 0 0;
       }
@@ -339,6 +392,8 @@ export default {
         height: 100%;
       }
       .text {
+        -webkit-text-stroke: 1px #502626;
+        text-stroke: 1px #502626;
         position: absolute;
         top: 80%;
         color: white;

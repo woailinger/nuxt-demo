@@ -16,40 +16,40 @@
                 img-format="png" />
       </client-only>
     </div>
-    <ProfileEdit v-if="isEdit" @ok="toggleEdit" />
-    <ul class="info" v-else>
-      <li class="item">
-        <span class="name">Name</span>
-        <span class="value">{{ info.userName }}</span>
-      </li>
-      <li class="item">
-        <span class="name">Gender</span>
-        <span class="value">{{info.Female}}</span>
-      </li>
-      <li class="item">
-        <span class="name">Nationality</span>
-        <span class="value">{{ info.nationality }}</span>
-      </li>
-      <li class="item">
-        <span class="name">Age</span>
-        <span class="value">{{ info.age }}</span>
-      </li>
-      <li class="item">
-        <span class="name">Email </span>
-        <span class="value">{{ info.email }}</span>
-      </li>
-      <li class="item">
-        <span class="name">Where do you live now</span>
-        <span class="value">{{ info.city }}</span>
-      </li>
-      <li class="item">
-        <span class="name">What interests you</span>
-        <span class="value">{{ info.interesting }}</span>
-      </li>
-      <li class="button">
-        <a-button type="primary" @click="toggleEdit">Edit</a-button>
-      </li>
-    </ul>
+    <ProfileEdit @ok="toggleEdit" />
+    <!--<ul class="info" v-else>-->
+      <!--<li class="item">-->
+        <!--<span class="name">Name</span>-->
+        <!--<span class="value">{{ info.userName }}</span>-->
+      <!--</li>-->
+      <!--<li class="item">-->
+        <!--<span class="name">Gender</span>-->
+        <!--<span class="value">Female</span>-->
+      <!--</li>-->
+      <!--<li class="item">-->
+        <!--<span class="name">Nationality</span>-->
+        <!--<span class="value">{{ info.infonationality }}</span>-->
+      <!--</li>-->
+      <!--<li class="item">-->
+        <!--<span class="name">Age</span>-->
+        <!--<span class="value">{{ info.age }}</span>-->
+      <!--</li>-->
+      <!--<li class="item">-->
+        <!--<span class="name">Email </span>-->
+        <!--<span class="value">{{ info.email }}</span>-->
+      <!--</li>-->
+      <!--<li class="item">-->
+        <!--<span class="name">Where do you live now</span>-->
+        <!--<span class="value">{{ info.city }}</span>-->
+      <!--</li>-->
+      <!--<li class="item">-->
+        <!--<span class="name">What interests you</span>-->
+        <!--<span class="value">{{ info.interesting }}</span>-->
+      <!--</li>-->
+      <!--<li class="button">-->
+        <!--<a-button type="primary" @click="toggleEdit">Edit</a-button>-->
+      <!--</li>-->
+    <!--</ul>-->
   </div>
 </template>
 <script>

@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <img class="logo pointer" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
-    <div class="title">Sign Up</div>
-    <a-form :form="form" @submit="handleSubmit" class="form">
+    <div class="title">
+      Find Password
+    </div>
+    <a-form class="form" :form="form" @submit="handleSubmit">
       <a-form-item>
         <a-input
           v-decorator="[
@@ -20,26 +22,41 @@
           <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)" />
         </a-input>
       </a-form-item>
-      <a-form-item>
-        <a-input
-          v-decorator="[
-          'userName',
+      <a-form-item label="">
+        <a-col :span="14">
+          <a-input
+            v-decorator="[
+          'vcode',
           {
             rules: [
-              { required: true, message: 'Please input your userName!' }
+              { required: true, message: 'Please enter the verification code!' }
             ]
-          },
+          }
         ]"
-          placeholder="Username"
-          size="large"
-        >
-          <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
-        </a-input>
+            placeholder="verification code"
+            size="large"
+          >
+            <a-icon slot="prefix" type="number" style="color:rgba(0,0,0,.25)" />
+          </a-input>
+        </a-col>
+        <a-col :span="8" :offset="2">
+          <a-button style="text-align: center; width: 100%" size="large" @click="handleGetCode" :disabled="codeDisabled">
+            <span v-if="!codeDisabled">get Code</span>
+            <a-statistic-countdown
+              v-else
+              :value="deadline"
+              suffix="S"
+              format="s"
+              valueStyle="color: rgba(0, 0, 0, 0.25); font-size: 16px;"
+              @finish="onFinish"
+            />
+          </a-button>
+        </a-col>
       </a-form-item>
       <a-form-item has-feedback>
         <a-input
           v-decorator="[
-          'password',
+          'newPassword',
           {
             rules: [
               { required: true, message: 'Please input your Password' },
@@ -74,65 +91,39 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
-          I have read the
-          <a href="/agreement" target="_blank">
-            user agreement
-          </a>
-        </a-checkbox>
-      </a-form-item>
-      <a-form-item>
-        <a-checkbox v-decorator="['subscribed', { valuePropName: 'checked' }]">
-          Subscribe
-        </a-checkbox>
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" html-type="submit" class="register" :loading="loading">
-          Sign Up
-        </a-button>
-        <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
+        <a-col :span="24" class="button">
+          <a-button type="primary" block html-type="submit">
+            Save
+          </a-button>
+        </a-col>
       </a-form-item>
     </a-form>
   </div>
 </template>
 <script>
-  import Utils from '@/tools/Utils.js';
-  const { encryption } = Utils;
   export default {
-    middleware: 'notTokenenticated',
     layout: "blank",
     data () {
-      return {
-        loading: false,
-        form: this.$form.createForm(this, { name: 'horizontal_login' }),
-        confirmDirty: false,
+      return  {
+        form: this.$form.createForm(this, {name: 'find_password'}),
         hasErrors: fieldsError => {
           return Object.keys(fieldsError).some(field => fieldsError[field]);
-        }
+        },
+        codeDisabled: false,
+        deadline: '',
+        email: '',
+        seqNo: '',
       }
     },
     mounted() {
+      let userInfo = this.$store.state.userInfo;
+      this.email = (userInfo && userInfo.email) || '';
     },
     methods: {
-      handleToLogin() {
-        this.$router.push('/login');
-      },
-      userNameError() {
-        const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('userName') && getFieldError('userName');
-      },
       // Only show error after a field is touched.
       passwordError() {
         const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('password') && getFieldError('password');
-      },
-      handleConfirmBlur(e) {
-        const value = e.target.value;
-        this.confirmDirty = this.confirmDirty || !!value;
-      },
-      confirmPasswordError() {
-        const { getFieldError, isFieldTouched } = this.form;
-        return isFieldTouched('password') && getFieldError('password');
+        return isFieldTouched('newPassword') && getFieldError('newPassword');
       },
       validateToNextPassword(rule, value, callback) {
         const form = this.form;
@@ -143,43 +134,65 @@
       },
       compareToFirstPassword(rule, value, callback) {
         const form = this.form;
-        if (value && value !== form.getFieldValue('password')) {
+        if (value && value !== form.getFieldValue('newPassword')) {
           callback('Two passwords that you enter is inconsistent!');
         } else {
           callback();
         }
+      },
+      handleConfirmBlur(e) {
+        const value = e.target.value;
+        this.confirmDirty = this.confirmDirty || !!value;
+      },
+      /***
+       * 校验code值
+       */
+      handleGetCode () {
+        const form = this.form;
+        form.validateFields(['email'], (errors, values) => {
+          if (!errors) {
+            this.$Server({
+              url: '/vcode/send-email',
+              method: 'post',
+              data: {
+                email: values.email,
+                scene: 'RESET_PASSWORD'
+              }
+            }).then((res) => {
+              this.codeDisabled = true;
+              this.deadline = Date.now() + 1000 * 60;
+              this.seqNo = res.data.seqNo;
+            }).catch((res) => {
+              this.$message.waring('sorry')
+            })
+          } else {
+            return false;
+          }
+        });
+      },
+      onFinish () {
+        this.codeDisabled = false;
       },
       handleSubmit(e) {
         e.preventDefault();
         this.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            if (!values.agreement) {
-              // 请勾选协议
-              this.$message.warning('Please read and tick the agreement carefully.');
-              return
-            }
-            this.postLogin(values);
+            this.handleConfirm(values);
+          } else {
+            return false;
           }
         });
       },
-      postLogin (values) {
-        console.log(values, '---');
-        this.loading = true
+      handleConfirm (values) {
         this.$Server({
-          url: 'user/register',
+          url: '/user/reset-password',
           method: 'post',
           data: {
-            email: values.email,
-            password: encryption(values['password']),
-            subscribed: !!values.subscribed,
-            userName: values.userName,
-          }
-        }).then(res => {
-          this.loading = false;
-          if (res.code == 0) {
-//            this.$store.commit('setToken', res.data.token);
-            this.$router.push('/getStarted');
+            userId: this.$store.state.userId,
+            newPassword: values.newPassword,
+            seqNo: this.seqNo,
+            vcode: values.vcode
           }
         })
       }
@@ -195,6 +208,7 @@
     align-items: center;
     overflow: auto;
     background: #f0f2f5;
+    //   background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
@@ -203,18 +217,13 @@
       height: 100px;
     }
     .title {
-      line-height: 120px;
-      font-size: 50px;
+      font-size: 30px;
+      line-height: 80px;
+      font-weight: 600;
+      text-align: center;
     }
     .form {
       width: 320px;
-    }
-    .register {
-      width: 125px
-    }
-    .toLogin {
-      display: block;
-      width: 195px;
     }
   }
 </style>

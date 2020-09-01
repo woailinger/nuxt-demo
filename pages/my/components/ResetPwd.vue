@@ -6,7 +6,7 @@
         <a-col :span="15">
           <a-input
             v-decorator="[
-          'oldPwd',
+          'oldPassword',
           {
             rules: [
               { required: true, message: 'Please input your oldPwd!' }
@@ -26,7 +26,7 @@
         <a-col :span="15">
           <a-input
             v-decorator="[
-          'token',
+          'newPassword',
           {
             rules: [
               { required: true, message: 'Please input your Password!' },
@@ -62,7 +62,7 @@
             <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-col>
-        
+
       </a-form-item>
       <a-form-item>
         <div class="button">
@@ -99,15 +99,16 @@ export default {
         method: 'post',
         data: {
           userId: this.$store.state.userId,
-          oldPassword: values.oldPwd,
-          newPassword: values.confirmPassword,
+          oldPassword: values.oldPassword,
+          newPassword: values.newPassword,
         }
       }).then(res => {
         this.loading = false;
       })
     },
     forget() {
-      this.$emit('changeTab', 6);
+//      this.$emit('changeTab', 6);
+      this.$router.push('/findPassword');
     },
      /***
      * 校验code值
@@ -115,21 +116,22 @@ export default {
     handleGetCode () {
       this.codeDisabled = true;
       this.deadline = Date.now() + 1000 * 60;
+      const form = this.reSetPwdForm;
+      if (!form.getFieldValue('email')) {
+        this.passwordError()
+        return;
+      }
       this.$Server({
-        url: '/vcode/send-email',
-        method: 'post',
-        data: {
-          email: this.$store.state.email,
-          scene: 'RESET_PASSWORD'
-        }
+      url: '/vcode/send-email',
+      method: 'post',
+      data: {
+        email: form.getFieldValue('email'),
+        scene: 'RESET_PASSWORD'
+      }
       })
     },
     onFinish () {
       this.codeDisabled = false;
-    },
-    passwordError() {
-      const { getFieldError, isFieldTouched } = this.reSetPwdForm;
-      return isFieldTouched('token') && getFieldError('token');
     },
     handleConfirmBlur(e) {
       const value = e.target.value;
@@ -138,13 +140,13 @@ export default {
     validateToNextPassword(rule, value, callback) {
       const form = this.reSetPwdForm;
       if (value && this.confirmDirty) {
-        form.validateFields(['confirm'], { force: true });
+        form.validateFields(['confirmPassword'], { force: true });
       }
       callback();
     },
     compareToFirstPassword(rule, value, callback) {
       const form = this.reSetPwdForm;
-      if (value && value !== form.getFieldValue('token')) {
+      if (value && value !== form.getFieldValue('newPassword')) {
         callback('Two passwords that you enter is inconsistent!');
       } else {
         callback();
