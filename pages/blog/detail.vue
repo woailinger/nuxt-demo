@@ -1,15 +1,11 @@
 <template>
   <div class="container">
     <div>
-        <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
+      <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
       <div v-show="!loadingFlag" v-if="latestData">
         <a-card style="margin: 24px 0px" :body-style="{padding: '60px'}">
           <div style="margin-bottom: 60px">
-            <a-avatar
-              style="margin:10px;"
-              size="small"
-              :src="latestData.avatar"
-            />
+            <a-avatar style="margin:10px;" size="small" :src="latestData.avatar"/>
             {{latestData.author}}
             <a-divider type="vertical"/>
             {{latestData.time}} read
@@ -34,7 +30,7 @@
 
               <div style="float: right;">
                 <a-col style="float: right;">
-                  <h2 >{{latestData.city}}</h2>
+                  <h2>{{latestData.city}}</h2>
                 </a-col>
               </div>
             </a-row>
@@ -46,7 +42,10 @@
               <div style="float: right;">
                 <a-col style="float: right;">
                   {{latestData.likes}}
-                  <a-icon type="heart"/>
+                  <a id="like">
+                    <a-icon type="heart" v-show="likeIcon" theme="filled" @click="cancelLike"/>
+                    <a-icon type="heart" v-show="!likeIcon" theme="outlined" @click="postLike"/>
+                  </a>
                 </a-col>
               </div>
             </a-row>
@@ -56,112 +55,18 @@
               <h2 class="mb-30">Related Posts</h2>
             </div>
             <a-row :gutter="[48,40]">
-                <a-col  :span="6" v-for="(item, index) in latestRealatedBlog" :key="'related'+ index">
-                    <a-card>
-                  <img
-                    slot="cover"
-                    alt="example"
-                    :src="item.img"
-                  >
+              <a-col :span="6" v-for="(item, index) in latestRealatedBlog" :key="'related'+ index">
+                <a-card>
+                  <img slot="cover" alt="example" :src="item.img">
                   <a-card-meta :title="item.title" :description="item.content.substr(0,15)"></a-card-meta>
                 </a-card>
-                </a-col>
+              </a-col>
             </a-row>
-            <!--<a-row :gutter="16">
-              <a-col :span="8">
-                <a-card hoverable style="width: 300px">
-                  <img
-                    slot="cover"
-                    alt="example"
-                    src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                  >
-                  <a-card-meta title="Card title" description="This is the tag"></a-card-meta>
-                </a-card>
-              </a-col>
-              <a-col :span="8">
-                <a-card hoverable style="width: 300px">
-                  <img
-                    slot="cover"
-                    alt="example"
-                    src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                  >
-                  <a-card-meta title="Card title" description="This is the tag"></a-card-meta>
-                </a-card>
-              </a-col>
-              <a-col :span="8">
-                <a-card hoverable style="width: 300px">
-                  <img
-                    slot="cover"
-                    alt="example"
-                    src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                  >
-                  <a-card-meta title="Card title" description="This is the tag"></a-card-meta>
-                </a-card>
-              </a-col>
-            </a-row>-->
           </div>
-          <a-comment>
-            <span slot="actions" key="comment-nested-reply-to">Reply to</span>
-            <a slot="author">Han Solo</a>
-            <a-avatar
-              slot="avatar"
-              src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-              alt="Han Solo"
-            />
-            <p
-              slot="content"
-            >We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
-            <a-comment>
-              <span slot="actions">Reply to</span>
-              <a slot="author">Han Solo</a>
-              <a-avatar
-                slot="avatar"
-                src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                alt="Han Solo"
-              />
-              <p slot="content">
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure).
-              </p>
-              <a-comment>
-                <span slot="actions">Reply to</span>
-                <a slot="author">Han Solo</a>
-                <a-avatar
-                  slot="avatar"
-                  src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                  alt="Han Solo"
-                />
-                <p slot="content">
-                  We supply a series of design principles, practical patterns and high quality design
-                  resources (Sketch and Axure).
-                </p>
-              </a-comment>
-              <a-comment>
-                <span slot="actions">Reply to</span>
-                <a slot="author">Han Solo</a>
-                <a-avatar
-                  slot="avatar"
-                  src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                  alt="Han Solo"
-                />
-                <p slot="content">
-                  We supply a series of design principles, practical patterns and high quality design
-                  resources (Sketch and Axure).
-                </p>
-              </a-comment>
-            </a-comment>
-          </a-comment>
-          <a-comment>
-            <span slot="actions">Reply to</span>
-            <a slot="author">Han Solo</a>
-            <a-avatar
-              slot="avatar"
-              src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-              alt="Han Solo"
-            />
-            <p
-              slot="content"
-            >We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).</p>
+          <a-comment v-for="(item, index) in commentsData" :key="'related'+ index">
+            <a slot="author">{{item.author}}</a>
+            <a-avatar slot="avatar" :src="item.avatar" alt="Han Solo"/>
+            <p slot="content">{{item.content}}</p>
           </a-comment>
           <div>
             <a-list
@@ -180,11 +85,6 @@
               </a-list-item>
             </a-list>
             <a-comment>
-              <a-avatar
-                slot="avatar"
-                src="https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG"
-                alt="Han Solo"
-              />
               <div slot="content">
                 <a-form-item>
                   <a-textarea :rows="4" :value="value" @change="handleChange"/>
@@ -209,17 +109,20 @@
 
 <script>
 import { HeartOutlined } from "@ant-design/icons";
-import moment from "moment";
+
 import { constants } from "zlib";
-import { connect } from 'tls';
+import { connect } from "tls";
+import { log } from "util";
+import { parse } from "querystring";
+//const getPageQuery = () => (window.location.href);
 
 const Cookie = process.client ? require("js-cookie") : undefined;
-const baseUrl = "../assets/img/bg";
-const params = new URLSearchParams();
 const latestData = {};
+const commentsData = {};
 const latestRealatedBlog = [];
 const legacySystemHTML = "";
-params.append("blogId", "493251007427682304");
+const blogId = "";
+const currentUrl = "";
 export default {
   watch: {
     "$route.query"(newValue) {
@@ -228,9 +131,15 @@ export default {
       this.getData(newValue);
     }
   },
+  created() {
+    this.getData(this.$route.query.blogId, function(data) {
+      console.log(data, "DA");
+    });
+    this.getComments(this.$route.query.blogId);
+    this.getLike(this.$route.query.blogId);
+  },
   data() {
     return {
-      baseUrl,
       loadingFlag: true,
       latestData,
       latestRealatedBlog,
@@ -239,15 +148,14 @@ export default {
       comments: [],
       submitting: false,
       value: "",
-      moment,
-      rawHtml: "testBlog.html"
+      blogId,
+      commentsData,
+      likeIcon: false,
+      currentUrl
     };
   },
   mounted() {
-    this.getData(this.$route.query.blogId, function(data) {
-      //this.latestData = data;
-      console.log(data, "DA");
-    });
+    console.log(this.$route.path, "path");
   },
   methods: {
     getData(key, callback) {
@@ -261,7 +169,6 @@ export default {
           function(data) {
             let ret = "";
             for (let it in data) {
-              // 如果 data[it] 是一个对象, 需要先使用 JSON.stringify, 再使用 encode
               ret +=
                 encodeURIComponent(it) +
                 "=" +
@@ -285,6 +192,7 @@ export default {
           this.latestRealatedBlog = res.dataList;
           this.legacySystemHTML = res.data.html;
           this.tagList = res.data.tag.split(",");
+          this.blogId = key;
           console.log(res.data, "DATA");
           console.log(res.dataList, "DATALIST");
         })
@@ -292,26 +200,108 @@ export default {
           this.loadingFlag = false;
         });
     },
+    getComments(key) {
+      this.$Server({
+        //url: 'http://localhost:8080/comment/list',
+        url: "/comment/list",
+        method: "get",
+        data: {
+          blogId: key
+        }
+      })
+        .then(res => {
+          if (res.code == 0) {
+            this.commentsData = res.data.comments;
+            console.log(res.data.comments, "comment");
+          } else {
+            this.$message.error(res.msg);
+          }
+        })
+        .catch(err => {
+          this.$message.waring(err);
+        });
+    },
+    getLike(key) {
+      if (this.$store.state.userId) {
+        this.$Server({
+          //url: 'http://localhost:8080/like/like-or-not',
+          url: "/like/like-or-not",
+          method: "get",
+          params: {
+            likeTargetId: key,
+            likeTargetType: "BLOG",
+            userId: this.$store.state.userId
+          }
+        })
+          .then(res => {
+            console.log(res, "get like res");
+            this.likeIcon = res.data.likeOrNot;
+          })
+          .catch(err => {
+            console.log(err, "err");
+          });
+      }
+    },
+    cancelLike() {
+      this.$Server({
+        //url: 'http://localhost:8080/comment/post',
+        url: "/like/cancel",
+        method: "post",
+        data: {
+          likeTargetId: this.blogId,
+          likeTargetType: "BLOG",
+          userId: this.$store.state.userId
+        }
+      })
+        .then(res => {
+          console.log(res, "cancel like res");
+          this.likeIcon = false;
+        })
+        .catch(err => {
+          console.log(err, "err");
+        });
+    },
+    postLike() {
+      this.$Server({
+        //url: 'http://localhost:8080/comment/post',
+        url: "/like/post",
+        method: "post",
+        data: {
+          likeTargetId: this.blogId,
+          likeTargetType: "BLOG",
+          userId: this.$store.state.userId
+        }
+      })
+        .then(res => {
+          console.log(res, "post like res");
+          this.likeIcon = true;
+        })
+        .catch(err => {
+          console.log(err, "err");
+        });
+    },
     handleSubmit() {
       if (!this.value) {
         return;
       }
-
-      this.submitting = true;
-
-      setTimeout(() => {
-        this.submitting = false;
-        this.comments = [
-          {
-            author: "Han Solo",
-            avatar: "assets/img/blog-details/avatar-1.jpg",
-            content: this.value,
-            datetime: moment().fromNow()
-          },
-          ...this.comments
-        ];
-        this.value = "";
-      }, 1000);
+      this.loading = true;
+      this.$Server({
+        //url: 'http://localhost:8080/comment/post',
+        url: "/comment/post",
+        method: "post",
+        data: {
+          blogId: this.blogId,
+          userId: this.$store.state.userId,
+          content: this.value
+        }
+      })
+        .then(res => {
+          console.log(res, "handle submit res");
+          this.getComments(this.blogId);
+        })
+        .catch(err => {
+          console.log(err, "err");
+        });
     },
     handleChange(e) {
       this.value = e.target.value;

@@ -49,13 +49,12 @@
                           <div
                             class="detail"
                             max-width="9%;"
-                            style="word-break:break-all;"
                           >{{item.content.substring(0,200)}}...</div>
                           <div class="author">
                             <a-avatar
                               style="margin:10px;"
                               size="small"
-                              src="https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20famous%20Chinese%20tea/%E9%A6%96%E9%A1%B5%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596708617&Signature=v0f%2BqrXbk%2BuRURvYNs8muA%2BeRuA%3D"
+                              :src="item.avatar"
                             />
                             {{item.author}}
                             <a-divider type="vertical"/>
@@ -64,14 +63,6 @@
                             <em>{{item.date}}</em>
                           </div>
                         </div>
-                        <span slot="actions">
-                          <a-icon style="margin-right: 8px" type="heart-o"/>
-                          {{item.likes}}
-                        </span>
-                        <span slot="actions">
-                          <a-icon style="margin-right: 8px" type="message"/>
-                          {{item.comment}}
-                        </span>
                       </a-list-item>
                     </a-list>
                   </a>
@@ -117,10 +108,10 @@ export default {
   methods: {
     getData(key, callback) {
       this.$Server({
-        url: "/es/search-tag",
         //url: "http://localhost:8080/es/search-tag",
-        method: "post",
-        data: {
+        url: "/es/search-tag",
+        method: "get",
+        params: {
           tag: key
         },
         transformRequest: [
