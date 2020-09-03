@@ -9,8 +9,8 @@
           'email',
           {
             rules: [
-              { type: 'email', message: 'The input is not valid E-mail!' },
-              { required: true, message: 'Please input your email!' }
+              { type: 'email', message: 'I􏰀􏰀nvali􏰁d email􏰁' },
+              { required: true, message: 'Email is required' }
             ]
           },
         ]"

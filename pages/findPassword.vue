@@ -2,7 +2,7 @@
   <div class="container">
     <img class="logo pointer" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
     <div class="title">
-      Find Password
+      Reset Password
     </div>
     <a-form class="form" :form="form" @submit="handleSubmit">
       <a-form-item>
@@ -11,8 +11,8 @@
           'email',
           {
             rules: [
-              { type: 'email', message: 'The input is not valid E-mail!' },
-              { required: true, message: 'Please input your email!' }
+              { type: 'email', message: 'I􏰀􏰀nvali􏰁d email􏰁' },
+              { required: true, message: 'Email is required' }
             ]
           },
         ]"
@@ -193,6 +193,11 @@
             newPassword: values.newPassword,
             seqNo: this.seqNo,
             vcode: values.vcode
+          }
+        }).then(res => {
+          if (res.msg === 'success') {
+            this.$message.success('Reset Password successful!')
+            this.$router.push('/')
           }
         })
       }

@@ -2,23 +2,25 @@
   <div class="form">
     <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
       <a-form-item
-        label="userName"
+        label="Username"
       >
         <a-input
           v-decorator="[
           'userName',
-          initialValue=data.userName,
-          { rules: [{ required: true, message: 'Please input your name' }] },
+          {
+            rules: [{ required: true, message: 'Please input your name' }]
+          },
         ]"
-          placeholder="Please input your name"
+          placeholder="Please choose a username"
         />
       </a-form-item>
       <a-form-item label="Gender">
         <a-radio-group
           v-decorator="[
             'gender',
-             initialValue=data.gender,
-            { rules: [{ required: true, message: 'Please Choose your Gender' }] },
+            {
+              rules: [{ required: true, message: 'Please Choose your Gender' }]
+            },
           ]"
         >
           <a-radio value="FEMALE">
@@ -26,6 +28,9 @@
           </a-radio>
           <a-radio value="MALE">
             Male
+          </a-radio>
+          <a-radio value="OTHER">
+            OTHER
           </a-radio>
         </a-radio-group>
       </a-form-item>
@@ -35,10 +40,11 @@
         <a-input
           v-decorator="[
           'nationality',
-           initialValue=data.nationality,
-          { rules: [{ required: true, message: 'Please input your nationality' }] },
+          {
+            rules: [{ required: true, message: 'Please input your nationality' }]
+          },
         ]"
-          placeholder="Please input your nationality"
+          placeholder="What is your atianationality?"
         />
       </a-form-item>
       <a-form-item
@@ -47,8 +53,10 @@
         <a-date-picker
           v-decorator="[
           'birthday',
-          initialValue=data.birthday,
-          { rules: [{ required: checkNick, message: 'Please choose your Birthday' }] },
+          {
+            initialValue: '1990-09-04',
+            rules: [{ required: checkNick, message: 'Please choose your Birthday' }]
+          },
         ]"
           placeholder="Please choose your Birthday"
           format="YYYY-MM-DD"
@@ -60,10 +68,11 @@
         <a-input
           v-decorator="[
           'email',
-          initialValue=data.email,
-          { rules: [{ required: true, message: 'Please input your Email' }] },
+          {
+            rules: [{ required: true, message: 'Please input your Email' }]
+          },
         ]"
-          placeholder="Please input your Email"
+          placeholder="Please write your Email"
         />
       </a-form-item>
       <a-form-item
@@ -72,10 +81,11 @@
         <a-input
           v-decorator="[
           'city',
-          initialValue=data.city,
-          { rules: [{ required: true, message: 'Please input your live now' }] },
+          {
+            rules: [{ required: true, message: 'Please input your live now' }]
+          },
         ]"
-          placeholder="Please input your live now"
+          placeholder="Where do you live now:E.g. Beijing"
         />
       </a-form-item>
       <a-form-item
@@ -84,44 +94,46 @@
         <a-checkbox-group
           v-decorator="[
           'interesting',
-          { rules: [{ required: true, message: 'Please choose your interests' }] },
+          {
+            rules: [{ required: false, message: 'Please choose your interests' }]
+          },
         ]"
           placeholder="Please choose your live now"
         >
           <a-row>
             <a-col :span="12">
-              <a-checkbox value="daily">
-                daily & Life
+              <a-checkbox value="Daily life">
+                Daily life
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="food & drinks">
-                food & drinks
+              <a-checkbox value="Food & Drinks">
+                Food & Drinks
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="travel">
-                travel
+              <a-checkbox value="Travel">
+                Travel
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="language">
-                language
+              <a-checkbox value="Language">
+                Language
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="shopping">
-                shopping
+              <a-checkbox value="Shopping">
+                Shopping
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="events">
-                events
+              <a-checkbox value="Events">
+                Events
               </a-checkbox>
             </a-col>
             <a-col :span="12">
-              <a-checkbox value="others">
-                others
+              <a-checkbox value="Other">
+                Other
               </a-checkbox>
             </a-col>
           </a-row>
@@ -141,33 +153,36 @@
 import moment from 'moment';
 
   export default {
-    asyncData ({ req, $Server, redirect, store }) {
-      $Server({
-        url: '/user/profile',
-        method: 'get',
-        params: {
-          userId: store.state.userId
-        }
-      }).then(res => {
-        if (res.code == 0) {
-          // 重定向到登录页面
-//        redirect('/login');
-        } else {
-          return {
-            data: res.info.data
-          }
-        }
-      })
-    },
+//    asyncData ({ req, $Server, redirect, store }) {
+//      $Server({
+//        url: '/user/profile',
+//        method: 'get',
+//        params: {
+//          userId: store.state.userId
+//        }
+//      }).then(res => {
+//        if (res.code == 0) {
+//          // 重定向到登录页面
+////        redirect('/login');
+//        } else {
+//          return {
+//            data: res.data
+//          }
+//        }
+//      })
+//    },
     data () {
       return {
-        checkNick: false,
-        form: this.$form.createForm(this, {name: 'dynamic_rule'}),
-        data: {}
+        checkNick: true,
+        form: this.$form.createForm(this, {name: 'profile'})
       }
+    },
+    mounted() {
+      this.getInfo();
     },
     methods: {
       getInfo() {
+        const { setFieldsValue } = this.form;
         this.$Server({
           url: '/user/profile',
           method: 'get',
@@ -176,10 +191,43 @@ import moment from 'moment';
           }
         }).then(res => {
           if (res.code == 0) {
-            this.info = res.data
+            const data = res.data
+            this.$store.commit('setUserInfo', data)
+            setFieldsValue({
+              birthday: data.birthday || '1990-09-04',
+              city: data.city,
+              country: data.country,
+              email: data.email,
+              gender: data.gender,
+              interesting: data.interesting,
+              nationality: data.nationality,
+              userName: data.userName
+            })
           } else {
-            this.formData = res.info.data
+            // 错误 使用mock数据
+//            setFieldsValue({
+//              birthday: null || '1990-09-04',
+//              city: null,
+//              country: null,
+//              email: "798406168@qq.com",
+//              gender: null,
+//              interesting: [],
+//              nationality: null,
+//              userName: "test"
+//            })
           }
+          // mock
+//          this.$store.commit('setUserInfo', {
+//            birthday: null || '1990-09-04',
+//            city: null,
+//            country: null,
+//            email: "798406168@qq.com",
+//            gender: null,
+//            interesting: [],
+//            nationality: null,
+//            userName: "test",
+//            avatar: null
+//          });
         })
       },
       handleSubmit(e) {

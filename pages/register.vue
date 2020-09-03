@@ -9,8 +9,8 @@
           'email',
           {
             rules: [
-              { type: 'email', message: 'The input is not valid E-mail!' },
-              { required: true, message: 'Please input your email!' }
+              { type: 'email', message: 'Invalid email' },
+              { required: true, message: 'Email is required' }
             ]
           },
         ]"
@@ -26,7 +26,7 @@
           'userName',
           {
             rules: [
-              { required: true, message: 'Please input your userName!' }
+              { required: true, message: 'Username is required' }
             ]
           },
         ]"
@@ -42,7 +42,7 @@
           'password',
           {
             rules: [
-              { required: true, message: 'Please input your Password' },
+              { required: true, message: 'Password is required' },
               { validator: validateToNextPassword }
             ]
           },
@@ -60,7 +60,7 @@
           'confirmPassword',
           {
             rules: [
-              { required: true, message: 'The passwords entered twice do not match!' },
+              { required: true, message: 'Passwords do not match' },
               { validator: compareToFirstPassword }
             ]
           }
@@ -73,7 +73,7 @@
           <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
         </a-input>
       </a-form-item>
-      <a-form-item>
+      <a-form-item style="margin-bottom: 0">
         <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
           I have read the
           <a href="/agreement" target="_blank">
@@ -81,17 +81,19 @@
           </a>
         </a-checkbox>
       </a-form-item>
-      <a-form-item>
+      <a-form-item style="margin-bottom: 0">
         <a-checkbox v-decorator="['subscribed', { valuePropName: 'checked' }]">
           Subscribe
         </a-checkbox>
       </a-form-item>
-      <a-form-item>
+      <a-form-item style="text-align: center; margin-bottom: 0">
         <a-button type="primary" html-type="submit" class="register" :loading="loading">
           Sign Up
         </a-button>
-        <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
       </a-form-item>
+      <div style="text-align: center">
+        <a-button type="link" class="toLogin" @click="handleToLogin">Already have an account?</a-button>
+      </div>
     </a-form>
   </div>
 </template>
@@ -144,7 +146,7 @@
       compareToFirstPassword(rule, value, callback) {
         const form = this.form;
         if (value && value !== form.getFieldValue('password')) {
-          callback('Two passwords that you enter is inconsistent!');
+          callback('The passwords don\'t match');
         } else {
           callback();
         }
@@ -156,7 +158,7 @@
             console.log('Received values of form: ', values);
             if (!values.agreement) {
               // 请勾选协议
-              this.$message.warning('Please read and tick the agreement carefully.');
+              this.$message.warning('Please check the box to accept our user agreement.');
               return
             }
             this.postLogin(values);
@@ -213,7 +215,7 @@
       width: 125px
     }
     .toLogin {
-      display: block;
+      /*display: block;*/
       width: 195px;
     }
   }

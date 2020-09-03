@@ -80,7 +80,8 @@ export default {
     return {
       reSetPwdForm: this.$form.createForm(this, { name: 'horizontal_reset' }),
       loading: false,
-      codeDisabled: false
+      codeDisabled: false,
+      seqNo: ''
     }
   },
   methods: {
@@ -104,6 +105,8 @@ export default {
         }
       }).then(res => {
         this.loading = false;
+        if (res.msg === 'success') {
+        }
       })
     },
     forget() {
@@ -128,6 +131,8 @@ export default {
         email: form.getFieldValue('email'),
         scene: 'RESET_PASSWORD'
       }
+      }).then(res => {
+        this.seqNo = res.data.seqNo
       })
     },
     onFinish () {
@@ -147,7 +152,7 @@ export default {
     compareToFirstPassword(rule, value, callback) {
       const form = this.reSetPwdForm;
       if (value && value !== form.getFieldValue('newPassword')) {
-        callback('Two passwords that you enter is inconsistent!');
+        callback('The passwords don\'t match!');
       } else {
         callback();
       }

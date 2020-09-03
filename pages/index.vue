@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-        <!-- <img src="../assets/img/bg1.jpg" alt="banner"> -->
     <client-only>
       <swiper
         ref="carousel"
@@ -32,7 +31,7 @@
       </a-card>
      </div>
     <a-divider class="">Daily Life</a-divider>
-     <p class="card-container">
+     <p class="card-container" >
        <nuxt-link to="/category/daily?category=daily" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
        <a-card hoverable class="card" v-for="(item, index) in dailyData" :key="'lastest'+ index" @click="goDetail(item.blogId)">
         <img
@@ -41,8 +40,7 @@
           alt="example"
           :src="item.img"
         />
-        <a-card-meta :title="item.title">
-        </a-card-meta>
+        <a-card-meta :title="item.title"></a-card-meta>
       </a-card>
      </p>
      <a-divider>Food & Drinks</a-divider>
@@ -121,7 +119,7 @@ export default {
           },
           {
             url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Why%20you%20should%20travel%20solo%20in%20China.jpg',
-            text: 'Why you should travel solo in China'
+            text: 'Why you should travel solo in China?'
           },
         ],
         dailyData: [
@@ -321,7 +319,7 @@ export default {
   .card-container {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     justify-content: space-around;
     padding: 0px 60px;
     .more {
@@ -392,8 +390,9 @@ export default {
         height: 100%;
       }
       .text {
-        -webkit-text-stroke: 1px #502626;
-        text-stroke: 1px #502626;
+        // -webkit-text-stroke: 1px #502626;
+        text-shadow: 2px 2px #423a3a;
+        // text-stroke: 1px #502626;
         position: absolute;
         top: 80%;
         color: white;
