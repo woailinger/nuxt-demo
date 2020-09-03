@@ -12,8 +12,8 @@
           <span class="header-right pointer">
             <a-button @click="signHandler" v-show="!loginFlag">Sign up / Login</a-button>
             <span v-show="!!loginFlag">
-              <a-avatar :src="avatarImg" @click="goInfo"></a-avatar>
-              <span>{{userName}}</span>
+              <a-avatar :src="$store.state.userInfo.avatar || avatarImg" @click="goInfo"></a-avatar>
+              <span>{{$store.state.userInfo.userName || userName}}</span>
               <a-button type="link" @click="logoutHandler" ghost>Logout</a-button>
             </span>
           </span>
@@ -100,7 +100,7 @@ export default {
   data() {
     return {
       searchValue: '',
-      avatarImg: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+      avatarImg: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
       userName: '',
       loginFlag: false
     }
@@ -143,6 +143,7 @@ export default {
         }).then(res => {
           if (res.code == 0) {
             // 设置全局个人信息
+            this.$store.commit('setUserInfo', res.data)
           }
         }).finally(data => {
           this.loading = false;

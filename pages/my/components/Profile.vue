@@ -2,18 +2,23 @@
   <div class="container">
     <div class="title">Profile</div>
     <div class="avatar">
-      <img :src="imgDataUrl" alt="">
+      <img :src="$store.state.userInfo.avatar || imgDataUrl" alt="">
       <span class="edit" @click="toggleShow">Edit</span>
       <client-only>
-        <avatar field="img"
+        <avatar field="uploadAvatarReq"
+                :withCredentials="true"
+                method="POST"
                 @crop-success="cropSuccess"
                 @crop-upload-success="cropUploadSuccess"
                 @crop-upload-fail="cropUploadFail"
                 v-model="show"
                 :width="300"
                 :height="300"
-                url="/user/avatar"
-                img-format="png" />
+                url="//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/user/upload-avatar"
+                img-format="png"
+                langType="en"
+                :params="{userId: $store.state.userId}"
+        />
       </client-only>
     </div>
     <ProfileEdit @ok="toggleEdit" />
@@ -55,24 +60,24 @@
 <script>
 import ProfileEdit from './ProfileEdit.vue';
 export default {
-  asyncData ({ req, $Server, redirect, store }) {
-    $Server({
-      url: '/user/profile',
-      method: 'get',
-      params: {
-        userId: store.state.userId
-      }
-    }).then(res => {
-      if (res.code == 0) {
-        // 重定向到登录页面
-//        redirect('/login');
-      } else {
-        return {
-          data: res.info.data
-        }
-      }
-    })
-  },
+//  asyncData ({ req, $Server, redirect, store }) {
+//    $Server({
+//      url: '/user/profile',
+//      method: 'get',
+//      params: {
+//        userId: store.state.userId
+//      }
+//    }).then(res => {
+//      if (res.code == 0) {
+//        // 重定向到登录页面
+////        redirect('/login');
+//      } else {
+//        return {
+//          data: res.data
+//        }
+//      }
+//    })
+//  },
   components: {
     ProfileEdit
   },
@@ -95,7 +100,7 @@ export default {
     }
   },
   mounted() {
-    this.getInfo();
+//    this.getInfo();
   },
   methods: {
     getInfo() {
@@ -132,6 +137,10 @@ export default {
       console.log('-------- upload success --------');
       console.log(jsonData);
       console.log('field: ' + field);
+      this.$store.commit('setUserInfo', {
+        ...this.$store.state.userInfo,
+        avatar: jsonData.data.avatar
+      })
     },
     /**
      * upload fail

@@ -4,7 +4,7 @@ export const state = () => {
   return {
     token: null,
     userId: null,
-    userInfo: null
+    userInfo: {}
   }
 }
 export const mutations = {
@@ -22,7 +22,6 @@ export const actions = {
   nuxtServerInit ({ commit }, { req }) {
     let token = null
     let userId = null
-    let userInfo = null
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
@@ -34,6 +33,5 @@ export const actions = {
     }
     commit('setToken', token)
     commit('setUserId', userId)
-    commit('setUserInfo', userInfo)
   }
 }

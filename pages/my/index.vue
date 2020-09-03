@@ -3,7 +3,7 @@
   <div class="left">
     <div class="top">
       <div class="avatar">
-        <img class="img" :src="imgDataUrl" alt="">
+        <img class="img" :src="$store.state.userInfo.avatar || imgDataUrl" alt="">
         <!--<a-dropdown>-->
           <!--<span class="dropdown" @click="e => e.preventDefault()">...</span>-->
           <!--<a-menu slot="overlay">-->
@@ -13,7 +13,7 @@
           <!--</a-menu>-->
         <!--</a-dropdown>-->
       </div>
-      <div class="userName">{{userName}}</div>
+      <div class="userName">{{$store.state.userInfo.userName}}</div>
     </div>
     <div class="bottom">
       <ul class="list">
