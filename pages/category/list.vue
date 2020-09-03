@@ -219,7 +219,7 @@ export default {
   height: 80%;
   align-items: center;
   text-align: center;
-  margin-bottom: -12%;
+  margin-bottom: -13%;
   .img {
     display: inline-block;
     padding-right: 52px;
