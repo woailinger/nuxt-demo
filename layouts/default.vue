@@ -49,6 +49,7 @@
       </div>
       <div class="footer">
         <div class="footer-container">
+          <div class="connet">
           <ul class="footer-link">
             <li class="nav-item">
               <a class="nav-link" href="">
@@ -82,12 +83,20 @@
             </li>
           </ul>
           <div class="footer-social">
-            <a-icon type="facebook" class="social-icon"/>
-            <a-icon type="twitter" class="social-icon"/>
-            <a-icon type="instagram" class="social-icon"/>
+            <a href=" https://www.youtube.com/channel/UCrWdKovbA8LkG3TKOYURihQ" target="_blank">
+              <a-icon type="facebook" class="social-icon"/>
+            </a>
+            <a href="https://www.linkedin.com/company/asha-go" target="_blank">
+              <a-icon type="linkedin" class="social-icon"/>
+              <!-- <a-icon type="twitter" /> -->
+            </a>
+            <a href="https://www.instagram.com/asha_go/" target="_blank">
+              <a-icon type="instagram" class="social-icon"/>
+            </a>
             <a-icon type="wechat" class="social-icon"/>
             <a-icon type="mail" class="social-icon"/>
             <span class="mail-desc"> &nbsp;&nbsp;&nbsp;Email: info@ashago.com</span>
+          </div>
           </div>
           <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
         </div>
@@ -294,12 +303,18 @@ html {
     padding: 2rem 0;
     position: relative;
     bottom: 0;
+    .connet {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
     .footer-link {
+      margin-left: 25px;
       list-style: none;
       display: inline-block;
       .nav-item {
         display: inline-block;
-        width: 120px;
+        padding-left: 25px;
         .nav-link {
           font-size: 16px;
           color: #fff;
@@ -312,11 +327,13 @@ html {
     }
     .footer-social {
       display: inline-flex;
+      margin-right: 50px;
       .mail-desc {
         height: 40px;
         line-height: 40px;
       }
       .social-icon {
+        color: #fff;
         margin-left: 30px;
         svg {
           height: 40px;

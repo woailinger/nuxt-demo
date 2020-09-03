@@ -30,47 +30,28 @@
         />
       </a-card>
      </div>
-    <a-divider class="">Daily Life</a-divider>
-     <p class="card-container" >
-       <nuxt-link to="/category/daily?category=daily" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-       <a-card hoverable class="card" v-for="(item, index) in dailyData" :key="'lastest'+ index" @click="goDetail(item.blogId)">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          :src="item.img"
-        />
-        <a-card-meta :title="item.title"></a-card-meta>
-      </a-card>
-     </p>
-     <a-divider>Food & Drinks</a-divider>
-     <p class="card-container">
-       <nuxt-link to="/category/food?category=food" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-       <a-card hoverable class="card" v-for="(item, index) in foodData" :key="'lastest'+ index"  @click="goDetail(item.blogId)">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          :src="item.img"
-        />
-        <a-card-meta :title="item.title">
-        </a-card-meta>
-      </a-card>
-     </p>
-     <a-divider>Travel</a-divider>
-     <p class="card-container">
-       <nuxt-link to="/category/travel?category=travel" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-       <a-card hoverable class="card" v-for="(item, index) in travelData" :key="'lastest'+ index"  @click="goDetail(item.blogId)">
-        <img
-          class="card-img"
-          slot="cover"
-          alt="example"
-          :src="item.img"
-        />
-        <a-card-meta :title="item.title">
-        </a-card-meta>
-      </a-card>
-     </p>
+      <div class="category" v-for="(item, index) in categoryData" :key="'categoryData' + index">
+        <a-divider class="">{{categoryDesc[index].title}} </a-divider>
+        <nuxt-link :to="'/category/' + categoryDesc[index].text+ '?category='+ categoryDesc[index].text" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
+        <p class="card-container" v-for="i in (item.length/3)" :key="i">
+          <a-card hoverable
+                  class="card"
+
+                  v-for="j in 3"
+                  :key="'lastest'+ i + j"
+                  @click="goDetail(item[(i-1)*3 + j -1].blogId)">
+            <template v-if="((i-1)*3 + j -1) < item.length">
+              <img
+                class="card-img"
+                slot="cover"
+                alt="example"
+                :src="item[(i-1)*3 + j - 1].img"
+              />
+              <a-card-meta :title="item[(i-1)*3 + j -1].title"></a-card-meta>
+            </template>
+          </a-card>
+        </p>
+      </div>
   </div>
 </template>
 
@@ -122,72 +103,25 @@ export default {
             text: 'Why you should travel solo in China?'
           },
         ],
-        dailyData: [
-          {
-            title: 'How to get a taxi in China',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20get%20a%20taxi%20in%20China/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596705905&Signature=EcIU64C6E%2BgsGPYSkA%2F25BYtc2w%3D'
+        categoryData: {
+          dailyData: [],
+          foodData: [],
+          travelData: [],
+        },
+        categoryDesc: {
+          dailyData: {
+            text: 'daily',
+            title: 'Daily Life'
           },
-          {
-            title: 'Where to watch movies and TV shows',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/Where%20to%20watch%20movies%20and%20TV%20shows/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596706248&Signature=2Ros7G5w4Vcx39cj5ikWpypM9GU%3D'
+          foodData: {
+            text: 'food',
+            title: 'Food & Drinks'
           },
-          {
-            title: 'Where to live in Beijing: an introduction to Beijing’s many districts',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/Where%20to%20live%20in%20Beijing%3A%20an%20introduction%20to%20Beijing%E2%80%99s%20many%20districts/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.JPG?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=100001596704295&Signature=dOceRxzvRpAYbxNtCk32SessHWM%3D'
-          },
-          {
-            title: 'How to use Alipay',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20use%20Alipay/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87%E7%A4%BA%E4%BE%8B.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596707604&Signature=gDRDuq9wVup2drqJQDzvzQQ4Sp0%3D'
-          },
-          {
-            title: ' How to use Wechat',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20use%20Wechat/%E5%9B%BE%E7%89%87%E7%A4%BA%E4%BE%8B.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596708293&Signature=9npI%2FURfxVV%2FV0PpWWtd86SMZhc%3D'
-          },
-          {
-            title: 'How to order from JD',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Daily%20Life/How%20to%20order%20from%20JD/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87%E7%A4%BA%E4%BE%8B.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596707090&Signature=0BHAYzIUAPO7%2BJw615MtKVuAvBk%3D'
-          },
-        ],
-        foodData: [
-          {
-            title: 'An introduction to Chinese alcohol',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/An%20introduction%20to%20Chinese%20alcohol/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596703048&Signature=gBFrTL4RkY2XhsAIQSUQ30%2B%2FShs%3D'
-          },
-          {
-            title: 'What is the spiciest food in China?',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/What%20to%20Order%20in%20a%20Traditional%20Beijing%20Mutton%20Hotpot%20Restaurant%3F/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596703145&Signature=BseZuqJffIeSVdBERZx6hwlVuMk%3D'
-          },
-          {
-            title: 'What to Order in a Traditional Beijing Mutton Hotpot Restaurant?',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/What%20to%20order%20in%20a%20Chaoshan%20(Guangdong)%20Beef%20Hotpot%20restaurant%3F/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596703532&Signature=lPq0nIJzCWnlQj5o3Jjx9JowlfQ%3D'
-          },
-          {
-            title: 'What to order in a Cantonese Beef Hotpot restaurant?',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20exotic%20fruit%20in%20China/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=100001596705279&Signature=UHVnzpuPAsVTpXT%2Fc8K4o5iNGE0%3D'
-          },
-          {
-            title: 'The most exotic fruit in China',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20exotic%20fruit%20in%20China/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=100001596705279&Signature=UHVnzpuPAsVTpXT%2Fc8K4o5iNGE0%3D'
-          },
-          {
-            title: 'The most famous Chinese tea',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20famous%20Chinese%20tea/%E9%A6%96%E9%A1%B5%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596708617&Signature=v0f%2BqrXbk%2BuRURvYNs8muA%2BeRuA%3D'
-          },
-        ],
-        travelData: [
-          {
-            title: 'Weekend getaways from Shanghai',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Travel/Weekend%20getaways%20from%20Shanghai/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596702894&Signature=aaIpQ6VfkCp%2FmdwFf7h8u0Kv1Js%3D'
-          },
-          {
-            title: 'Beijing best weekend getaways',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Travel/Beijing%20best%20weekend%20getaways/%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596705048&Signature=ZVwl5tij8UaZj4PUVBSgtOjLoy4%3D'
-          },
-          {
-            title: 'Best HK staycations',
-            url: 'https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Travel/Best%20HK%20staycations/Best%20HK%20staycations.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=10001596702782&Signature=cdYJ3igLmiBjt1m1Wb0M5y%2BLkTQ%3D'
-          },
-        ],
+          travelData: {
+            text: 'travel',
+            title: 'Travel'
+          }
+        },
         cityData: [
           {name: 'china', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0207.PNG'},
           {name: 'beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0208.PNG'},
@@ -284,7 +218,7 @@ export default {
       })
         .then(res => {
           this.loadingFlag = false;
-          this[category+ 'Data'] = res.dataList;
+          this.categoryData[category+ 'Data'] = res.dataList;
         })
         .finally(() => {
           this.loadingFlag = false;
@@ -316,32 +250,34 @@ export default {
       height: 150px;
     }
   }
-  .card-container {
+  .category {
     position: relative;
-    display: flex;
-    // flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0px 60px;
     .more {
-      position:absolute;
-      bottom: 10px;
-      right: 40px;
+        position:absolute;
+        bottom: 10px;
+        right: 40px;
     }
-    .ant-card {
-        border-radius: 15px;
-    }
-    .card {
-      margin-bottom: 50px;
-      width: 360px;
-      .card-img {
-        width: 358px;
-        height: 238px;
+    .card-container {
+      display: flex;
+      justify-content: space-around;
+      padding: 0px 60px;
+      .ant-card {
+          border-radius: 15px;
       }
-      .ant-card-cover img {
-        border-radius: 15px 15px 0 0;
+      .card {
+        margin-bottom: 50px;
+        width: 360px;
+        .card-img {
+          width: 358px;
+          height: 238px;
+        }
+        .ant-card-cover img {
+          border-radius: 15px 15px 0 0;
+        }
       }
     }
   }
+
 
   .ant-carousel  .slick-dots {
     height: auto;
