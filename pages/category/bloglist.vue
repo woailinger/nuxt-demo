@@ -5,22 +5,7 @@
           <a-card :bordered="false" :body-style="{padding: '5% 24px',margin: '0px 15%'}">
             <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
             <div v-show="!loadingFlag" v-if="latestData">
-              <div class="tag-list">
-                <a-card :bordered="true">
-                  <h2>
-                    <a-icon type="schedule" style="margin-right: 1%"/>Hot Tags
-                  </h2>
-                  <a-divider/>
-                  <div>
-                    <a-button
-                      class="tag-btn"
-                      v-for="(tagName, tagIndex) in config.allTagList"
-                      :key="'lastest'+ tagIndex"
-                      v-bind:href="'/category/bloglist?tag='+tagName"
-                    >{{tagName}}</a-button>
-                  </div>
-                </a-card>
-              </div>
+              
               <a-list size="large" :bordered="false">
                 <a-list-item v-for="(item, index) in latestData" :key="'lastest'+ index">
                   <div class="listcover">
