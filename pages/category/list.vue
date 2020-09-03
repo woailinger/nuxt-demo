@@ -26,8 +26,9 @@
                   <a-divider/>
                   <div>
                      <a-button
+                      style="margin-bottom: 1%"
                       class="tag-btn"
-                      v-for="(tagName, tagIndex) in config.allTagList"
+                      v-for="(tagName, tagIndex) in allTagList"
                       :key="'lastest'+ tagIndex"
                       v-bind:href="'/category/bloglist?tag='+tagName"
                     >{{tagName}}</a-button>
@@ -105,6 +106,7 @@ const Cookie = process.client ? require("js-cookie") : undefined;
 const latestData = [];
 const tagList = [[]];
 const config = Config;
+const allTagList = [];
 export default {
   name: "CategoryList",
   props: ["type"],
@@ -123,7 +125,8 @@ export default {
       comments: [],
       config: Config,
       submitting: false,
-      value: ""
+      value: "",
+      allTagList
     };
   },
   mounted() {
@@ -132,6 +135,7 @@ export default {
   methods: {
     getData(key, callback) {
       this.$Server({
+        //url: "http://localhost:8080/blog/get-blog-list",
         url: "/blog/get-blog-list",
         method: "post",
         data: {
@@ -160,6 +164,7 @@ export default {
         .then(res => {
           this.loadingFlag = false;
           this.latestData = res.dataList;
+          this.allTagList = res.data.split(",");
           if (res.dataList) {
             for (var k = 0; k < res.dataList.length; k++) {
               //this.latestData.tagList[k] = res.dataList[k].tag.split(",");
