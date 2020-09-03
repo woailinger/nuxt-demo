@@ -69,7 +69,7 @@
                             <a-avatar
                               style="margin:10px;"
                               size="small"
-                              src="https://ashago.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20China%20website%202020/Food%26Drinks/The%20most%20famous%20Chinese%20tea/%E9%A6%96%E9%A1%B5%E5%B0%81%E9%9D%A2%E5%9B%BE%E7%89%87.jpg?OSSAccessKeyId=LTAI4FcWHUa9TfvGA9oMY3fE&Expires=1001596708617&Signature=v0f%2BqrXbk%2BuRURvYNs8muA%2BeRuA%3D"
+                              v-bind:src="item.avatar"
                             />
                             {{item.author}}
                             <a-divider type="vertical"/>
