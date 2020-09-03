@@ -8,7 +8,7 @@
       :data-source="commentsData"
     >
       <a-list-item slot="renderItem" slot-scope="item, index">
-        <a-comment :author="item.author" :avatar="item.avatar">
+        <a-comment :author="item.author" :avatar="item.avatar || imgDataUrl">
           <template slot="actions">
             <span>
               comment on <span class="default">{{item.blogTitle}}</span>
@@ -30,6 +30,7 @@ import moment from 'moment';
 export default {
   data () {
     return {
+      imgDataUrl: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
       commentsData: [
         {
           author: 'Han Solo',
@@ -53,27 +54,27 @@ export default {
       moment
     }
   },
-  created() {
+  mounted () {
     this.getComments();
   },
-  asyncData ({ req, $Server, redirect, store }) {
-    $Server({
-      url: '/comment/list',
-      method: 'GET',
-      parmas: {
-        userId: store.state.userId
-      }
-    }).then(res => {
-      if (res.code == 0) {
-        // 重定向到登录页面
-//        redirect('/login');
-      } else {
-        // return {
-        //   data: res.data.comments
-        // }
-      }
-    })
-  },
+//  asyncData ({ req, $Server, redirect, store }) {
+//    $Server({
+//      url: '/comment/list',
+//      method: 'GET',
+//      parmas: {
+//        userId: store.state.userId
+//      }
+//    }).then(res => {
+//      if (res.code == 0) {
+//        // 重定向到登录页面
+////        redirect('/login');
+//      } else {
+//        // return {
+//        //   data: res.data.comments
+//        // }
+//      }
+//    })
+//  },
   methods: {
     getComments() {
       this.$Server({
