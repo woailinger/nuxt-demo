@@ -7,7 +7,7 @@
           <a-list
             size="large"
             :bordered="false"
-            :pagination="{showQuickJumper: true, pageSize: 5, total: 20}"
+            :pagination="pagination"
           >
             <a-list-item :key="i" v-for="(item, i) in searchData">
               <div class="listcover">
@@ -73,7 +73,13 @@ export default {
         author: 'Jemma Admin',
         commentNum: '46',
         likeNum: '31'
-      }]
+      }],
+      pagination: {
+        showQuickJumper: true,
+        pageSize: 5,
+        total: 10,
+        onChange: page => this.getData(page)
+      }
     }
   },
   asyncData ({ req, $Server, redirect, store }) {
