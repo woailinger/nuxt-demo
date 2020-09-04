@@ -102,6 +102,9 @@ export default {
             this.getData();
         },
         getData(page) {
+            if(this.keyWord === '王高兴') {
+                this.$router.push('/test');
+            }
             this.$Server({
                 url: '/es/search-content',
                 method: 'GET',
