@@ -77,7 +77,7 @@
                   <a-card>
                     <img slot="cover" alt="example" :src="item.img">
                     <a-card-meta>
-                      <div style="height: 60px; white-space: normal;" slot="title">{{item.title}}</div>
+                      <div style="height: 54px; white-space: normal;" slot="title">{{item.title}}</div>
                     </a-card-meta>
                   </a-card>
                 </a>
