@@ -10,7 +10,7 @@
             <a-divider type="vertical"/>
             {{latestData.time}} read
             <a-divider type="vertical"/>
-            <em>2018-08-05 22:23</em>
+            <em>{{latestData.date}}</em>
           </div>
           <div v-html="legacySystemHTML"></div>
           <div>
@@ -21,10 +21,27 @@
             <a-row>
               <a-col :span="12">
                 <h2>
-                  <a-icon type="facebook" style="margin-right: 12px"/>
-                  <a-icon type="twitter" style="margin-right: 12px"/>
-                  <a-icon type="linkedin" style="margin-right: 12px"/>
-                  <a-icon type="link" style="margin-right: 12px"/>
+                  <a
+                    target="_blank"
+                    v-bind:href="'http://www.facebook.com/sharer.php?u='+ encodeURIComponent(currentUrl)"
+                  >
+                    <a-icon type="facebook" style="margin-right: 12px"/>
+                  </a>
+                  <a
+                    target="_blank"
+                    v-bind:href="'http://twitter.com/share?url='+ encodeURIComponent(currentUrl)"
+                  >
+                    <a-icon type="twitter" style="margin-right: 12px"/>
+                  </a>
+                  <a
+                    target="_blank"
+                    v-bind:href="'https://www.linkedin.com/shareArticle?url='+ encodeURIComponent(currentUrl)"
+                  >
+                    <a-icon type="linkedin" style="margin-right: 12px"/>
+                  </a>
+                  <a @click="copyUrl">
+                    <a-icon type="link" style="margin-right: 12px"/>
+                  </a>
                 </h2>
               </a-col>
 
@@ -51,15 +68,19 @@
             </a-row>
           </div>
           <div style="padding-top: 50px;padding-bottom: 50px">
-            <div class="related-post mt-50">
-              <h2 class="mb-30">Related Posts</h2>
+            <div class="normal-content">
+              <p>Related Posts</p>
             </div>
-            <a-row :gutter="[48,40]">
+            <a-row :gutter="[8,40]">
               <a-col :span="6" v-for="(item, index) in latestRealatedBlog" :key="'related'+ index">
-                <a-card>
-                  <img slot="cover" alt="example" :src="item.img">
-                  <a-card-meta :title="item.title" :description="item.content.substr(0,15)"></a-card-meta>
-                </a-card>
+                <a v-bind:href="'/blog/detail?blogId='+ item.blogId">
+                  <a-card>
+                    <img slot="cover" alt="example" :src="item.img">
+                    <a-card-meta>
+                      <div style="height: 54px; white-space: normal;" slot="title">{{item.title}}</div>
+                    </a-card-meta>
+                  </a-card>
+                </a>
               </a-col>
             </a-row>
           </div>
@@ -114,7 +135,7 @@ import { constants } from "zlib";
 import { connect } from "tls";
 import { log } from "util";
 import { parse } from "querystring";
-//const getPageQuery = () => (window.location.href);
+import copy from "copy-to-clipboard";
 
 const Cookie = process.client ? require("js-cookie") : undefined;
 const latestData = {};
@@ -155,11 +176,12 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.path, "path");
+    this.currentUrl = location.href;
   },
   methods: {
     getData(key, callback) {
       this.$Server({
+        //url: "http://localhost:8080/blog/get-blog-info",
         url: "/blog/get-blog-info",
         method: "post",
         data: {
@@ -303,6 +325,9 @@ export default {
           console.log(err, "err");
         });
     },
+    copyUrl() {
+      copy(this.currentUrl);
+    },
     handleChange(e) {
       this.value = e.target.value;
     }
@@ -321,5 +346,17 @@ export default {
 }
 .tag {
   margin-right: 10px;
+}
+.normal-content {
+  align-items: center;
+  text-align: center;
+  display: inline-block;
+  text-align: left;
+  p {
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
 }
 </style>
