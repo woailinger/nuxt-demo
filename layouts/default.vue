@@ -13,7 +13,7 @@
             <a-button @click="signHandler" v-show="!loginFlag">Sign up / Login</a-button>
             <span v-show="!!loginFlag">
               <a-avatar :src="$store.state.userInfo.avatar || avatarImg" @click="goInfo"></a-avatar>
-              <span>{{$store.state.userInfo.userName || userName}}</span>
+              <span class="user-name">{{$store.state.userInfo.userName || userName}}</span>
               <a-button type="link" @click="logoutHandler" ghost>Logout</a-button>
             </span>
           </span>
@@ -75,15 +75,12 @@
                 <span>用户协议</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">
-                <p>Privacy</p>
-                <span>用户协议</span>
-              </a>
-            </li>
           </ul>
           <div class="footer-social">
-            <a href=" https://www.youtube.com/channel/UCrWdKovbA8LkG3TKOYURihQ" target="_blank">
+            <!-- <a href=" https://www.youtube.com/channel/UCrWdKovbA8LkG3TKOYURihQ" target="_blank">
+              <a-icon type="facebook" class="social-icon"/>
+            </a> -->
+            <a href=" https://www.facebook.com/ashagoplatform/" target="_blank">
               <a-icon type="facebook" class="social-icon"/>
             </a>
             <a href="https://www.linkedin.com/company/asha-go" target="_blank">
@@ -218,6 +215,7 @@ html {
   .search {
     margin-right: 40px ;
     width: 200px;
+    font-size: 16px;
     color: #fff;
     .ant-input {
       border: none;
@@ -275,6 +273,9 @@ html {
        border-color: #ac4448;
        margin-top: -15px;
      }
+     .user-name {
+       font-size: 16px;
+     }
   }
   .header-logo {
     object-position: 50% 50%;
@@ -297,6 +298,7 @@ html {
 
 .footer {
   padding: 0px;
+  margin-top: 10px;
   .footer-container {
     background-color: #8d040c;
     color: #fff;

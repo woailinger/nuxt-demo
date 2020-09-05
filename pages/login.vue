@@ -9,7 +9,7 @@
           'email',
           {
             rules: [
-              { type: 'email', message: 'I􏰀􏰀nvali􏰁d email􏰁' },
+              { type: 'email', message: 'Invalid email' },
               { required: true, message: 'Email is required' }
             ]
           },

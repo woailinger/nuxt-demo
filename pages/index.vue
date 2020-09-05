@@ -31,12 +31,15 @@
       </a-card>
      </div>
       <div class="category" v-for="(item, index) in categoryData" :key="'categoryData' + index">
-        <a-divider class="">{{categoryDesc[index].title}} </a-divider>
+        <a-divider class="categoryTitle">
+          <nuxt-link :to="'/category/' + categoryDesc[index].text+ '?category='+ categoryDesc[index].text" > 
+            {{categoryDesc[index].title}} 
+          </nuxt-link>
+        </a-divider>
         <nuxt-link :to="'/category/' + categoryDesc[index].text+ '?category='+ categoryDesc[index].text" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
         <p class="card-container" v-for="i in (item.length/3)" :key="i">
           <a-card hoverable
                   class="card"
-
                   v-for="j in 3"
                   :key="'lastest'+ i + j"
                   @click="goDetail(item[(i-1)*3 + j -1].blogId)">
@@ -70,7 +73,11 @@ export default {
           centeredSlides: true,
           spaceBetween: 10,
           effect: 'fade',
-          autoplay: 3000,
+           autoplay: {
+            delay: 2000,
+            stopOnLastSlide: false,
+            disableOnInteraction: true,
+         },
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true,
@@ -244,6 +251,7 @@ export default {
   .city-container {
     display: flex;
     margin-top: 30px;
+    margin-bottom: 25px;
     justify-content: space-around;
     .card-img  {
       width: 150px;
@@ -252,6 +260,14 @@ export default {
   }
   .category {
     position: relative;
+    .categoryTitle {
+      margin-bottom: 28px;
+      font-size: 20px;
+      cursor: pointer;
+      a {
+        color: #000;
+      }
+    }
     .more {
         position:absolute;
         bottom: 10px;

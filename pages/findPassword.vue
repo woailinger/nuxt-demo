@@ -11,7 +11,7 @@
           'email',
           {
             rules: [
-              { type: 'email', message: 'I􏰀􏰀nvali􏰁d email􏰁' },
+              { type: 'email', message: 'Invalid email' },
               { required: true, message: 'Email is required' }
             ]
           },
@@ -41,7 +41,7 @@
         </a-col>
         <a-col :span="8" :offset="2">
           <a-button style="text-align: center; width: 100%" size="large" @click="handleGetCode" :disabled="codeDisabled">
-            <span v-if="!codeDisabled">get Code</span>
+            <span v-if="!codeDisabled">Get code</span>
             <a-statistic-countdown
               v-else
               :value="deadline"
@@ -77,7 +77,7 @@
           'confirmPassword',
           {
             rules: [
-              { required: true, message: 'The passwords entered twice do not match!' },
+              { required: true, message: 'The passwords don’t match' },
               { validator: compareToFirstPassword }
             ]
           }
@@ -189,7 +189,7 @@
           url: '/user/reset-password',
           method: 'post',
           data: {
-            userId: this.$store.state.userId,
+            email: values.email,
             newPassword: values.newPassword,
             seqNo: this.seqNo,
             vcode: values.vcode
@@ -213,7 +213,6 @@
     align-items: center;
     overflow: auto;
     background: #f0f2f5;
-    //   background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;

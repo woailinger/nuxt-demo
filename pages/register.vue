@@ -215,7 +215,7 @@
       width: 125px
     }
     .toLogin {
-      /*display: block;*/
+      margin-top: 5px;
       width: 195px;
     }
   }

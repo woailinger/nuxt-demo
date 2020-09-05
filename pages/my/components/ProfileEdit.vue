@@ -30,7 +30,7 @@
             Male
           </a-radio>
           <a-radio value="OTHER">
-            OTHER
+            Other
           </a-radio>
         </a-radio-group>
       </a-form-item>
@@ -44,7 +44,7 @@
             rules: [{ required: true, message: 'Please input your nationality' }]
           },
         ]"
-          placeholder="What is your atianationality?"
+          placeholder="What is your nationality?"
         />
       </a-form-item>
       <a-form-item

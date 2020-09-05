@@ -9,46 +9,34 @@
             :bordered="false"
             :pagination="pagination"
           >
-            <a-list-item :key="i" v-for="(item, i) in searchData">
+            <a-list-item :key="i" v-for="(item, i) in likeData">
               <div class="listcover">
-                <img style="height: 200px; margin: -10px 0" shape="square" :src="item.imgUrl" />
+                <img style="margin: -10px 0" shape="square" :src="item.cover" />
               </div>
-              <a-list-item-meta>
-                <a slot="title"></a>
-              </a-list-item-meta>
-
               <a class="categoryContent" href="#">
                 <a-list itemLayout="vertical">
                   <a-list-item>
-                    <a-list-item-meta :title="item.title">
+                    <!-- <a-list-item-meta :title="item.title">
                       <div slot="description">
                         <a-tag :key="index + 's'" v-for="(it, index) in item.tags" >{{it}}</a-tag>
                       </div>
-                    </a-list-item-meta>
+                    </a-list-item-meta> -->
                     <div class="content">
                       <div
                         class="detail"
                         max-width="9%;"
                         style="word-break:break-all;"
-                      >{{item.desc}}</div>
+                      >{{item.title}}</div>
                       <div class="author">
                         <a-avatar
                           style="margin:10px;"
                           size="small"
                           :src="item.avatar"
-                        />{{item.author}}
+                        />{{item.slots[0]}}
                         <a-divider type="vertical" />
-                        <em>{{item.date}}</em>
+                        <em>{{item.slots[2]}}</em>
                       </div>
                     </div>
-                    <span slot="actions">
-                        <a-icon style="margin-right: 8px" type="heart-o" />
-                        {{item.likeNum}}
-                      </span>
-                    <span slot="actions">
-                        <a-icon style="margin-right: 8px" type="message" />
-                        {{item.commentNum}}
-                      </span>
                   </a-list-item>
                 </a-list>
               </a>
@@ -63,6 +51,7 @@
 export default {
   data () {
     return {
+      likeData: [],
       searchData: [{
         imgUrl: '/assets/img/blog-details/1.jpg',
         avator: '',
@@ -109,7 +98,7 @@ export default {
           likeTargetType: 'BLOG'
         }
       }).then((res) => {
-        this.searchData = res.data;
+        this.likeData = res.data.likeList;
       })
     }
   }
@@ -118,19 +107,26 @@ export default {
 <style scoped lang="less">
   .container {
     color: #8D050B;
-    width: 900px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: auto;
+    justify-content: flex-start;
     .title {
       font-size: 30px;
       line-height: 80px;
       font-weight: 600;
     }
+    .detail {
+      width: 300px;
+    }
     .listcover {
       padding-right: 30px;
+      height: 140px;
+      img {
+        height: 140px
+      }
     }
     .extra{
       width: 272px;

@@ -4,14 +4,6 @@
     <div class="top">
       <div class="avatar">
         <img class="img" :src="$store.state.userInfo.avatar || imgDataUrl" alt="">
-        <!--<a-dropdown>-->
-          <!--<span class="dropdown" @click="e => e.preventDefault()">...</span>-->
-          <!--<a-menu slot="overlay">-->
-            <!--<a-menu-item>-->
-              <!--<span @click="toggleShow">修改头像</span>-->
-            <!--</a-menu-item>-->
-          <!--</a-menu>-->
-        <!--</a-dropdown>-->
       </div>
       <div class="userName">{{$store.state.userInfo.userName}}</div>
     </div>
@@ -45,7 +37,6 @@
     <FindPwd v-if="active === 6" />
     <div class="modifyUserInfo">
       <a-form :form="modifyForm" @submit="handleSubmitModify" class="form">
-
       </a-form>
     </div>
   </div>
@@ -144,8 +135,10 @@
     display: flex;
     overflow-x: auto;
     .left {
-      width: 350px;
+      margin-left: 100px;
+      margin-top: 40px;
       .top {
+        width: 260px;
         padding: 30px 30px;
         border: 1px solid #8D050B;
         .avatar {
@@ -169,9 +162,8 @@
         .userName {
           text-align: center;
           margin: 0 auto;
-          // border-bottom: 2px solid #8D050B;
           line-height: 40px;
-          font-size: 30px;
+          font-size: 20px;
           color: #8D050B;
         }
         .follow {
@@ -192,12 +184,14 @@
         }
       }
       .bottom {
+        width: 260px;
         margin-top: 20px;
         padding: 10px 30px;
         border: 1px solid #8D050B;
         color: #8D050B;
+        font-size: 18px;
         .title {
-          font-size: 25px;
+          font-size: 20px;
           line-height: 40px;
         }
         ul, li{
@@ -207,15 +201,15 @@
         .list {
           li {
             font-size: 18px;
-            line-height: 80px;
+            line-height: 60px;
             cursor: pointer;
           }
           .active {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
           }
           li:hover {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
           }
         }
@@ -223,8 +217,9 @@
     }
     .right {
       /*flex: 1;*/
-      margin: 0 auto;
-      padding: 0 100px;
+      margin: 0px;
+      margin-left: 20px ;
+      padding: 0 50px;
       /*overflow: auto;*/
     }
   }
