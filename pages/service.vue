@@ -18,7 +18,7 @@
       <a-col :span="2" />
       <a-col :span="20">
         <div
-          style="width:100%;height:240px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Service%20page/service%20picture%E7%9A%84%E5%89%AF%E6%9C%AC.jpg)"
+          style="width:100%;height:240px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Service%20page/service%20picture%E7%9A%84%E5%89%AF%E6%9C%AC%202.jpg)"
         />
       </a-col>
       <a-col :span="2" />
