@@ -12,9 +12,9 @@
               :bordered="false"
               :pagination="pagination"
             >
-              <a-list-item :key="i" v-for="(item, i) in searchData">
+              <a-list-item :key="i" v-for="(item, i) in searchData" @click="goDetail(item.blogId)">
                 <div class="listcover">
-                  <img style="height: 200px; margin: -10px 0" shape="square" :src="item.imgUrl" />
+                  <img style="height: 200px; margin: -10px 0" shape="square" :src="item.img" />
                 </div>
                 <a-list-item-meta>
                   <a slot="title"></a>
@@ -32,8 +32,7 @@
                         <div
                           class="detail"
                           max-width="9%;"
-                          style="word-break:break-all;"
-                        >{{item.desc}}</div>
+                        >{{item.content}}</div>
                         <div class="author">
                           <a-avatar
                             style="margin:10px;"
@@ -46,11 +45,11 @@
                       </div>
                       <span slot="actions">
                         <a-icon style="margin-right: 8px" type="heart-o" />
-                        {{item.likeNum}}
+                        {{item.likes}}
                       </span>
                       <span slot="actions">
                         <a-icon style="margin-right: 8px" type="message" />
-                        {{item.commentNum}}
+                        {{item.comment}}
                       </span>
                     </a-list-item>
                   </a-list>
@@ -69,15 +68,15 @@ export default {
         return {
             keyWord: '',
             searchData: [{
-                imgUrl: '/assets/img/blog-details/1.jpg',
+                img: '/assets/img/blog-details/1.jpg',
                 avator: '',
                 title: 'BeiJing BeiJing BeiJing',
-                desc: 'This is your blog post. To really engage your site visitors we suggest you blog about subjects that are related to your site or business. Blogging is really great for SEO, so we recommend including keywords that relate to your',
-                tags: ['Foods', 'Travel'],
+                content: 'This is your blog post. To really engage your site visitors we suggest you blog about subjects that are related to your site or business. Blogging is really great for SEO, so we recommend including keywords that relate to your',
+                tag: ['Foods', 'Travel'],
                 date: '2020-01-21',
                 author: 'Jemma Admin',
-                commentNum: '46',
-                likeNum: '31'
+                comment: '46',
+                likes: '31'
             }],
             pagination: {
               showQuickJumper: true,
@@ -99,6 +98,14 @@ export default {
     methods:{
         onSearch() {
             this.getData();
+        },
+        goDetail(blogId){
+          this.$router.push({
+            path: '/blog/detail',
+            query: {
+              blogId: blogId
+            }
+          })
         },
         getData(page) {
             if(this.keyWord === '王高兴') {
@@ -171,5 +178,10 @@ export default {
 }
 .content {
   margin-top: 0px;
+  .detail {
+    max-height: 120px;
+    overflow: hidden;
+    word-wrap:break-word;
+  }
 }
 </style>

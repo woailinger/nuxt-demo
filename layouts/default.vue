@@ -33,10 +33,10 @@
               </a>
               <a-menu slot="overlay">
                 <a-menu-item>
-                  <nuxt-link to="/pageb" class="menu-item">Our Team</nuxt-link>
+                  <nuxt-link to="/aboutUs" class="menu-item">Our Team</nuxt-link>
                 </a-menu-item>
                 <a-menu-item>
-                  <nuxt-link to="/pageb" class="menu-item">Contact Us</nuxt-link>
+                  <nuxt-link to="/contactUs" class="menu-item">Contact Us</nuxt-link>
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -241,6 +241,7 @@ html {
     .ant-btn-primary {
       background-color: #8d040c;
       border: none;
+      border-radius: 0px;
     }
   }
 }
