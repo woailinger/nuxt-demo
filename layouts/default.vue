@@ -18,7 +18,7 @@
             </span>
           </span>
         </div>
-        <div class="menu-container">
+        <div class="menu-container" id="menuContainer">
           <nav class="menu">
             <nuxt-link to="/category/daily?category=daily" class="menu-item">Daily Life</nuxt-link>
             <nuxt-link to="/category/food?category=food" class="menu-item">Food & Drinks</nuxt-link>
@@ -112,6 +112,18 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener("scroll",()=>{
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;  
+        let offsetTop = document.querySelector('#menuContainer').offsetTop;
+        console.log(offsetTop,scrollTop, 'xxx====');
+        if (scrollTop > offsetTop) {
+            document.querySelector('#menuContainer').style.position="fixed";
+            document.querySelector('#menuContainer').style.top="0";
+        } else {
+            document.querySelector('#menuContainer').style.position="";
+            document.querySelector('#menuContainer').style.top="";
+        }
+    })
     if(this.$store.state.token){
         this.getUserInfo();
         this.loginFlag = true;
@@ -195,12 +207,14 @@ html {
   background-color: #fff;
   margin: 0px;
   padding: 0px;
-  position: fixed;
-  top:0px;
+  // position: fixed;
+  // top:0px;
   width: 100%;
   z-index: 999;
 }
 .menu-container {
+  width: 100%;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -293,7 +307,6 @@ html {
   display: block;
   height: 100%;
   overflow: hidden;
-  margin-top: 150px ;
 }
 
 .footer {

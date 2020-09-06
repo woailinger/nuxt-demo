@@ -2,8 +2,8 @@
   <div class="container">
     <div class="title">Articles liked</div>
     <client-only>
-      <div class="articlelist" :bordered="false" :body-style="{padding: '24px',margin: '15%'}">
-        <a-card :bordered="false" :body-style="{padding: '24px',margin: '0px 15%'}">
+      <div class="articlelist" :bordered="false">
+        <a-card :bordered="false" >
           <a-list
             size="large"
             :bordered="false"
@@ -16,11 +16,6 @@
               <a class="categoryContent" href="#">
                 <a-list itemLayout="vertical">
                   <a-list-item>
-                    <!-- <a-list-item-meta :title="item.title">
-                      <div slot="description">
-                        <a-tag :key="index + 's'" v-for="(it, index) in item.tags" >{{it}}</a-tag>
-                      </div>
-                    </a-list-item-meta> -->
                     <div class="content">
                       <div
                         class="detail"
@@ -99,6 +94,7 @@ export default {
         }
       }).then((res) => {
         this.likeData = res.data.likeList;
+        this.pagination.total = this.likeData.length;
       })
     }
   }
@@ -108,11 +104,6 @@ export default {
   .container {
     color: #8D050B;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    justify-content: flex-start;
     .title {
       font-size: 30px;
       line-height: 80px;
@@ -125,7 +116,7 @@ export default {
       padding-right: 30px;
       height: 140px;
       img {
-        height: 140px
+        height: 110px
       }
     }
     .extra{

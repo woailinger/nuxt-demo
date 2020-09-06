@@ -252,7 +252,7 @@ import moment from 'moment';
           }
         }).then(res => {
           if(res.code === '0') {
-            this.$message.info(res.msg);
+            this.$message.success(res.msg);
             this.$emit('ok')
           } else {
             this.$message.error(res.msg);

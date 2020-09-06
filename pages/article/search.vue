@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="container">
+    <div class="page-search">
      <div class="search">
-       <a-input-search placeholder="search" v-model="keyWord" @search="onSearch" />
+       <a-input-search placeholder="search" v-model="keyWord" @search="onSearch" size="large"/>
      </div>
       <client-only>
-        <div class="articlelist" :bordered="false" :body-style="{padding: '24px',margin: '15%'}">
-          <a-card :bordered="false" :body-style="{padding: '24px',margin: '0px 15%'}">
+        <div class="article-list" :bordered="false" >
+          <a-card :bordered="false" :body-style="{padding: '24px',margin: '0px 15%', 'min-width': '160px'}">
             <a-list
               size="large"
               :bordered="false"
@@ -81,14 +81,13 @@ export default {
             }],
             pagination: {
               showQuickJumper: true,
-              pageSize: 5,
-              total: 20,
+              pageSize: 10,
+              total: 1,
               onChange: page => this.getData(page)
           }
       }
     },
     created() {
-        console.log(this.$route.query.keyWord, 'test--');
         this.keyWord = this.$route.query.keyWord || '';
         this.getData();
     },
@@ -123,20 +122,19 @@ export default {
                         "&";
                     }
                     ret = ret.substring(0, ret.lastIndexOf("&"));
-
-                    console.log(ret, "---");
                     return ret;
                   }
                 ],
             }).then((res) => {
-                this.searchData = res.data;
+                this.searchData = res.dataList;
+                this.pagination.total = this.searchData.length;
             })
         }
     }
 }
 </script>
  <style scoped lang="less">
-.container {
+.page-search {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -145,7 +143,7 @@ export default {
   overflow: auto;
   .search {
     width: 100%;
-    height: 300px;
+    height: 400px;
     text-align: centrn;
     display: flex;
     align-items: center;
@@ -153,9 +151,15 @@ export default {
     background: url("../../assets/img/search.jpg");
     background-size: cover;
     .ant-input-affix-wrapper {
+      margin-top: -10%;
       width: 40%;
-      height: 40px;
     }
+  }
+  .article-list {
+       color: red;
+      .ant-card-body {
+         min-width: 160px;
+      }
   }
 }
 .listcover {

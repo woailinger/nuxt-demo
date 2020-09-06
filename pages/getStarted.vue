@@ -28,7 +28,7 @@
           }
         }).then(res => {
           if (res.code == 0) {
-             this.$message.info(res.msg);
+             this.$message.success(res.msg);
           }
         }).finally(data => {
           this.loading = false;
