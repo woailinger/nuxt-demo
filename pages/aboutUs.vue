@@ -5,12 +5,8 @@
         <p>Asha GO was founded in 2020 on the premise that living in China should be easy and exciting. Based in Shanghai, the aim of the Asha Go platform is to make the market of local service providers in China both transparent and accessible to expats.</p>
         <p>Whether you’re looking for a driver, cleaner or childcare services, or looking to open a bank account in China, we aim to help you be independent and confident in establishing your new life in China. We also aim to promote a better understanding between the East and West through up to date and unbiased information. </p>
     </div>
-      <!-- <a-col :span="16">
-        <div><h1>Our service</h1></div>
-        <p>Asha Go is an information site on all things regarding living, working and studying in China.....</p>
-      </a-col> -->
     <div class="person">
-        <div class="person-card" v-for="(item, index) in personData" :key="index"> 
+        <div class="person-card" v-for="(item, index) in personData" :key="index">
            <img :src="item.img" alt=""  class="image"/>
            <div class="content">
               <span class="name">{{item.name}}</span>
@@ -37,6 +33,15 @@ export default {
 </script>
 <style lang="less" scoped>
   .container {
+    color: #8d040c;
+    .story {
+      .title {
+       font-size: 25px;
+      }
+      font-size: 20px;
+      line-height: 40px;
+      text-align: center;
+    }
     .person{
       padding: 100px;
       .person-card {
@@ -70,7 +75,7 @@ export default {
             line-height: 30px;
 
           }
-        } 
+        }
       }
     }
   }

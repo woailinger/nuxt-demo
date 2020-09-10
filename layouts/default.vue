@@ -52,22 +52,22 @@
           <div class="connet">
           <ul class="footer-link">
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <nuxt-link to="/aboutUs" class="nav-link">
                 <p>Who are we</p>
                 <span>我们是谁</span>
-              </a>
+              </nuxt-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+               <nuxt-link to="/contactUs" class="nav-link">
                 <p>Business inquiries </p>
                 <span>商业合作</span>
-              </a>
+               </nuxt-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <nuxt-link to="/contactUs" class="nav-link">
                 <p>Write for us</p>
                 <span>投稿</span>
-              </a>
+              </nuxt-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
@@ -113,7 +113,7 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll",()=>{
-      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;  
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         let offsetTop = document.querySelector('#menuContainer').offsetTop;
         console.log(offsetTop,scrollTop, 'xxx====');
         if (scrollTop > offsetTop) {
