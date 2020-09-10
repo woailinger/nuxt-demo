@@ -175,7 +175,6 @@ export default {
         method: "GET",
         url: "/recommend/list"
       }).then((res) => {
-        debugger;
         if(res.code === '0'){
           this.bannerData = res.data.recommendList;
         }
