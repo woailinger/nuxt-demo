@@ -200,12 +200,12 @@
         }
         .list {
           li {
-            font-size: 18px;
+            font-size: 16px;
             line-height: 60px;
             cursor: pointer;
           }
           .active {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
           }
           li:hover {
@@ -216,11 +216,9 @@
       }
     }
     .right {
-      /*flex: 1;*/
       margin: 0px;
-      margin-left: 20px ;
+      margin-left: 40px ;
       padding: 0 50px;
-      /*overflow: auto;*/
     }
   }
 </style>

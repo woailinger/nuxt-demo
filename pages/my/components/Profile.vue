@@ -5,7 +5,7 @@
       <img :src="$store.state.userInfo.avatar || imgDataUrl" alt="">
       <span class="edit" @click="toggleShow">Edit</span>
       <client-only>
-        <avatar field="uploadAvatarReq"
+        <avatar field="avatar"
                 :withCredentials="true"
                 method="POST"
                 @crop-success="cropSuccess"
