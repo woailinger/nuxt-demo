@@ -1,34 +1,129 @@
 <template>
-<div>
-    <div>
-            <a-row>
-                <a-col :span="24">
-                    <div style="height:200px;">
-                        <span style="color:#fff;font-size:80px;">Welcome to join Asha Go community! </span>
-                    </div>
-              </a-col>
-            </a-row>
+  <div id="community">
+    <a-row>
+      <a-col :span="24">
+        <div style="height:60px"></div>
+      </a-col>
+    </a-row>
+    <a-row>
+      <a-col :span="4" />
+      <a-col :span="16">
+        <div style="height:60px">
+          <h1
+            style="text-align:left;color:#990000;font-size:40px;line-height:30px;font-family:Arial;"
+          >Welcome to join Asha Go community!</h1>
         </div>
-    <div
-          style="width:100%;height:960px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
-        >
-    </div>
-    <div>
-            <a-row>
-                <a-col :span="12">
-                    <div
-          style="width:100%;height:960px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/qr%20code.PNG)"
-        >
-    </div>
-                </a-col>
-                <a-col :span="12">
-                    <div
-          style="width:100%;height:960px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/qr%20code.PNG)"
-        >
-    </div>
-                </a-col>
-            </a-row>
-            
-        </div>
-</div>
+      </a-col>
+      <a-col :span="4" />
+    </a-row>
+
+    <a-row>
+      <a-col :span="4" />
+      <a-col :span="16">
+        <div style="height:20px"></div>
+        <p
+          style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;"
+        >One of the biggest challenging parts of living in a foreign country is loneliness and lack of a sense of belonging.</p>
+        <p
+          style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;"
+        >You are not alone! Here you can join our online peer supporting groups and attend our social activities.</p>
+        <p
+          style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;"
+        >As always, our aim is to make your life in China easy and exciting!</p>
+      </a-col>
+      <a-col :span="4" />
+    </a-row>
+
+<a-row>
+      <a-col :span="24">
+        <div style="height:60px"></div>
+      </a-col>
+    </a-row>
+
+    <a-row>
+      <a-col :span="4" />
+      <a-col :span="6">
+          
+        <div
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0213.JPG)"
+        ></div>
+      </a-col>
+      <a-col :span="4" />
+      <a-col :span="6">
+        <p style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;">
+          Shanghai expats supporting and social group
+          (scan QR code with Wechat)
+        </p>
+        <div
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
+        ></div>
+      </a-col>
+      <a-col :span="4" />
+    </a-row>
+
+<a-row>
+      <a-col :span="24">
+        <div style="height:60px"></div>
+      </a-col>
+    </a-row>
+
+    <a-row>
+      <a-col :span="4" />
+      <a-col :span="6">
+        <div
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0213.JPG)"
+        ></div>
+      </a-col>
+      <a-col :span="4" />
+      <a-col :span="6">
+        <p style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;">
+          Shanghai expats supporting and social group
+          (scan QR code with Wechat)
+        </p>
+        <div
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
+        ></div>
+      </a-col>
+      <a-col :span="4" />
+    </a-row>
+
+<a-row>
+      <a-col :span="24">
+        <div style="height:60px"></div>
+      </a-col>
+    </a-row>
+
+    <a-row>
+      <a-col :span="4" />
+      <a-col :span="6">
+        <div
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0213.JPG)"
+        ></div>
+      </a-col>
+      <a-col :span="4" />
+      <a-col :span="6">
+        <p style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;">
+          Shanghai expats supporting and social group
+          (scan QR code with Wechat)
+        </p>
+        <div
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
+        ></div>
+      </a-col>
+      <a-col :span="4" />
+    </a-row>
+  </div>
 </template>
+
+<style>
+#community {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  color: #990000;
+  margin-top: 10px;
+  line-height: 15px;
+  font-size: 15px;
+}
+</style>
