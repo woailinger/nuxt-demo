@@ -111,6 +111,8 @@ export default {
     }
     .detail {
       width: 300px;
+      margin-bottom: 35px;
+      margin-left: 10px;
     }
     .listcover {
       padding-right: 30px;

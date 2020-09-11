@@ -14,7 +14,7 @@
                 v-model="show"
                 :width="300"
                 :height="300"
-                url="//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/user/upload-avatar"
+                url="/user/upload-avatar"
                 img-format="png"
                 langType="en"
                 :params="{userId: $store.state.userId}"
