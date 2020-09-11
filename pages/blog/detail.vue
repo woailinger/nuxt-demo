@@ -227,7 +227,7 @@ export default {
         //url: 'http://localhost:8080/comment/list',
         url: "/comment/list",
         method: "get",
-        data: {
+        params: {
           blogId: key
         }
       })
@@ -235,12 +235,9 @@ export default {
           if (res.code == 0) {
             this.commentsData = res.data.comments;
             console.log(res.data.comments, "comment");
-          } else {
-            this.$message.error(res.msg);
           }
         })
         .catch(err => {
-          this.$message.waring(err);
         });
     },
     getLike(key) {
@@ -339,7 +336,6 @@ export default {
   margin: 0 15%;
   min-height: 100vh;
   display: flex;
-  padding: 50px 0px;
   flex-direction: column;
   align-items: center;
   overflow: auto;
