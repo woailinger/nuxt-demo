@@ -12,6 +12,7 @@
         <p>Asha GO was founded in 2020 on the premise that living in China should be easy and exciting. Based in Shanghai, the aim of the Asha Go platform is to make the market of local service providers in China both transparent and accessible to expats.</p>
         <p>Whether you’re looking for a driver, cleaner or childcare services, or looking to open a bank account in China, we aim to help you be independent and confident in establishing your new life in China. We also aim to promote a better understanding between the East and West through up to date and unbiased information. </p>
     </div>
+    <a-divider class="team">OUR FOUNDERS</a-divider>
     <div class="person">
         <div class="person-card" v-for="(item, index) in personData" :key="index">
            <img :src="item.img" alt=""  class="image"/>
@@ -54,6 +55,12 @@ export default {
       p {
         margin-top: 25px;
       }
+    }
+    .team {
+      color: #8d040c;
+      text-align: center;
+      font-size: 24px;
+      margin-top: 80px;
     }
     .person{
       padding: 100px;
