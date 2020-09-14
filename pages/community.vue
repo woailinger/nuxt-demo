@@ -6,8 +6,8 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="4" />
-      <a-col :span="16">
+      <a-col :span="6" />
+      <a-col :span="14">
         <div style="height:60px">
           <h1
             style="text-align:left;color:#990000;font-size:40px;line-height:30px;font-family:Arial;"
@@ -18,8 +18,8 @@
     </a-row>
 
     <a-row>
-      <a-col :span="4" />
-      <a-col :span="16">
+      <a-col :span="6" />
+      <a-col :span="14">
         <div style="height:20px"></div>
         <p
           style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;"
@@ -41,76 +41,22 @@
     </a-row>
 
     <a-row>
-      <a-col :span="4" />
-      <a-col :span="6">
-          
-        <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0213.JPG)"
-        ></div>
-      </a-col>
-      <a-col :span="4" />
-      <a-col :span="6">
+      <a-col :span="8" />      
+      <a-col :span="7">
         <p style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;">
-          Shanghai expats supporting and social group
+          Asha Go expats supporting and social group
           (scan QR code with Wechat)
         </p>
         <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
+          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/community/asha.jpg)"
         ></div>
       </a-col>
-      <a-col :span="4" />
+      <a-col :span="11" />
     </a-row>
-
-<a-row>
+    <a-row>
       <a-col :span="24">
         <div style="height:60px"></div>
       </a-col>
-    </a-row>
-
-    <a-row>
-      <a-col :span="4" />
-      <a-col :span="6">
-        <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0213.JPG)"
-        ></div>
-      </a-col>
-      <a-col :span="4" />
-      <a-col :span="6">
-        <p style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;">
-          Shanghai expats supporting and social group
-          (scan QR code with Wechat)
-        </p>
-        <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
-        ></div>
-      </a-col>
-      <a-col :span="4" />
-    </a-row>
-
-<a-row>
-      <a-col :span="24">
-        <div style="height:60px"></div>
-      </a-col>
-    </a-row>
-
-    <a-row>
-      <a-col :span="4" />
-      <a-col :span="6">
-        <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0213.JPG)"
-        ></div>
-      </a-col>
-      <a-col :span="4" />
-      <a-col :span="6">
-        <p style="text-align:left;color:#990000;font-size:16px;line-height:30px;font-family:Arial;">
-          Shanghai expats supporting and social group
-          (scan QR code with Wechat)
-        </p>
-        <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/Community%20page/images/piqsels.com-id-jslvz.jpg)"
-        ></div>
-      </a-col>
-      <a-col :span="4" />
     </a-row>
   </div>
 </template>
