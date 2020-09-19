@@ -74,12 +74,6 @@ module.exports = {
     '/user': {
       target: '//ashago-api-dev.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com'
     },
-    // '/api': {
-    //   target: '//yapi.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/mock/25'
-    // },
-    // '/user': {
-    //   target: '//yapi.cc2dbe1fd91f042528f96dc27c2dba5fe.cn-zhangjiakou.alicontainer.com/mock/25'
-    // }
   },
   /*
   ** Auto import components
