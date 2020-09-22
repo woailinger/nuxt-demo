@@ -8,5 +8,4 @@ import BaseConfig from './base'
 console.log(process.env.NODE_ENV, '-----process');
 const Config = require('./' + (process.env.NODE_ENV || 'production'))
 Object.assign(BaseConfig, Config.default)
-console.log(BaseConfig, '-----BaseConfig')
 export default BaseConfig
