@@ -40,7 +40,7 @@
           </nuxt-link>
         </a-divider>
         <nuxt-link :to="'/category/' + categoryDesc[index].text+ '?category='+ categoryDesc[index].text" class="more">MORE&nbsp;&nbsp;<a-icon type="double-right" /></nuxt-link>
-        <p class="card-container" v-for="i in (item.length/3)" :key="i">
+        <p class="card-container" v-for="i in Math.ceil(item.length/3)" :key="i">
           <a-card hoverable
                   class="card"
                   v-for="j in 3"
@@ -76,11 +76,11 @@ export default {
           centeredSlides: true,
           spaceBetween: 10,
           effect: 'fade',
-           autoplay: {
+          autoplay: {
             delay: 2000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
-         },
+            disableOnInteraction: false,
+          },
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true,
@@ -134,9 +134,9 @@ export default {
         },
         cityData: [
           {name: 'china', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0207.PNG'},
-          {name: 'beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0208.PNG'},
-          {name: 'shanghai', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG'},
-          {name: 'shenzhen', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0210.PNG'},
+          {name: 'beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG'},
+          {name: 'shanghai', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0210.PNG'},
+          {name: 'shenzhen', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0208.PNG'},
           {name: 'hongkong', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0211.PNG'},
         ]
     }
@@ -239,7 +239,7 @@ export default {
       })
         .then(res => {
           this.loadingFlag = false;
-          this.categoryData[category+ 'Data'] = res.dataList;
+          this.categoryData[category+ 'Data'] = res.dataList || [];
         })
         .finally(() => {
           this.loadingFlag = false;
@@ -276,7 +276,7 @@ export default {
     position: relative;
     .categoryTitle {
       margin-bottom: 28px;
-      font-size: 20px;
+      font-size: 22px;
       cursor: pointer;
       a {
         color: #000;
@@ -342,7 +342,7 @@ export default {
   }
   .swiper {
     width: 100%;
-    height: 400px;
+    // height: 400px;
     .swiper-slide {
       text-align: center;
       font-size: 38px;

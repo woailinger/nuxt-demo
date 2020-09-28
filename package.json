@@ -6,6 +6,7 @@
     "dev": "cross-env CODE_ENV=dev node server/index.js --watch server",
     "build": "nuxt build",
     "start": "nuxt build && nuxt start",
+    "prod":  "cross-env NODE_ENV=production &&  nuxt build && nuxt start",
     "export": "nuxt export",
     "serve": "nuxt serve",
     "api": "node server/api.js"

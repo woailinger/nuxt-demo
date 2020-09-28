@@ -3,16 +3,16 @@
     <div>
       <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
       <div v-show="!loadingFlag" v-if="latestData">
-        <a-card style="margin: 24px 0px" :body-style="{padding: '60px'}">
-          <div style="margin-bottom: 60px">
+        <a-card class="card-body">
+          <div class="author-description">
             <a-avatar style="margin:10px;" size="small" :src="latestData.avatar"/>
             {{latestData.author}}
             <a-divider type="vertical"/>
             {{latestData.time}} read
             <a-divider type="vertical"/>
-            <em>{{latestData.date}}</em>
+            <em class="blog-date">{{latestData.date}}</em>
           </div>
-          <div v-html="legacySystemHTML"></div>
+          <div class="article-body" v-html="legacySystemHTML"></div>
           <div>
             <a-button class="tag" v-for="(item, index) in tagList" :key="'lastest'+ index">{{item}}</a-button>
           </div>
@@ -67,12 +67,12 @@
               </div>
             </a-row>
           </div>
-          <div style="padding-top: 50px;padding-bottom: 50px">
+          <div class="related-post">
             <div class="normal-content">
               <p>Related Posts</p>
             </div>
             <a-row :gutter="[8,40]">
-              <a-col :span="6" v-for="(item, index) in latestRealatedBlog" :key="'related'+ index">
+              <a-col :md="6" v-for="(item, index) in latestRealatedBlog" :key="'related'+ index">
                 <a v-bind:href="'/blog/detail?blogId='+ item.blogId">
                   <a-card>
                     <img slot="cover" alt="example" :src="item.img">
@@ -105,8 +105,14 @@
                 />
               </a-list-item>
             </a-list>
-            <a-comment>
-              <div slot="content">
+
+          <a-divider/>
+            <a-comment >
+              <a-avatar 
+              slot="avatar" 
+              :src="$store.state.userInfo.avatar || avatarImg" 
+              style="backgroundColor:#ac4448; margin:5px"/>
+              <div v-if="$store.state.userInfo.avatar" slot="content">
                 <a-form-item>
                   <a-textarea :rows="4" :value="value" @change="handleChange"/>
                 </a-form-item>
@@ -119,6 +125,8 @@
                     @click="handleSubmit"
                   >Add Comment</a-button>
                 </a-form-item>
+              </div>
+              <div v-else slot="content" class="login-tips">Login to leave a comment
               </div>
             </a-comment>
           </div>
@@ -152,13 +160,7 @@ export default {
       this.getData(newValue);
     }
   },
-  created() {
-    this.getData(this.$route.query.blogId, function(data) {
-      console.log(data, "DA");
-    });
-    this.getComments(this.$route.query.blogId);
-    this.getLike(this.$route.query.blogId);
-  },
+  created() {},
   data() {
     return {
       loadingFlag: true,
@@ -172,11 +174,17 @@ export default {
       blogId,
       commentsData,
       likeIcon: false,
-      currentUrl
+      currentUrl,
+      avatarImg: require("~/assets/img/Asha-Go-dark-circle-logo-no-text.png")
     };
   },
   mounted() {
     this.currentUrl = location.href;
+    this.getData(this.$route.query.blogId, function(data) {
+      console.log(data, "DA");
+    });
+    this.getComments(this.$route.query.blogId);
+    this.getLike(this.$route.query.blogId);
   },
   methods: {
     getData(key, callback) {
@@ -237,8 +245,7 @@ export default {
             console.log(res.data.comments, "comment");
           }
         })
-        .catch(err => {
-        });
+        .catch(err => {});
     },
     getLike(key) {
       if (this.$store.state.userId) {
@@ -334,14 +341,25 @@ export default {
 <style scoped lang="less">
 .container {
   margin: 0 15%;
+  @media (max-width: 992px) {
+    margin: 0;
+    padding: 0;
+    display: inline;
+  }
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: auto;
+  //overflow: auto;
+  overflow: hidden;
+}
+.article-body {
+  overflow: hidden;
 }
 .tag {
   margin-right: 10px;
+  margin-bottom: 3px;
+  margin-top: 10px;
 }
 .normal-content {
   align-items: center;
@@ -353,6 +371,35 @@ export default {
     line-height: 20px;
     margin-bottom: 20px;
     text-align: left;
+  }
+}
+.related-post {
+  padding-top:3%;
+  padding-bottom: 5%
+}
+.login-tips {
+  font-size: 20px;
+  line-height: 20px;
+  color: #ac4448;
+}
+.card-body {
+  margin-top: 24px;
+  margin-bottom: 60px;
+  padding: 60px;
+  @media (max-width: 992px) {
+    margin: 0;
+    padding: 0;
+  }
+}
+.author-description {
+  margin-bottom: 60px;
+  @media (max-width: 992px) {
+    margin-bottom: 10%;
+  }
+}
+.blog-date {
+  @media (max-width: 992px) {
+    overflow: hidden;
   }
 }
 </style>
