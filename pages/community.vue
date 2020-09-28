@@ -48,7 +48,7 @@
           (scan QR code with Wechat)
         </p>
         <div
-          style="width:100%;height:360px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/community/asha.jpg)"
+          style="width:100%;height:480px;background:url(https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/community/asha.jpg)"
         ></div>
       </a-col>
       <a-col :span="11" />
