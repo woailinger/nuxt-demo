@@ -16,7 +16,6 @@
               <p>{{item.recommendTitle}}</p>
             </div>
           </span>
-
         </swiper-slide>
         <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
@@ -257,14 +256,14 @@ export default {
   align-items: center;
   text-align: center;
   .more {
-    font-size: 16px;
+    font-size: 1.6rem;
   }
   .ant-divider-inner-text {
     margin: 26px 0px;
   }
   .city-container {
     display: flex;
-    margin-top: 30px;
+    margin-top: 1.3rem;
     margin-bottom: 25px;
     justify-content: space-around;
     .card-img  {

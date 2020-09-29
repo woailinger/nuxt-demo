@@ -47,17 +47,6 @@ export default {
   data () {
     return {
       likeData: [],
-      searchData: [{
-        imgUrl: '/assets/img/blog-details/1.jpg',
-        avator: '',
-        title: 'BeiJing BeiJing BeiJing',
-        desc: 'This is your blog post. To really engage your site visitors we suggest you blog about subjects that are related to your site or business. Blogging is really great for SEO, so we recommend including keywords that relate to your',
-        tags: ['Foods', 'Travel'],
-        date: '2020-01-21',
-        author: 'Jemma Admin',
-        commentNum: '46',
-        likeNum: '31'
-      }],
       pagination: {
         showQuickJumper: true,
         pageSize: 5,
@@ -70,7 +59,7 @@ export default {
     $Server({
       url: '/like/list',
       methods: 'GET',
-      parmas: {
+      params: {
         userId: store.state.userId,
         likeTargetType: 'BLOG'
       }

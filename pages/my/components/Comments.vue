@@ -31,30 +31,11 @@ export default {
   data () {
     return {
       imgDataUrl: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
-      commentsData: [
-        {
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content:
-            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(1, 'days'),
-          blogId: '',
-          blogName: 'beijing City',
-        },
-        {
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content:
-            'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          datetime: moment().subtract(2, 'days'),
-          blogId: '',
-          blogTitle: 'shanghai City',
-        },
-      ],
+      commentsData: [],
       moment
     }
   },
-  mounted () {
+  created () {
     this.getComments();
   },
 //  asyncData ({ req, $Server, redirect, store }) {
@@ -77,12 +58,14 @@ export default {
 //  },
   methods: {
     getComments() {
+      console.log(this.$store.state.userId, '----2222', '444');
       this.$Server({
-      url: '/comment/list',
-      method: 'GET',
-      parmas: {
-        userId: this.$store.state.userId
-      }
+        url: '/comment/list',
+        method: 'GET',
+        params: {
+          userId: this.$store.state.userId,
+          test: 'test'
+        }
     }).then(res => {
       if (res.code == 0) {
         this.commentsData = res.data.comments
