@@ -70,10 +70,10 @@
               </nuxt-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <nuxt-link to="/agreement" class="nav-link">
                 <p>User agreement</p>
                 <span>用户协议</span>
-              </a>
+              </nuxt-link>
             </li>
           </ul>
           <div class="footer-social">
@@ -116,7 +116,6 @@ export default {
     window.addEventListener("scroll",()=>{
       let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         let offsetTop = document.querySelector('#menuContainer').offsetTop;
-        console.log(offsetTop,scrollTop, 'xxx====');
         if (scrollTop > offsetTop) {
             document.querySelector('#menuContainer').style.position="fixed";
             document.querySelector('#menuContainer').style.top="0";
