@@ -44,8 +44,6 @@
                             {{item.author}}
                             <a-divider type="vertical"/>
                             {{item.time}} read
-                            <a-divider type="vertical"/>
-                            <em>{{item.date}}</em>
                           </div>
                         </div>
                       </a-list-item>

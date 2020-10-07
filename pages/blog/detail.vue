@@ -9,8 +9,6 @@
             {{latestData.author}}
             <a-divider type="vertical"/>
             {{latestData.time}} read
-            <a-divider type="vertical"/>
-            <em class="blog-date">{{latestData.date}}</em>
           </div>
           <div class="article-body" v-html="legacySystemHTML"></div>
           <div>
@@ -20,34 +18,32 @@
           <div class="socialmedia">
             <a-row>
               <a-col :span="12">
-                <h2>
                   <a
                     target="_blank"
                     v-bind:href="'http://www.facebook.com/sharer.php?u='+ encodeURIComponent(currentUrl)"
                   >
-                    <a-icon type="facebook" style="margin-right: 12px"/>
+                    <a-icon type="facebook"/>
                   </a>
                   <a
                     target="_blank"
                     v-bind:href="'http://twitter.com/share?url='+ encodeURIComponent(currentUrl)"
                   >
-                    <a-icon type="twitter" style="margin-right: 12px"/>
+                    <a-icon type="twitter"/>
                   </a>
                   <a
                     target="_blank"
                     v-bind:href="'https://www.linkedin.com/shareArticle?url='+ encodeURIComponent(currentUrl)"
                   >
-                    <a-icon type="linkedin" style="margin-right: 12px"/>
+                    <a-icon type="linkedin"/>
                   </a>
                   <a @click="copyUrl">
-                    <a-icon type="link" style="margin-right: 12px"/>
+                    <a-icon type="link"/>
                   </a>
-                </h2>
               </a-col>
 
               <div style="float: right;">
                 <a-col style="float: right;">
-                  <h2>{{latestData.city}}</h2>
+                  <p>{{latestData.city}}</p>
                 </a-col>
               </div>
             </a-row>
@@ -220,7 +216,10 @@ export default {
 
           this.latestData = res.data;
           this.latestRealatedBlog = res.dataList;
-          this.legacySystemHTML = res.data.html;
+          var initHTML = res.data.html;
+          var reg = /width="([0-9])\w+" height="([0-9])\w+"/g;//
+          this.legacySystemHTML = initHTML.replace(reg, 'width="100%" height="100%"');
+          text = text.replace(reg, '');
           this.tagList = res.data.tag.split(",");
           this.blogId = key;
           console.log(res.data, "DATA");
@@ -355,6 +354,13 @@ export default {
 }
 .article-body {
   overflow: hidden;
+  @media (max-width: 992px) {
+    font-size: 12px!important;
+  }
+  img {
+    width: 100%!important;
+    height: 100%!important;
+  }
 }
 .tag {
   margin-right: 10px;
@@ -400,6 +406,13 @@ export default {
 .blog-date {
   @media (max-width: 992px) {
     overflow: hidden;
+  }
+}
+.socialmedia {
+  font-size: 32px;
+  line-height: 32px;
+  a-icon {
+    margin-right: 10%;
   }
 }
 </style>
