@@ -14,8 +14,8 @@
         </div>
       </div>
       <client-only>
-        <div class="articlelist" :bordered="false" :body-style="{padding: '24px',margin: '15%'}">
-          <a-card :bordered="false" :body-style="{padding: '24px',margin: '0px 15%'}">
+        <div class="articlelist" :bordered="false">
+          <a-card :bordered="false">
             <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
             <div v-show="!loadingFlag" v-if="latestData">
               <div class="tag-list">
@@ -26,7 +26,7 @@
                   <a-divider/>
                   <div>
                      <a-button
-                      style="margin-bottom: 1%"
+                      style="margin-bottom: 2%"
                       class="tag-btn"
                       v-for="(tagName, tagIndex) in allTagList"
                       :key="'lastest'+ tagIndex"
@@ -39,7 +39,6 @@
                 <a-list-item v-for="(item, index) in latestData" :key="'lastest'+ index">
                   <div class="listcover">
                     <img
-                      style="height: 200px; margin: -10px 0"
                       shape="square"
                       v-bind:src="item.img"
                     >
@@ -74,8 +73,6 @@
                             {{item.author}}
                             <a-divider type="vertical"/>
                             {{item.time}} read
-                            <a-divider type="vertical"/>
-                            <em>{{item.date}}</em>
                           </div>
                         </div>
                         <span slot="actions">
@@ -197,6 +194,17 @@ export default {
 }
 .listcover {
   padding-right: 30px;
+  @media (max-width: 992px) {
+    padding: 0px;
+  }
+  img {
+    height: 200px; 
+    margin: -10px 0;
+    @media (max-width: 992px) {
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 .extra {
   width: 272px;
@@ -252,6 +260,14 @@ export default {
       line-height: 28px;
       margin-bottom: 16px;
     }
+  }
+}
+.articlelist {
+  padding: 24px;
+  margin: 0px 15%;
+  @media (max-width: 992px) {
+    padding: 0px;
+    margin: 0px;
   }
 }
 </style>
