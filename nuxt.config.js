@@ -18,7 +18,7 @@ module.exports = {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     script: [
@@ -51,6 +51,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/antd-ui',
+    '@/plugins/vant-ui',
     '@/plugins/axios',
     { src: '@/plugins/vue-quill-editor', ssr: false },
     { src: '@/plugins/avatar.js', ssr: false },
