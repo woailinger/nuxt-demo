@@ -67,6 +67,7 @@ export default {
     data() {
         return {
             keyWord: '',
+            city: '',
             searchData: [{
                 img: '/assets/img/blog-details/1.jpg',
                 avator: '',
@@ -88,7 +89,12 @@ export default {
     },
     created() {
         this.keyWord = this.$route.query.keyWord || '';
-        this.getData();
+        this.city =  this.$route.query.city || ''
+        if (this.city) {
+          this.getCityData();
+        } else {
+          this.getData();
+        }
     },
     watch: {
       '$route.query' (val, oldval) {
@@ -107,10 +113,42 @@ export default {
             }
           })
         },
-        getData(page) {
-            if(this.keyWord === '王高兴') {
-                this.$router.push('/test');
+        getCityData(page){
+          this.$Server({
+            url: "/blog/get-blog-list",
+            method: "post",
+            data: {
+              city: this.city
+            },
+            transformRequest: [
+              function(data) {
+                let ret = "";
+                for (let it in data) {
+                  ret +=
+                    encodeURIComponent(it) +
+                    "=" +
+                    encodeURIComponent(data[it]) +
+                    "&";
+                }
+                ret = ret.substring(0, ret.lastIndexOf("&"));
+
+                console.log(ret, "---");
+                return ret;
+              }
+            ],
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
             }
+          }).then(res => {
+            this.loadingFlag = false;
+            this.categoryData[category+ 'Data'] = res.dataList || [];
+          })
+          .finally(() => {
+            this.loadingFlag = false;
+          });
+        },
+        getData(page) {
+          
             this.$Server({
                 url: '/es/search-content',
                 method: 'GET',

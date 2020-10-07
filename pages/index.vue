@@ -23,7 +23,7 @@
       </swiper>
      </client-only>
      <div class="city-container">
-       <a-card hoverable :bordered="false" class="card-city" v-for="(item, index) in cityData" :key="'city'+ index" @click="search(item.name)">
+       <a-card hoverable :bordered="false" class="card-city" v-for="(item, index) in cityData" :key="'city'+ index" @click="search(item.name, 'city')">
          <img
           class="card-img"
           slot="cover"
@@ -179,12 +179,20 @@ export default {
         }
       });
     },
-    search(value) {
-      this.$router.push({
-        path: '/article/search',
-        query: {
+    search(value, type) {
+      let query = {};
+      if (type == 'city') {
+          query = {
+            city : value
+          }
+      } else {
+        query = {
           keyWord: value
         }
+      }
+      this.$router.push({
+        path: '/article/search',
+        query: query
       })
     },
     goDetail(blogId) {
