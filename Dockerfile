@@ -12,4 +12,4 @@ ENV HOST 0.0.0.0
 # Expose the app port
 EXPOSE 3000
 
-CMD ["npm", "$NODE_ENV"]
+CMD ["npm", "run", "$NODE_ENV"]
