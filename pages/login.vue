@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <van-cell is-link @click="showPopup">展示弹出层</van-cell>
+    <van-popup v-model="show" position="left" :style="{ width: '30%' }" />
     <img class="logo pointer" @click="goHome" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
     <div class="title">Login</div>
     <a-form :form="form" @submit="handleSubmit" class="form">
@@ -61,6 +63,7 @@
     data () {
       return {
         loading: false,
+        show: false,
         form: this.$form.createForm(this, { name: 'horizontal_login' }),
         hasErrors: fieldsError => {
           return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -84,6 +87,9 @@
       });
     },
     methods: {
+      showPopup() {
+        this.show = true;
+      },
       handleToRegister () {
         this.$router.push('/register');
       },

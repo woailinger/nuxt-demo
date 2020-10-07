@@ -3,7 +3,7 @@ const clientWidth = oHtml.clientWidth;
 
 // 320px的屏幕基准像素为10px
 if(clientWidth < 1366) {
-  oHtml.style.fontSize = 10 * (clientWidth / 1366) + "px";
+  oHtml.style.fontSize = 10 * (clientWidth / 320) + "px";
 } else {
   oHtml.style.fontSize = "10px";
 }
