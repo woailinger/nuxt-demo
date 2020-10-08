@@ -14,7 +14,7 @@
                 v-model="show"
                 :width="300"
                 :height="300"
-                url="/user/upload-avatar"
+                :url="url"
                 img-format="png"
                 langType="en"
                 :params="{userId: $store.state.userId}"
@@ -22,43 +22,11 @@
       </client-only>
     </div>
     <ProfileEdit @ok="toggleEdit" />
-    <!--<ul class="info" v-else>-->
-      <!--<li class="item">-->
-        <!--<span class="name">Name</span>-->
-        <!--<span class="value">{{ info.userName }}</span>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<span class="name">Gender</span>-->
-        <!--<span class="value">Female</span>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<span class="name">Nationality</span>-->
-        <!--<span class="value">{{ info.infonationality }}</span>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<span class="name">Age</span>-->
-        <!--<span class="value">{{ info.age }}</span>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<span class="name">Email </span>-->
-        <!--<span class="value">{{ info.email }}</span>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<span class="name">Where do you live now</span>-->
-        <!--<span class="value">{{ info.city }}</span>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<span class="name">What interests you</span>-->
-        <!--<span class="value">{{ info.interesting }}</span>-->
-      <!--</li>-->
-      <!--<li class="button">-->
-        <!--<a-button type="primary" @click="toggleEdit">Edit</a-button>-->
-      <!--</li>-->
-    <!--</ul>-->
   </div>
 </template>
 <script>
 import ProfileEdit from './ProfileEdit.vue';
+import config from '../../../plugins/config'
 export default {
 //  asyncData ({ req, $Server, redirect, store }) {
 //    $Server({
@@ -82,10 +50,12 @@ export default {
     ProfileEdit
   },
   data () {
+    let url = config.baseURL + '/user/upload-avatar';
     return {
       imgDataUrl: require('~/assets/img/Asha-Go-dark-circle-logo-no-text.png'),
       show: false,
       isEdit: false,
+      url: url,
       info: {
         nationality: 'Chinese',
         email: '798406168@qq.com',

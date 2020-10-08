@@ -140,15 +140,14 @@ export default {
               "Content-Type": "application/x-www-form-urlencoded"
             }
           }).then(res => {
-            this.loadingFlag = false;
-            this.categoryData[category+ 'Data'] = res.dataList || [];
+            this.searchData = res.dataList || [];
+            this.pagination.total = this.searchData.length;
           })
           .finally(() => {
             this.loadingFlag = false;
           });
         },
         getData(page) {
-          
             this.$Server({
                 url: '/es/search-content',
                 method: 'GET',
@@ -206,20 +205,21 @@ export default {
          min-width: 160px;
       }
   }
-}
-.listcover {
-  padding-right: 30px;
-}
-.extra{
-    width: 272px;
-    height: 1px;
-}
-.content {
-  margin-top: 0px;
-  .detail {
-    max-height: 120px;
-    overflow: hidden;
-    word-wrap:break-word;
+  .listcover {
+    padding-right: 30px;
+  }
+  .extra{
+      width: 272px;
+      height: 1px;
+  }
+  .content {
+    margin-top: 0px;
+    .detail {
+      max-height: 120px;
+      overflow: hidden;
+      word-wrap:break-word;
+    }
   }
 }
+
 </style>

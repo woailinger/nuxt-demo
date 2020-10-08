@@ -1,16 +1,18 @@
 <template>
   <div class="container">
     <div class="search">
-       <a-input-search placeholder="search" v-model="keyWord" @search="onSearch" size="large"/>
+      <span class="conent">
+        <div class="desc">ASHA GO</div>
+        <div class="desc">Your China Platform</div>
+        <div class="desc remark">Life in China should be easy and exciting</div>
+        <a-input-search placeholder="search" v-model="keyWord" @search="search" class="input-search" size="large"/>
+      </span>
     </div>
     <client-only>
       <swiper
         ref="carousel"
         class="swiper pointer"
         :options="swiperOptions"
-        @ready="onSwiperRedied"
-        @clickSlide="onSwiperClickSlide"
-        @slideChangeTransitionStart="onSwiperSlideChangeTransitionStart"
       >
         <swiper-slide v-for="(item, index) in bannerData" :key="'banner'+ index">
           <span @click="goDetail(item.blogId)">
@@ -18,8 +20,6 @@
           </span>
         </swiper-slide>
         <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
      </client-only>
      <div class="city-container">
@@ -32,6 +32,67 @@
         />
       </a-card>
      </div>
+    <a-divider class="categoryTitle"> Recent Blog</a-divider>
+    <client-only>
+    <div class="article-list" :bordered="false" >
+       <div
+          v-infinite-scroll="handleInfiniteOnLoad"
+          :infinite-scroll-disabled="busy"
+          :infinite-scroll-distance="10">
+          <a-card :bordered="false" class="card-container">
+            <a-list
+              size="large"
+              :bordered="false">
+              <a-list-item :key="i" v-for="(item, i) in recentData" @click="goDetail(item.blogId)">
+                <div class="listcover">
+                  <img style="height: 200px; margin: -10px 0" shape="square" :src="item.cover" />
+                </div>
+                <!-- <a-list-item-meta>
+                  <a slot="title"></a>
+                </a-list-item-meta> -->
+
+                <a class="categoryContent" href="#">
+                  <a-list itemLayout="vertical">
+                    <a-list-item>
+                      <a-list-item-meta :title="item.title">
+                        <!-- <div slot="description">
+                          <a-tag :key="index + 's'" v-for="(it, index) in item.tags" >{{it}}</a-tag>
+                        </div> -->
+                      </a-list-item-meta>
+                      <div class="content">
+                        <!-- <div
+                          class="detail"
+                          max-width="9%;"
+                        >{{item.content}}</div> -->
+                        <div class="author">
+                          <a-avatar
+                            style="margin:10px;"
+                            size="small"
+                            :src="item.avatar"
+                          />{{item.author}}
+                          <em>{{item.date}}</em>
+                          <span slot="actions">
+                            <a-icon style="margin-right: 8px" type="heart-o" />
+                            {{item.likes}}
+                          </span>
+                          <span slot="actions">
+                            <a-icon style="margin-right: 8px" type="message" />
+                            {{item.comment}}
+                          </span>
+                        </div>
+                      </div>
+                    </a-list-item>
+                    <div v-if="loading && !busy" class="demo-loading-container">
+                      <a-spin />
+                    </div>
+                  </a-list>
+                </a>
+              </a-list-item>
+            </a-list>
+          </a-card>
+        </div>
+      </div>
+    </client-only>
   </div>
 </template>
 
@@ -45,6 +106,12 @@ export default {
   data() {
     return {
       baseUrl,
+      keyWord: '',
+      recentData: [],
+      loading: false,
+      busy: false,
+      index: 0,
+
       swiperOptions: {
           loop: true,
           slidesPerView: 'auto',
@@ -59,60 +126,20 @@ export default {
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true,
-            clickable: true
+            clickable: true,
+            renderBullet(index, className) {
+              return `<span class="${className} swiper-pagination-bullet-custom">${index + 1}</span>`
+            }
           },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
         },
-        bannerData: [
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Is%20China%20a%20safe%20country%20for%20travellers.jpg',
-          //   recommendTitle: 'Is China a safe country for travellers?'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Growing%20up%20as%20a%20woman%20in%20China.jpg',
-          //   recommendTitle: 'Growing up as a woman in China'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-The%20most%20famous%20Chinese%20curse%20words.JPG',
-          //   recommendTitle: 'The most famous Chinese curse words'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Movies%20to%20improve%20your%20Chinese.jpg',
-          //   recommendTitle: 'Movies to improve your Chinese'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Why%20you%20should%20travel%20solo%20in%20China.jpg',
-          //   recommendTitle: 'Why you should travel solo in China?'
-          // },
-        ],
-        categoryData: {
-          dailyData: [],
-          foodData: [],
-          travelData: [],
-        },
-        categoryDesc: {
-          dailyData: {
-            text: 'daily',
-            title: 'Daily Life'
-          },
-          foodData: {
-            text: 'food',
-            title: 'Food & Drinks'
-          },
-          travelData: {
-            text: 'travel',
-            title: 'Travel'
-          }
-        },
+        bannerData: [],
+        
         cityData: [
-          {name: 'china', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0207.PNG'},
-          {name: 'beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG'},
-          {name: 'shanghai', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0210.PNG'},
-          {name: 'shenzhen', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0208.PNG'},
-          {name: 'hongkong', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0211.PNG'},
+          {name: 'All China', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0207.PNG'},
+          {name: 'Beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG'},
+          {name: 'Shanghai', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0210.PNG'},
+          {name: 'Shenzhen', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0208.PNG'},
+          {name: 'Hong Kong', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0211.PNG'},
         ]
     }
   },
@@ -132,18 +159,32 @@ export default {
     // this.swiper.slideTo(3, 1000, false)
   },
   created() {
-    let categoryList = ['daily', 'food', 'travel']
-    categoryList.forEach(item => {
-      this.getData(item);
-    });
-    this.getRecommend();
+    // let categoryList = ['daily', 'food', 'travel']
+    // categoryList.forEach(item => {
+    //   this.getData(item);
+    // });
+    this.getRecentData(0);
   },
-
-
 
   methods: {
     getImgUrl(i) {
       return `${baseUrl}abstract0${i + 1}.jpg`;
+    },
+    getRecentData(index) {
+      this.$Server({
+        methods: "GET",
+        url: "/blog/get-recent-blog",
+        query: {
+          index: index || 0
+        }
+      }).then((res) => {
+          if(res.code === '0'){
+          this.recentData = this.recentData.concat(res.data.recentBlogs);
+        }
+      });
+    },
+    handleInfiniteOnLoad() {
+      getRecentData(this.index + 1);
     },
     getRecommend() {
       this.$Server({
@@ -174,15 +215,6 @@ export default {
       Cookie.remove('_t');
       this.$store.commit('setToken', null);
       this.$router.push('/login');
-    },
-    onSwiperRedied(swiper) {
-        console.log('Swiper redied!', swiper)
-    },
-    onSwiperSlideChangeTransitionStart() {
-      console.log('SwiperSlideChangeTransitionStart!')
-    },
-    onSwiperClickSlide(index, reallyIndex) {
-      console.log('Swiper click slide!', reallyIndex)
     },
     getData(category) {
       this.$Server({
@@ -232,17 +264,29 @@ export default {
   align-items: center;
   text-align: center;
   .search {
+    display: inline-block;
+    vertical-align: middle;
     width: 100%;
-    height: 400px;
-    text-align: centrn;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 33rem;
+    text-align: center;
+    color: #fff;
     background: url("../../assets/img/search.jpg");
     background-size: cover;
-    .ant-input-affix-wrapper {
-      margin-top: -10%;
-      width: 40%;
+    .conent {
+      display: inline-block;
+      margin: 6rem 0;
+      .input-search {
+        width: 80%;
+      }
+    }
+    .desc {
+      display: block;
+      font-size: 2.8rem;
+      font-weight: 10;
+      margin-bottom: 1rem ;
+    }
+    .remark {
+      font-size: 1.2rem;
     }
   }
   .more {
@@ -261,6 +305,11 @@ export default {
       width: 150px;
       height: 150px;
     }
+  }
+  .card-container {
+    padding: 1rem;
+    min-width: 160px;
+    margin-left: 1.2rem;
   }
   .category {
     position: relative;

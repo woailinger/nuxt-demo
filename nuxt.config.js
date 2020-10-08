@@ -54,6 +54,7 @@ module.exports = {
     '@/plugins/vant-ui',
     '@/plugins/axios',
     { src: '@/plugins/vue-quill-editor', ssr: false },
+    { src: '@/plugins/vue-infinite-scroll.js', ssr: false },
     { src: '@/plugins/avatar.js', ssr: false },
     { src: '@/plugins/vue-swiper', ssr: false },
   ],

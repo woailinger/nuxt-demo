@@ -2,7 +2,7 @@
   <div>
       <div class="h5-header">
         <div class="menu-container">
-            <van-icon class="menu" size="5rem" name="wap-nav" @click="showPopup"/>
+            <van-icon class="menu" size="4rem" name="wap-nav" @click="showPopup"/>
             <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
             <van-popup v-model="show" position="top left" class="popup">
               <nuxt-link to="/h5" class="menu-item">
@@ -55,17 +55,17 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener("scroll",()=>{
-      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        let offsetTop = document.querySelector('#menuContainer').offsetTop;
-        if (scrollTop > offsetTop) {
-            document.querySelector('#menuContainer').style.position="fixed";
-            document.querySelector('#menuContainer').style.top="0";
-        } else {
-            document.querySelector('#menuContainer').style.position="";
-            document.querySelector('#menuContainer').style.top="";
-        }
-    })
+    // window.addEventListener("scroll",()=>{
+    //   let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    //     let offsetTop = document.querySelector('#menuContainer').offsetTop;
+    //     if (scrollTop > offsetTop) {
+    //         document.querySelector('#menuContainer').style.position="fixed";
+    //         document.querySelector('#menuContainer').style.top="0";
+    //     } else {
+    //         document.querySelector('#menuContainer').style.position="";
+    //         document.querySelector('#menuContainer').style.top="";
+    //     }
+    // })
     if(this.$store.state.token){
         this.getUserInfo();
         this.loginFlag = true;
@@ -160,12 +160,10 @@ html {
   color: #fff;
   .header-logo {
     margin: 0 auto;
-    height: 8rem;
-    // height: 6rem;
+    height: 6rem;
   }
   .van-popup--top {
     width: auto;
-    height: 100%;
   }
   .icon {
     margin-right: 0.5rem;
@@ -174,7 +172,8 @@ html {
     a:hover {
       color: #ccc;
     }
-    margin-left: 2rem;
+    position: absolute;
+    left: 2rem
   }
   .popup {
     background-color: #8d040c;
