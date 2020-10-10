@@ -9,25 +9,25 @@
                 <a-icon type="home" class="icon"/> Home
               </nuxt-link>
               <nuxt-link to="/category/daily?category=daily" class="menu-item">
-                <a-icon type="github" class="icon"/> Daily Life
+                <icon-font type="iconDaily" /> Daily Life
               </nuxt-link>
               <nuxt-link to="/category/food?category=food" class="menu-item">
-                <a-icon type="wechat" class="icon"/>Food & Drinks
+                <icon-font type="iconfood" class="icon"/>Food & Drinks
               </nuxt-link>
               <nuxt-link to="/category/travel?category=travel" class="menu-item">
-                <a-icon type="github" class="icon"/>Travel
+                <icon-font type="iconfeiji" class="icon"/>Travel
               </nuxt-link>
               <nuxt-link to="/category/language?category=language" class="menu-item">
-                <a-icon type="github" class="icon"/>Language
+                <icon-font type="iconlanguage" class="icon"/>Language
               </nuxt-link>
               <nuxt-link to="/community" class="menu-item">
-                <a-icon type="github" class="icon"/>Community
+                <icon-font type="iconcommunity" class="icon"/>Community
               </nuxt-link>
               <nuxt-link to="/service" class="menu-item">
-                <a-icon type="github" class="icon"/>Service
+                <icon-font type="iconicon_service" class="icon"/>Service
               </nuxt-link>
               <nuxt-link to="/service" class="menu-item">
-                <a-icon type="github" class="icon"/>About Us
+                <icon-font type="iconwoshou" class="icon"/>About Us
               </nuxt-link>
             </van-popup>
         </div>
@@ -40,7 +40,15 @@
 </template>
 <script>
 const Cookie = process.client ? require('js-cookie') : undefined
+import { Icon } from 'ant-design-vue';
+
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2118142_nof06qcreu.js',
+});
 export default {
+   components: {
+    IconFont,
+  },
   data() {
     return {
       searchValue: '',
@@ -177,6 +185,7 @@ html {
   }
   .popup {
     background-color: #8d040c;
+    height: 100%;
   }
   .menu-item {
     margin: 0 20px;
