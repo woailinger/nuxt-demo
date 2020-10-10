@@ -302,15 +302,15 @@ export default {
     justify-content: space-around;
     flex-wrap: wrap;
     .card-img  {
-      width: 9rem;
-      height: 9rem;
+      width: 10rem;
+      height: 10rem;
     }
   }
   .card-container {
       min-width: 16rem;
       .list-cover {
         img {
-          width: 27rem; 
+          width: 28rem; 
           margin: -10px 0;
         }
       }
