@@ -64,6 +64,10 @@
 </template>
 <script>
 export default {
+    mixins: [],
+    layout(context) {
+        return context.isMobile ? 'h5' : 'default';
+    },
     data() {
         return {
             keyWord: '',

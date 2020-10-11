@@ -64,6 +64,9 @@ module.exports = {
   env: {
     host_env: process.env.CODE_ENV
   },
+  router: {
+    middleware: 'user-agent'
+  },
   axios: {
     proxy: false,
   },

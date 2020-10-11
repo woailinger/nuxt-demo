@@ -145,6 +145,13 @@
     </a-row>
   </div>
 </template>
+<script>
+export default {
+  layout(context) {
+     return context.isMobile ? 'h5' : 'default';
+  },
+}
+</script>
 
 <style>
 #contact {

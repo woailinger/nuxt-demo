@@ -60,7 +60,13 @@
     </a-row>
   </div>
 </template>
-
+<script>
+export default {
+  layout(context) {
+        return context.isMobile ? 'h5' : 'default';
+  },
+}
+</script>
 <style>
 #community {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
