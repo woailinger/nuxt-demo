@@ -103,6 +103,11 @@ export default {
   computed: {
   },
   layout: 'h5',
+  asyncData(context) {
+     if (!context.isMobile) {
+       context.redirect('/')
+     }
+  },
   data() {
     return {
       baseUrl,
@@ -133,7 +138,7 @@ export default {
           },
         },
         bannerData: [],
-        
+
         cityData: [
           {name: 'All China', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0207.PNG'},
           {name: 'Beijing', url: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/pic/citis/IMG_0209.PNG'},
@@ -310,7 +315,7 @@ export default {
       min-width: 16rem;
       .list-cover {
         img {
-          width: 28rem; 
+          width: 28rem;
           margin: -10px 0;
         }
       }

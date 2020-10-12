@@ -27,6 +27,11 @@
       }
     },
     middleware: 'notTokenenticated',
+    asyncData(context) {
+     if (!context.isMobile) {
+       context.redirect('/my/')
+     }
+    },
     data() {
       return {
         userName: '',

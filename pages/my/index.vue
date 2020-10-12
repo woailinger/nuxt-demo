@@ -58,6 +58,11 @@
       }
     },
     middleware: 'notTokenenticated',
+    asyncData(context) {
+     if (context.isMobile) {
+       context.redirect('/h5/my/')
+     }
+    },
     components: {
       Profile,
       Comments,

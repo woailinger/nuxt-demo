@@ -66,6 +66,11 @@ const baseUrl = '../assets/img/bg';
 export default {
   computed: {
   },
+  asyncData(context) {
+     if (context.isMobile) {
+       context.redirect('/h5/')
+     }
+  },
   data() {
     return {
       baseUrl,
