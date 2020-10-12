@@ -105,7 +105,7 @@ export default {
   layout: 'h5',
   asyncData(context) {
      if (!context.isMobile) {
-       context.redirect('/')
+       context.redirect('/');
      }
   },
   data() {

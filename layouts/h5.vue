@@ -4,6 +4,14 @@
         <div class="menu-container">
             <van-icon class="menu" size="4rem" name="wap-nav" @click="showPopup"/>
             <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
+            <span class="login">
+              <a-button @click="signHandler" v-show="!loginFlag" class="button">Login</a-button>
+              <span v-show="!!loginFlag">
+                <!-- <a-avatar :src="$store.state.userInfo.avatar || avatarImg" @click="goInfo"></a-avatar> -->
+                <span class="user-name">{{$store.state.userInfo.userName || userName}}</span>
+                <a-button type="link" @click="logoutHandler" ghost>Logout</a-button>
+              </span>
+            </span>
             <van-popup v-model="show" position="top left" class="popup">
               <nuxt-link to="/h5" class="menu-item">
                 <a-icon type="home" class="icon"/> Home
@@ -182,6 +190,15 @@ html {
     }
     position: absolute;
     left: 2rem
+  }
+  .login{
+    position: absolute;
+    right: 0.5rem;
+    color: #fff;
+    .button {
+       background: #8d040c;
+      color: #fff
+    }
   }
   .popup {
     background-color: #8d040c;
