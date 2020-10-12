@@ -6,7 +6,7 @@
      </div>
       <client-only>
         <div class="article-list" :bordered="false" >
-          <a-card :bordered="false" :body-style="{padding: '24px',margin: '0px 15%', 'min-width': '160px'}">
+          <a-card :bordered="false" class="card-container">
             <a-list
               size="large"
               :bordered="false"
@@ -14,7 +14,7 @@
             >
               <a-list-item :key="i" v-for="(item, i) in searchData" @click="goDetail(item.blogId)">
                 <div class="listcover">
-                  <img style="height: 200px; margin: -10px 0" shape="square" :src="item.img" />
+                  <img style="height: 230px; margin: -10px 0" shape="square" :src="item.img" />
                 </div>
                 <a-list-item-meta>
                   <a slot="title"></a>
@@ -203,6 +203,23 @@ export default {
       width: 40%;
     }
   }
+  .card-container {
+      min-width: 16rem;
+      max-width: 90%;
+      margin: 0 auto;
+      .list-cover {
+        img {
+          width: 28rem;
+          margin: -10px 0;
+        }
+      }
+      .ant-list-split {
+        .ant-list-item {
+          border-bottom: none;
+          justify-content: center;
+        }
+      }
+  }
   .article-list {
        color: red;
       .ant-card-body {
@@ -210,7 +227,16 @@ export default {
       }
   }
   .listcover {
-    padding-right: 30px;
+      padding-right: 30px;
+  }
+  @media screen and (max-width: 1024px) {
+    .listcover {
+      padding-right: 0px;
+    }
+    .search {
+      background: url("../../assets/img/phone-index.jpeg");
+      background-size: cover;
+    }
   }
   .extra{
       width: 272px;

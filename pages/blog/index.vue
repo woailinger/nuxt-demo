@@ -362,13 +362,16 @@
 import { HeartOutlined } from "@ant-design/icons";
 import moment from "moment";
 export default {
+  layout(context) {
+        return context.isMobile ? 'h5' : 'default';
+  },
   data() {
     return {
       comments: [],
       submitting: false,
       value: "",
       moment,
-      rawHtml: "testBlog.html", 
+      rawHtml: "testBlog.html",
     };
   },
   methods: {

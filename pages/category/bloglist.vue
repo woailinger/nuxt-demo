@@ -5,7 +5,6 @@
           <a-card :bordered="false">
             <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
             <div v-show="!loadingFlag" v-if="latestData">
-              
               <a-list size="large" :bordered="false">
                 <a-list-item v-for="(item, index) in latestData" :key="'lastest'+ index">
                   <div class="listcover">
@@ -156,7 +155,7 @@ export default {
     padding: 0px;
   }
   img {
-    height: 200px; 
+    height: 200px;
     margin: -10px 0;
     @media (max-width: 992px) {
       height: 100%;

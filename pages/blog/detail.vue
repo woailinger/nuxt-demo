@@ -104,9 +104,9 @@
 
           <a-divider/>
             <a-comment >
-              <a-avatar 
-              slot="avatar" 
-              :src="$store.state.userInfo.avatar || avatarImg" 
+              <a-avatar
+              slot="avatar"
+              :src="$store.state.userInfo.avatar || avatarImg"
               style="backgroundColor:#ac4448; margin:5px"/>
               <div v-if="$store.state.userInfo.avatar" slot="content">
                 <a-form-item>
@@ -149,6 +149,9 @@ const legacySystemHTML = "";
 const blogId = "";
 const currentUrl = "";
 export default {
+  layout(context) {
+        return context.isMobile ? 'h5' : 'default';
+  },
   watch: {
     "$route.query"(newValue) {
       console.log(newValue, "Newvalue");

@@ -275,8 +275,8 @@ export default {
     height: 33rem;
     text-align: center;
     color: #fff;
-    background: url("../../assets/img/search.jpg");
-    background-size: cover;
+    background: url("../../assets/img/phone-index.jpeg");
+    background-size: contain;
     .conent {
       display: inline-block;
       margin: 6rem 0;
