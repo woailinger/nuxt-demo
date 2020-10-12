@@ -187,7 +187,7 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  padding: 100px 0px;
+  padding: 5% 0px;
   flex-direction: column;
   align-items: center;
   overflow: auto;
@@ -223,12 +223,14 @@ export default {
   margin-left: 10%;
 }
 .exception {
-  min-height: 500px;
-  height: 80%;
   align-items: center;
   text-align: center;
-  margin-bottom: -13%;
+  margin-bottom: 3%;
   .img {
+    @media (max-width: 992px) {
+      width: 100%;
+      padding: 0;
+    }
     display: inline-block;
     padding-right: 52px;
     zoom: 1;
@@ -241,6 +243,11 @@ export default {
     display: inline-block;
     width: 35%;
     text-align: left;
+    @media (max-width: 992px) {
+      width: 100%;
+      padding: 3rem;
+      padding-bottom: 0;
+    }
     h1 {
       color: #434e59;
       font-size: 60px;

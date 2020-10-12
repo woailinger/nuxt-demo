@@ -1,8 +1,8 @@
 <template>
   <div class="blog-list">
     <client-only>
-        <div class="articlelist" :bordered="false" :body-style="{padding: '24px',margin: '15%'}">
-          <a-card :bordered="false" :body-style="{padding: '5% 24px',margin: '0px 15%'}">
+        <div class="articlelist" :bordered="false">
+          <a-card :bordered="false">
             <a-spin tip="Loading..." v-show="loadingFlag"></a-spin>
             <div v-show="!loadingFlag" v-if="latestData">
               
@@ -145,13 +145,24 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  padding: 100px 0px;
+  padding: 5% 0px;
   flex-direction: column;
   align-items: center;
   overflow: auto;
 }
 .listcover {
   padding-right: 30px;
+  @media (max-width: 992px) {
+    padding: 0px;
+  }
+  img {
+    height: 200px; 
+    margin: -10px 0;
+    @media (max-width: 992px) {
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 .extra {
   width: 272px;
@@ -168,5 +179,13 @@ export default {
 }
 .cover {
   margin-left: 10%;
+}
+.articlelist {
+  padding: 24px;
+  margin: 0px 15%;
+  @media (max-width: 992px) {
+    padding: 0px;
+    margin: 0px;
+  }
 }
 </style>
