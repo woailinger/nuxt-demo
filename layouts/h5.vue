@@ -2,14 +2,14 @@
   <div>
       <div class="h5-header">
         <div class="menu-container">
-            <van-icon class="menu" size="4rem" name="wap-nav" @click="showPopup"/>
+            <van-icon class="menu" size="6vh" name="wap-nav" @click="showPopup"/>
             <img class="header-logo" src="../assets/img/Asha-Go-dark-circle-logo-no-text.png" alt="logo">
             <span class="login">
               <a-button @click="signHandler" v-show="!loginFlag" class="button">Login</a-button>
               <span v-show="!!loginFlag">
                 <!-- <a-avatar :src="$store.state.userInfo.avatar || avatarImg" @click="goInfo"></a-avatar> -->
                 <span class="user-name">{{$store.state.userInfo.userName || userName}}</span>
-                <a-button type="link" @click="logoutHandler" ghost>Logout</a-button>
+                <icon-font type="iconexit" class="logout-icon" @click="logoutHandler"/>
               </span>
             </span>
             <van-popup v-model="show" position="top left" class="popup">
@@ -51,7 +51,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 import { Icon } from 'ant-design-vue';
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2118142_nof06qcreu.js',
+  scriptUrl: '//at.alicdn.com/t/font_2118142_fev5ry0wqpp.js',
 });
 export default {
    components: {
@@ -180,6 +180,10 @@ html {
   }
   .van-popup--top {
     width: auto;
+  }
+  .logout-icon {
+     width: 10rem;
+     height: 10rem;
   }
   .icon {
     margin-right: 0.5rem;

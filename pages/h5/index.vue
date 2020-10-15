@@ -272,22 +272,22 @@ export default {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
-    height: 33rem;
+    height: 93vh;
     text-align: center;
     color: #fff;
     background: url("../../assets/img/phone-index.jpeg");
-    background-size: contain;
+    background-size: cover;
     .conent {
       display: inline-block;
-      margin: 6rem 0;
+      margin: 25vh 0;
       .input-search {
         width: 80%;
       }
     }
     .desc {
       display: block;
-      font-size: 2.8rem;
-      font-weight: 10;
+      font-size: 3rem;
+      font-weight: 20;
       margin-bottom: 1rem ;
     }
     .remark {
@@ -306,16 +306,22 @@ export default {
     margin-bottom: 25px;
     justify-content: space-around;
     flex-wrap: wrap;
+    .card-city {
+      &:nth-child(5) {
+        margin-left: -6.2rem ;
+      }
+    }
     .card-img  {
       width: 10rem;
       height: 10rem;
     }
+
   }
   .card-container {
       min-width: 16rem;
       .list-cover {
         img {
-          width: 28rem;
+          width: 30rem;
           margin: -10px 0;
         }
       }
