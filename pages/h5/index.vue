@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="h5-container">
     <div class="search">
       <span class="conent">
         <div class="desc">ASHA GO</div>
@@ -32,7 +32,7 @@
         />
       </a-card>
      </div>
-    <a-divider class="categoryTitle"> Recent Blog</a-divider>
+    <a-divider class="categoryTitle"> Featured Articles</a-divider>
     <client-only>
     <div class="article-list" :bordered="false" >
        <div
@@ -93,6 +93,20 @@
         </div>
       </div>
     </client-only>
+    <van-tabbar v-model="active">
+      <nuxt-link to="/h5" class="tab-item">
+        <van-tabbar-item icon="home-o">Home</van-tabbar-item>
+      </nuxt-link>
+      <nuxt-link to="/article/search" class="tab-item">
+        <van-tabbar-item icon="search">search</van-tabbar-item>
+      </nuxt-link>
+      <nuxt-link to="/contactUs" class="tab-item">
+        <van-tabbar-item icon="shop-collect-o">concatUS</van-tabbar-item>
+      </nuxt-link>
+      <nuxt-link to="/h5/my" class="tab-item">
+        <van-tabbar-item icon="contact">my</van-tabbar-item>
+      </nuxt-link>
+    </van-tabbar>
   </div>
 </template>
 
@@ -116,7 +130,7 @@ export default {
       loading: false,
       busy: false,
       index: 0,
-
+      active: 0,
       swiperOptions: {
           loop: true,
           slidesPerView: 'auto',
@@ -262,12 +276,26 @@ export default {
 </script>
 
 <style scoped lang="less">
-.container {
+.h5-container {
   margin: 0 auto;
   min-height: 100vh;
   justify-content: center;
   align-items: center;
   text-align: center;
+  .van-tabbar {
+    display: flex;
+    justify-content: space-around;
+    .tab-item {
+      color: #000;
+      padding-top: 0.4rem;
+    }
+  }
+  .van-tabbar-item--active {
+    color: #8D050B;
+    .tab-item {
+      color: #8D050B;
+    }
+  }
   .search {
     display: inline-block;
     vertical-align: middle;
@@ -315,7 +343,6 @@ export default {
       width: 10rem;
       height: 10rem;
     }
-
   }
   .card-container {
       min-width: 16rem;

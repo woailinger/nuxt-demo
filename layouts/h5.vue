@@ -8,7 +8,7 @@
               <a-button @click="signHandler" v-show="!loginFlag" class="button">Login</a-button>
               <span v-show="!!loginFlag">
                 <!-- <a-avatar :src="$store.state.userInfo.avatar || avatarImg" @click="goInfo"></a-avatar> -->
-                <span class="user-name">{{$store.state.userInfo.userName || userName}}</span>
+                <!-- <span class="user-name">{{$store.state.userInfo.userName || userName}}</span> -->
                 <icon-font type="iconexit" class="logout-icon" @click="logoutHandler"/>
               </span>
             </span>
@@ -34,7 +34,7 @@
               <nuxt-link to="/service" class="menu-item">
                 <icon-font type="iconicon_service" class="icon"/>Service
               </nuxt-link>
-              <nuxt-link to="/service" class="menu-item">
+              <nuxt-link to="/contactUs" class="menu-item">
                 <icon-font type="iconwoshou" class="icon"/>About Us
               </nuxt-link>
             </van-popup>
@@ -43,6 +43,9 @@
       </div>
       <div class="content">
         <Nuxt />
+      </div>
+      <div class="h5-fotter">
+          
       </div>
   </div>
 </template>

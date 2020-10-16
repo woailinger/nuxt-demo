@@ -11,8 +11,8 @@
     <van-cell title="Comments" is-link to="/h5/my/comments" />
     <van-cell title="Likes" is-link to="/h5/my/likes" />
     <van-cell title="ResetPwd" is-link to="/h5/my/resetPwd" />
-    <van-cell title="Newsletter" is-link to="/h5/my/newsletter" />
-    <van-cell title="FindPwd" is-link to="/h5/my/findPwd" />
+    <!-- <van-cell title="Newsletter" is-link to="/h5/my/newsletter" /> -->
+    <!-- <van-cell title="FindPwd" is-link to="/h5/my/findPwd" /> -->
   </div>
 </div>
 </template>
@@ -26,7 +26,7 @@
         link: [{ rel: "favicon", href: "favicon.ico" }]
       }
     },
-    middleware: 'notTokenenticated',
+    // middleware: 'notTokenenticated',
     asyncData(context) {
      if (!context.isMobile) {
        context.redirect('/my/');

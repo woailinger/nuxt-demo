@@ -198,7 +198,7 @@ export default {
     padding: 0px;
   }
   img {
-    height: 200px; 
+    height: 200px;
     margin: -10px 0;
     @media (max-width: 992px) {
       height: 100%;

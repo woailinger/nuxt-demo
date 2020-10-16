@@ -95,28 +95,7 @@ export default {
             prevEl: '.swiper-button-prev'
           }
         },
-        bannerData: [
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Is%20China%20a%20safe%20country%20for%20travellers.jpg',
-          //   recommendTitle: 'Is China a safe country for travellers?'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Growing%20up%20as%20a%20woman%20in%20China.jpg',
-          //   recommendTitle: 'Growing up as a woman in China'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-The%20most%20famous%20Chinese%20curse%20words.JPG',
-          //   recommendTitle: 'The most famous Chinese curse words'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Movies%20to%20improve%20your%20Chinese.jpg',
-          //   recommendTitle: 'Movies to improve your Chinese'
-          // },
-          // {
-          //   cover: 'https://ashago-resource.oss-cn-zhangjiakou.aliyuncs.com/Asha%20Go%20Website%201.0/%E9%A6%96%E9%A1%B5Homepage/Featured%20articles%20%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0/images/web%E9%A6%96%E9%A1%B5-Why%20you%20should%20travel%20solo%20in%20China.jpg',
-          //   recommendTitle: 'Why you should travel solo in China?'
-          // },
-        ],
+        bannerData: [],
         categoryData: {
           dailyData: [],
           foodData: [],
