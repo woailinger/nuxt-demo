@@ -45,7 +45,10 @@
         <Nuxt />
       </div>
       <div class="h5-fotter">
-          
+        <view>
+          <van-cell :title="item.text" v-for="(item, index) in footData" :key="index" is-link/>
+          <div class="copyright">Copyright © 2020 Asha Go Inc. All rights reserved.</div>
+        </view>
       </div>
   </div>
 </template>
@@ -71,6 +74,24 @@ export default {
       list: ['Daily Life', 'Food & Drinks', 'Travel', 'Language', 'Community', 'Service', 'About Us'],
       loading: false,
       finished: false,
+      footData: [
+        {
+          text: '我们是谁 who we are',
+          link: '/aboutUs'
+        },
+        {
+          text: '商业合作 Business inquiries',
+          link: '/contactUs'
+        },
+        {
+          text: '投稿 Write for us',
+          link: '/contactUs'
+        },
+        {
+          text: '用户协议 User agreement',
+          link: '/agreement'
+        },
+      ]
     }
   },
   mounted() {
@@ -247,92 +268,18 @@ html {
   height: 100%;
   overflow: hidden;
 }
-
-.footer {
-  padding: 0px;
-  width: 100%;
-  overflow: hidden;
-  margin-top: 10px;
-  .footer-container {
+.h5-fotter {
+  margin-bottom: 5rem;
+  color: #fff;
+  background-color: #8d040c;
+  .van-cell {
     background-color: #8d040c;
     color: #fff;
-    padding: 2rem 0;
-    position: relative;
-    bottom: 0;
-    .connet {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: nowrap;
-    }
-    .footer-link {
-      margin-left: 25px;
-      list-style: none;
-      display: inline-block;
-      .nav-item {
-        display: inline-block;
-        padding-left: 25px;
-        .nav-link {
-          font-size: 16px;
-          color: #fff;
-          margin-right: 50px;
-          p {
-            padding-bottom: 10px;
-          }
-        }
-      }
-    }
-    .footer-social {
-      display: inline-flex;
-      margin-right: 50px;
-      .mail-desc {
-        height: 40px;
-        line-height: 40px;
-      }
-      .social-icon {
-        color: #fff;
-        margin-left: 30px;
-        svg {
-          height: 40px;
-          width: 40px;
-        }
-      }
-    }
-    .copyright {
-        width: 100%;
-        font-size: 18px;
-        line-height: 18px;
-        text-align: center;
-        margin-top: 40px;
-    }
   }
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+  .copyright {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5rem
+  }
 }
 </style>
