@@ -81,7 +81,8 @@ export default {
 <style scoped lang="less">
 .container {
   color: #8D050B;
-  width: 900px;
+  //width: 900px;
+  padding: 20px;
   .title {
     font-size: 30px;
     line-height: 80px;

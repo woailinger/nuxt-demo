@@ -165,7 +165,7 @@ export default {
   margin-top:50px;
   margin-left: 30px;
   color: #8D050B;
-  width: 500px;
+  //width: 500px;
   .title {
     font-size: 22px;
     font-weight: 600;

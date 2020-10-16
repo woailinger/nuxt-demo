@@ -1,9 +1,9 @@
 <template>
   <div class="resetPwd">
     <div class="title">Change Passwords</div>
-    <a-form :form="reSetPwdForm" @submit="handleSubmit" class="form" :label-col="{ span: 7 }" :wrapper-col="{ span: 17 }" labelAlign="left">
-      <a-form-item label="Old password">
-        <a-col :span="15">
+    <a-form :form="reSetPwdForm" @submit="handleSubmit" class="form" labelAlign="left">
+      <a-form-item>
+        <a-col :span="13">
           <a-input
             v-decorator="[
           'oldPassword',
@@ -20,12 +20,11 @@
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25);" />
           </a-input>
         </a-col>
-        <a-col :span="7" :offset="2" class="forgetPwd" @click="forget">Forget password ?</a-col>
+        <a-col :span="10" :offset="1" class="forgetPwd" @click="forget">Forget password ?</a-col>
       </a-form-item>
-      <a-form-item has-feedback label="New password">
-        <a-col :span="15">
-          <a-input
-            v-decorator="[
+      <a-form-item has-feedback>
+        <a-input
+          v-decorator="[
           'newPassword',
           {
             rules: [
@@ -34,18 +33,16 @@
             ]
           },
         ]"
-            type="password"
-            placeholder="Password"
-            size="large"
-          >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-col>
+          type="password"
+          placeholder="Password"
+          size="large"
+        >
+          <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
+        </a-input>
       </a-form-item>
-      <a-form-item has-feedback label="Confirm password">
-        <a-col :span="15">
-          <a-input
-            v-decorator="[
+      <a-form-item has-feedback>
+        <a-input
+          v-decorator="[
           'confirmPassword',
           {
             rules: [
@@ -54,14 +51,13 @@
             ]
           }
         ]"
-            type="password"
-            placeholder="Confirm password"
-            size="large"
-            @blur="handleConfirmBlur"
-          >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-col>
+          type="password"
+          placeholder="Confirm password"
+          size="large"
+          @blur="handleConfirmBlur"
+        >
+          <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
+        </a-input>
 
       </a-form-item>
       <a-form-item>
@@ -162,22 +158,31 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.form {
+.resetPwd {
   margin: 0 auto;
-  width: 700px;
-}
-.title {
-  text-align: center;
-  color: #8D050B;
-  line-height: 200px;
-  font-size: 40px;
-  font-weight: 500;
-}
-.forgetPwd {
-  display: inline-block;
-  border: 1px solid #ccc;
-  text-align: center;
-  cursor: pointer;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  .title {
+    text-align: center;
+    color: #8D050B;
+    line-height: 200px;
+    font-size: 40px;
+    font-weight: 500;
+  }
+  .forgetPwd {
+    display: inline-block;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+  }
+  .form {
+    //margin: 0 auto;
+    //width: 320px;
+    //width: 700px;
+  }
 }
 .button {
   text-align: center;

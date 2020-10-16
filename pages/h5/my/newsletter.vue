@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title">Sign up for Newsletter</div>
-    <a-form :form="form" :label-col="{ span: 12 }" :wrapper-col="{ span: 12 }" labelAlign="left">
+    <a-form :form="form" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }" labelAlign="left">
       <a-form-item
         label="Email address"
       >
@@ -62,19 +62,19 @@
           </a-row>
         </a-checkbox-group>
       </a-form-item>
-      <a-form-item wrapper-col="{ span: 24 }">
+      <a-form-item :wrapper-col="{ span: 24 }">
         <a-col :span="24" class="button">
           <a-button type="primary" html-type="submit">
             Submit
           </a-button>
         </a-col>
       </a-form-item>
-      <a-form-item wrapper-col="{ span: 24 }">
+      <a-form-item :wrapper-col="{ span: 24 }">
         <a-col :span="24" class="title">
           Cancel subscription
         </a-col>
       </a-form-item>
-      <a-form-item wrapper-col="{ span: 24 }">
+      <a-form-item :wrapper-col="{ span: 24 }">
         <a-col :span="24" class="button">
           <a-button type="primary" html-type="submit">
             Submit
@@ -96,7 +96,7 @@ export default {
 </script>
 <style scoped lang="less">
 .container {
-  width: 500px;
+  //width: 500px;
   /*color: #8D050B;*/
   .title {
     font-size: 30px;
