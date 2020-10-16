@@ -3,8 +3,8 @@
     <div class="title">
       Find Password
     </div>
-    <a-form :form="form" @submit="handleSubmit" :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" labelAlign="left">
-      <a-form-item label="email">
+    <a-form :form="form" @submit="handleSubmit" labelAlign="left">
+      <a-form-item>
         <a-input
           v-model="email"
           v-decorator="[
@@ -14,7 +14,7 @@
           placeholder="Please input your Email"
         />
       </a-form-item>
-      <a-form-item label="code">
+      <a-form-item>
         <a-col :span="14">
           <a-input
             v-decorator="[
@@ -45,7 +45,7 @@
           </a-button>
         </a-col>
       </a-form-item>
-      <a-form-item label="New Password">
+      <a-form-item>
         <a-input
           v-decorator="[
           'newPassword',
@@ -138,11 +138,20 @@ export default {
 <style scoped lang="less">
 .container {
   color: #8D050B;
-  width: 500px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  //width: 500px;
   .title {
     font-size: 30px;
     line-height: 80px;
     font-weight: 600;
+  }
+  .button {
+    text-align: center;
   }
 }
 </style>

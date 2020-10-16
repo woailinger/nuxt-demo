@@ -94,6 +94,7 @@ export default {
 .container {
   color: #8D050B;
   min-height: 100vh;
+  padding: 20px;
   .title {
     font-size: 30px;
     line-height: 80px;
