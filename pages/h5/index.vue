@@ -288,6 +288,9 @@ export default {
     .tab-item {
       color: #000;
       padding-top: 0.4rem;
+      .van-tabbar-item__text {
+        font-size: 1.2rem;
+      }
     }
   }
   .van-tabbar-item--active {
@@ -310,6 +313,7 @@ export default {
       margin: 25vh 0;
       .input-search {
         width: 80%;
+        margin-top: 3rem;
       }
     }
     .desc {
@@ -319,7 +323,7 @@ export default {
       margin-bottom: 1rem ;
     }
     .remark {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
   }
   .more {
