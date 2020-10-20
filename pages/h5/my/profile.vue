@@ -2,24 +2,32 @@
   <div class="container">
     <div class="title">Profile</div>
     <div class="avatar">
-      <img :src="$store.state.userInfo.avatar || imgDataUrl" alt="">
-      <span class="edit" @click="toggleShow">Edit</span>
-      <client-only>
-        <avatar field="avatar"
-                :withCredentials="true"
-                method="POST"
-                @crop-success="cropSuccess"
-                @crop-upload-success="cropUploadSuccess"
-                @crop-upload-fail="cropUploadFail"
-                v-model="show"
-                :width="300"
-                :height="300"
-                url="/user/upload-avatar"
-                img-format="png"
-                langType="en"
-                :params="{userId: $store.state.userId}"
-        />
-      </client-only>
+<!--      <img :src="$store.state.userInfo.avatar || imgDataUrl" alt="">-->
+<!--      <van-image-->
+<!--        round-->
+<!--        width="100px"-->
+<!--        height="100px"-->
+<!--        :src="$store.state.userInfo.avatar || imgDataUrl"-->
+<!--      />-->
+      <van-uploader v-model="fileList" multiple :max-count="1" :after-read="afterRead">
+      </van-uploader>
+<!--      <span class="edit" @click="toggleShow">Edit</span>-->
+<!--      <client-only>-->
+<!--        <avatar field="avatar"-->
+<!--                :withCredentials="true"-->
+<!--                method="POST"-->
+<!--                @crop-success="cropSuccess"-->
+<!--                @crop-upload-success="cropUploadSuccess"-->
+<!--                @crop-upload-fail="cropUploadFail"-->
+<!--                v-model="show"-->
+<!--                :width="300"-->
+<!--                :height="300"-->
+<!--                url="/user/upload-avatar"-->
+<!--                img-format="png"-->
+<!--                langType="en"-->
+<!--                :params="{userId: $store.state.userId}"-->
+<!--        />-->
+<!--      </client-only>-->
     </div>
     <ProfileEdit @ok="toggleEdit" />
     <!--<ul class="info" v-else>-->
@@ -97,7 +105,8 @@ export default {
         interesting: 'daily life, food& drinks',
         avatarImg: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
         age: 30
-      }
+      },
+      fileList: [{ url: this.$store.state.userInfo.avatar || 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png', isImage: true }]
     }
   },
   mounted() {
@@ -120,6 +129,26 @@ export default {
           }
         }
       })
+    },
+    afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      console.log(file);
+      let params = new FormData();
+      params.append('file', file.file)
+      params.append('userId', this.$store.state.userId)
+      this.$Server({
+        url: '/user/upload-avatar',
+        method: 'post',
+        params: params
+      }).then(res => {
+        console.log(res, 123)
+        this.imgDataUrl = res.data.avatar;
+        this.$store.commit('setUserInfo', {
+          ...this.$store.state.userInfo,
+          avatar: res.data.avatar
+        })
+      })
+
     },
     toggleShow() {
       this.show = !this.show;
@@ -201,6 +230,17 @@ export default {
       line-height: 100px;
       text-align: center;
     }
+  }
+  .preview-cover {
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
   }
 }
 </style>

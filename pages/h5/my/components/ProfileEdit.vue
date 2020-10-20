@@ -81,7 +81,7 @@
       </van-field>
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">
-          提交
+          submit
         </van-button>
       </div>
     </van-form>
